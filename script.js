@@ -121,12 +121,12 @@ const translations = {
         'Home': 'မူလစာမျက်',
         'Calendar': 'က္ခဒိန်',
         'Sermons': 'ဓမ္မဟောကြားချက်များ',
-        'News': 'သတင်း',
+        'News': 'ကြေညာချက်',
         'Contact': 'ဆက်သွယ်ရန်',
         'Members': 'အဖွဲ့ဝင်များ',
         
         // Common
-        'Gospel Baptist Church': 'သတင်းကောင်း ဗတ္တစ်တ် ဘုရားကျောင်း',
+        'Gospel Baptist Church': 'သတင်းကောင်းနှစ်ခြင်းအသင်းတော်',
         'All rights reserved.': 'အခွင့်အရေးအားလုံး ထိန်းသိမ်းထားပါသည်။',
         'Facebook': 'ဖေ့စ်ဘွတ်',
         'Connect With Us': 'ကျွန်ုပ်တို့နှင့် ဆက်သွယ်ပါ',
@@ -194,7 +194,7 @@ const translations = {
         'Video': 'ဗီဒီယို',
         
         // Blog
-        'Church News': 'ဘုရားကျောင်း သတင်း',
+        'Church News': 'ဘုရားကျောင်း ကြေညာချက်',
         'Add New Post': 'ပို့စ်အသစ် ထည့်ရန်',
         'Newest First': 'အသစ်ဆုံး ဦးစွာ',
         'Oldest First': 'အဟောင်းဆုံး ဦးစွာ',
@@ -213,7 +213,7 @@ const translations = {
         '123 Church Street, City, State 12345': '၁၂၃ ဘုရားကျောင်းလမ်း၊ မြို့၊ ပြည်နယ် ၁၂၃၄၅',
         
         // Home page
-        'Welcome to Gospel Baptist Church': 'သတင်းကောင်း ဗတ္တစ်တ် ဘုရားကျောင်းသို့ ကြိုဆိုပါသည်',
+        'Welcome to Gospel Baptist Church': 'သတင်းကောင်းနှစ်ခြင်းအသင်းတော်သို့ ကြိုဆိုပါသည်',
         'Sharing the love of Christ with our community': 'ခရစ်တော်၏ မေတ္တာကို ကျွန်ုပ်တို့ လူမှုအသိုင်းအဝိုင်းနှင့် မျှဝေခြင်း',
         'Service Times': 'ဘုရားဝတ်ပြုချိန်များ',
         'Donate Online': 'အွန်လိုင်း လှူဒါန်းရန်',
@@ -974,6 +974,12 @@ function initNavigation() {
 function initLanguageToggle() {
     const langBtns = document.querySelectorAll('.lang-btn');
     
+    // Load saved language preference
+    const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+    
+    // Set initial language
+    changeLanguage(savedLang);
+    
     langBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const lang = this.getAttribute('data-lang');
@@ -993,36 +999,55 @@ function initLanguageToggle() {
 function changeLanguage(lang) {
     const elements = document.querySelectorAll('[data-en][data-my]');
     
+    // Add fading effect to all translatable elements
     elements.forEach(element => {
-        if (lang === 'my') {
-            element.textContent = element.getAttribute('data-my');
-        } else {
-            element.textContent = element.getAttribute('data-en');
-        }
+        element.classList.add('language-transitioning');
     });
     
-    // Update placeholders
-    const inputs = document.querySelectorAll('[data-en-placeholder][data-my-placeholder]');
-    inputs.forEach(input => {
-        if (lang === 'my') {
-            input.placeholder = input.getAttribute('data-my-placeholder');
-        } else {
-            input.placeholder = input.getAttribute('data-en-placeholder');
+    // Wait for fade out, then change content and fade in
+    setTimeout(() => {
+        elements.forEach(element => {
+            if (lang === 'my') {
+                element.textContent = element.getAttribute('data-my');
+            } else {
+                element.textContent = element.getAttribute('data-en');
+            }
+            // Remove transitioning class to fade in
+            element.classList.remove('language-transitioning');
+        });
+        
+        // Update placeholders with fade effect
+        const inputs = document.querySelectorAll('[data-en-placeholder][data-my-placeholder]');
+        inputs.forEach(input => {
+            input.style.opacity = '0';
+            input.style.transform = 'translateY(-10px)';
+            
+            setTimeout(() => {
+                if (lang === 'my') {
+                    input.placeholder = input.getAttribute('data-my-placeholder');
+                } else {
+                    input.placeholder = input.getAttribute('data-en-placeholder');
+                }
+                input.style.opacity = '1';
+                input.style.transform = 'translateY(0)';
+            }, 200);
+        });
+    }, 200);
+    
+    // Save language preference
+    localStorage.setItem('preferredLanguage', lang);
+    
+    // Update button states
+    const langBtns = document.querySelectorAll('.lang-btn');
+    langBtns.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-lang') === lang) {
+            btn.classList.add('active');
         }
     });
 }
 
-// Mobile menu functionality
-function initMobileMenu() {
-    const mobileToggle = document.querySelector('.mobile-menu-toggle');
-    const navList = document.querySelector('.nav-list');
-    
-    if (mobileToggle && navList) {
-        mobileToggle.addEventListener('click', function() {
-            navList.classList.toggle('active');
-        });
-    }
-}
+
 
 // Slideshow functionality
 function initSlideshow() {
