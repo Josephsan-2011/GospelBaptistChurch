@@ -256,12 +256,12 @@ function handleSermonSubmit(e, isDraft = false) {
     const coverPhoto = document.getElementById('coverPhoto').files[0];
     const video = document.getElementById('sermonVideo').files[0];
     const audio = document.getElementById('sermonAudio').files[0];
-    const document = document.getElementById('sermonDocument').files[0];
+    const sermonDocument = document.getElementById('sermonDocument').files[0];
 
     if (coverPhoto) formData.append('coverPhoto', coverPhoto);
     if (video) formData.append('video', video);
     if (audio) formData.append('audio', audio);
-    if (document) formData.append('document', document);
+    if (sermonDocument) formData.append('document', sermonDocument);
 
     // Simulate upload (in real implementation, this would send to server)
     simulateUpload(formData, isDraft);
