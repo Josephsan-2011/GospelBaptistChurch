@@ -448,6 +448,70 @@ function initScrollArrow() {
 }
 
 // Initialize hero slideshow functionality
+function initImageModal() {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalCaption = document.getElementById('modalCaption');
+    const closeBtn = document.querySelector('.image-modal-close');
+
+    // Close modal when clicking the close button
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+    });
+
+    // Close modal when clicking outside the image
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('show')) {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+    });
+
+    // Add click handlers to all slideshow images
+    const slideshowImages = document.querySelectorAll('.slide-image img');
+    slideshowImages.forEach(img => {
+        img.addEventListener('click', () => {
+            modalImg.src = img.src;
+            modalCaption.textContent = img.alt;
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        });
+    });
+    
+    // Add click handlers to other images on the page (optional)
+    const allImages = document.querySelectorAll('img:not(.slide-image img)');
+    allImages.forEach(img => {
+        // Skip small icons and buttons
+        if (img.width > 100 && img.height > 100) {
+            img.addEventListener('click', () => {
+                modalImg.src = img.src;
+                modalCaption.textContent = img.alt || 'Image';
+                modal.style.display = 'flex';
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+            });
+        }
+    });
+}
+
 function initHeroSlideshow() {
     const slideshow = document.querySelector('.hero-slideshow');
     if (!slideshow) return;
@@ -590,6 +654,9 @@ function initHeroSlideshow() {
 
     // Initialize first slide
     showSlide(0);
+    
+    // Reinitialize image modal for slideshow images
+    initImageModal();
 }
 
 // Initialize parallax and fade effects
@@ -650,6 +717,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initFormValidation();
     initSmoothScrolling();
     initScrollArrow();
+    initImageModal();
     initHeroSlideshow();
     initParallaxEffects();
     
