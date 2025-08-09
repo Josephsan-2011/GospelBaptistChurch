@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gospel Baptist Church - Contact</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Header with Logo -->
+    <header class="top-header">
+        <div class="container">
+            <div class="logo">
+                <img src="gbclogos.png" alt="Gospel Baptist Church Logo" class="logo-image">
+                <h1 class="logo-text" data-en="Gospel Baptist Church" data-my="သတင်းကောင်း ဗတ္တစ်တ် ဘုရားကျောင်း">Gospel Baptist Church</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link" data-en="Home" data-my="မူလစာမျက်">Home</a></li>
+                <li><a href="calendar.html" class="nav-link" data-en="Calendar" data-my="က္ခဒိန်">Calendar</a></li>
+                <li><a href="sermons.html" class="nav-link" data-en="Sermons" data-my="ဓမ္မဟောကြားချက်များ">Sermons</a></li>
+                <li><a href="blog.html" class="nav-link" data-en="News" data-my="သတင်း">News</a></li>
+                <li><a href="contact.html" class="nav-link active" data-en="Contact" data-my="ဆက်သွယ်ရန်">Contact</a></li>
+                <li><a href="#" class="nav-link members-link" data-en="Members" data-my="အဖွဲ့ဝင်များ">Members</a></li>
+            </ul>
+            
+            <div class="language-toggle">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="my">MY</button>
+            </div>
+            
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h1 class="page-title" data-en="Contact Us" data-my="ကျွန်ုပ်တို့ကို ဆက်သွယ်ပါ">Contact Us</h1>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2 data-en="Get in Touch" data-my="ဆက်သွယ်ရန်">Get in Touch</h2>
+                    <p data-en="We'd love to hear from you. Please feel free to reach out to us with any questions, prayer requests, or to learn more about our church." data-my="ကျွန်ုပ်တို့သည် သင့်ထံမှ ကြားရရန် လိုလားပါသည်။ မေးခွန်းများ၊ ဆုတောင်းခြင်း တောင်းဆိုမှုများ သို့မဟုတ် ကျွန်ုပ်တို့ ဘုရားကျောင်းအကြောင်း ပိုမိုလေ့လာရန် ကျွန်ုပ်တို့ကို ဆက်သွယ်ရန် ဝမ်းမြောက်ပါသည်။">We'd love to hear from you. Please feel free to reach out to us with any questions, prayer requests, or to learn more about our church.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h3 data-en="Email" data-my="အီးမေးလ်">Email</h3>
+                                <p>desmoinesgbc@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h3 data-en="Phone" data-my="ဖုန်း">Phone</h3>
+                                <p>+1 515 346 5562</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h3 data-en="Office Hours" data-my="ရုံးချိန်">Office Hours</h3>
+                                <p data-en="Monday - Friday: 9:00 AM - 5:00 PM" data-my="တနင်္လာ - သောကြာ: နံနက် ၉ နာရီ - ညနေ ၅ နာရီ">Monday - Friday: 9:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h3 data-en="Address" data-my="လိပ်စာ">Address</h3>
+                                <p data-en="6222 University Ave, Des Moines, IA 50311" data-my="၆၂၂၂ ယူနီဗာစီတီ လမ်း၊ ဒက်စ်မွိုင်းန်း၊ အိုင်အေ ၅၀၃၁၁">6222 University Ave, Des Moines, IA 50311</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <h2 data-en="Send us a Message" data-my="ကျွန်ုပ်တို့ထံ မက်ဆေ့ချ် ပို့ပါ">Send us a Message</h2>
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name" data-en="Full Name" data-my="အမည်အပြည့်အစုံ">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" data-en="Email Address" data-my="အီးမေးလ် လိပ်စာ">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone" data-en="Phone Number" data-my="ဖုန်းနံပါတ်">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject" data-en="Subject" data-my="ခေါင်းစဉ်">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="" data-en="Select a subject" data-my="ခေါင်းစဉ် ရွေးချယ်ပါ">Select a subject</option>
+                                <option value="general" data-en="General Inquiry" data-my="ယေဘုယျ မေးခွန်း">General Inquiry</option>
+                                <option value="prayer" data-en="Prayer Request" data-my="ဆုတောင်းခြင်း တောင်းဆိုမှု">Prayer Request</option>
+                                <option value="visit" data-en="Visit Information" data-my="လည်ပတ်ခြင်း အချက်အလက်">Visit Information</option>
+                                <option value="volunteer" data-en="Volunteer Opportunities" data-my="စေတနာ့ဝန်ထမ်း အခွင့်အလမ်းများ">Volunteer Opportunities</option>
+                                <option value="other" data-en="Other" data-my="အခြား">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" data-en="Message" data-my="မက်ဆေ့ချ်">Message</label>
+                            <textarea id="message" name="message" rows="6" required data-en-placeholder="Please share your message, prayer request, or question here..." data-my-placeholder="သင့်မက်ဆေ့ချ်၊ ဆုတောင်းခြင်း တောင်းဆိုမှု သို့မဟုတ် မေးခွန်းကို ဤနေရာတွင် မျှဝေပါ..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large" data-en="Send Message" data-my="မက်ဆေ့ချ် ပို့ရန်">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Message Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-modal">
+            <div class="success-content">
+                <i class="fas fa-check-circle"></i>
+                <h2 data-en="Message Sent Successfully!" data-my="မက်ဆေ့ချ် အောင်မြင်စွာ ပို့ပြီးပါပြီ!">Message Sent Successfully!</h2>
+                <p data-en="Thank you for contacting us. We will get back to you as soon as possible." data-my="ကျွန်ုပ်တို့ကို ဆက်သွယ်ပေးသည့်အတွက် ကျေးဇူးတင်ပါသည်။ ကျွန်ုပ်တို့သည် ဖြစ်နိုင်သမျှ မြန်မြန် ပြန်လည်ဆက်သွယ်ပါမည်။">Thank you for contacting us. We will get back to you as soon as possible.</p>
+                <button class="btn btn-primary" id="closeSuccessBtn" data-en="Close" data-my="ပိတ်ရန်">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-en="Gospel Baptist Church" data-my="သတင်းကောင်း ဗတ္တစ်တ် ဘုရားကျောင်း">Gospel Baptist Church</h3>
+                    <p data-en="Sharing the love of Christ with our community" data-my="ခရစ်တော်၏ မေတ္တာကို ကျွန်ုပ်တို့ လူမှုအသိုင်းအဝိုင်းနှင့် မျှဝေခြင်း">Sharing the love of Christ with our community</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-en="Connect With Us" data-my="ကျွန်ုပ်တို့နှင့် ဆက်သွယ်ပါ">Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/groups/194934027750815/" target="_blank" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                            <span data-en="Facebook" data-my="ဖေ့စ်ဘွတ်">Facebook</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 data-en="Contact Info" data-my="ဆက်သွယ်ရန် အချက်အလက်">Contact Info</h3>
+                    <p>Email: desmoinesgbc@gmail.com</p>
+                    <p>Phone: +1 515 346 5562</p>
+                    <p data-en="Address: 6222 University Ave, Des Moines, IA 50311" data-my="လိပ်စာ: ၆၂၂၂ ယူနီဗာစီတီ လမ်း၊ ဒက်စ်မွိုင်းန်း၊ အိုင်အေ ၅၀၃၁၁">Address: 6222 University Ave, Des Moines, IA 50311</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Gospel Baptist Church. <span data-en="All rights reserved." data-my="အခွင့်အရေးအားလုံး ထိန်းသိမ်းထားပါသည်။">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="contact.js"></script>
+</body>
+</html>

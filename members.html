@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gospel Baptist Church - Members Area</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Header with Logo -->
+    <header class="top-header">
+        <div class="container">
+            <div class="logo">
+                <img src="gbclogos.png" alt="Gospel Baptist Church Logo" class="logo-image">
+                <h1 class="logo-text" data-en="Gospel Baptist Church" data-my="သတင်းကောင်း ဗတ္တစ်တ် ဘုရားကျောင်း">Gospel Baptist Church</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link" data-en="Home" data-my="မူလစာမျက်">Home</a></li>
+                <li><a href="calendar.html" class="nav-link" data-en="Calendar" data-my="က္ခဒိန်">Calendar</a></li>
+                <li><a href="sermons.html" class="nav-link" data-en="Sermons" data-my="ဓမ္မဟောကြားချက်များ">Sermons</a></li>
+                <li><a href="blog.html" class="nav-link" data-en="News" data-my="သတင်း">News</a></li>
+                <li><a href="contact.html" class="nav-link" data-en="Contact" data-my="ဆက်သွယ်ရန်">Contact</a></li>
+                <li><a href="members.html" class="nav-link active" data-en="Members" data-my="အဖွဲ့ဝင်များ">Members</a></li>
+            </ul>
+            
+            <div class="language-toggle">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="my">MY</button>
+            </div>
+            
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Members Section -->
+    <section class="members-section">
+        <div class="container">
+            <div class="members-header">
+                <h1 class="page-title" data-en="Members Area" data-my="အဖွဲ့ဝင်များ နေရာ">Members Area</h1>
+                <button class="btn btn-secondary logout-btn" onclick="logout()" data-en="Logout" data-my="ထွက်ရန်">Logout</button>
+            </div>
+            
+            <!-- General Members Section -->
+            <div class="general-members-section">
+                <h2 class="section-title" data-en="Welcome Members" data-my="အဖွဲ့ဝင်များ ကြိုဆိုပါသည်">Welcome Members</h2>
+                
+                <div class="members-dashboard">
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3 data-en="Upcoming Events" data-my="ရောက်ရှိလာမည့် အစီအစဉ်များ">Upcoming Events</h3>
+                        <p data-en="View church calendar and upcoming events" data-my="ဘုရားကျောင်း က္ခဒိန်နှင့် ရောက်ရှိလာမည့် အစီအစဉ်များကို ကြည့်ရှုရန်">View church calendar and upcoming events</p>
+                        <a href="calendar.html" class="btn btn-primary">View Calendar</a>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <h3 data-en="Latest News" data-my="နောက်ဆုံးရ သတင်းများ">Latest News</h3>
+                        <p data-en="Stay updated with church announcements and news" data-my="ဘုရားကျောင်း ကြေညာချက်များနှင့် သတင်းများကို နောက်ဆုံးရ ရယူရန်">Stay updated with church announcements and news</p>
+                        <a href="blog.html" class="btn btn-primary">Read News</a>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-pray"></i>
+                        </div>
+                        <h3 data-en="Prayer Requests" data-my="ဆုတောင်းခြင်း တောင်းဆိုချက်များ">Prayer Requests</h3>
+                        <p data-en="Submit prayer requests and view prayer list" data-my="ဆုတောင်းခြင်း တောင်းဆိုချက်များ တင်သွင်းရန်နှင့် ဆုတောင်းခြင်း စာရင်းကို ကြည့်ရှုရန်">Submit prayer requests and view prayer list</p>
+                        <button class="btn btn-primary" onclick="showPrayerForm()">Submit Request</button>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 data-en="Member Directory" data-my="အဖွဲ့ဝင် စာရင်း">Member Directory</h3>
+                        <p data-en="Connect with other church members" data-my="အခြား ဘုရားကျောင်း အဖွဲ့ဝင်များနှင့် ဆက်သွယ်ရန်">Connect with other church members</p>
+                        <button class="btn btn-primary" onclick="showMemberDirectory()">View Directory</button>
+                    </div>
+                    
+
+                </div>
+            </div>
+            
+            <!-- Members-Only Sermons Section -->
+                <div class="members-sermons-section">
+                    <h3 class="subsection-title" data-en="Members-Only Sermons" data-my="အဖွဲ့ဝင်များ သာ ဓမ္မဟောကြားချက်များ">Members-Only Sermons</h3>
+                    <p class="section-description" data-en="These sermons are exclusively available to church members" data-my="ဤဓမ္မဟောကြားချက်များသည် ဘုရားကျောင်း အဖွဲ့ဝင်များအတွက် သီးသန့် ရရှိနိုင်ပါသည်">These sermons are exclusively available to church members</p>
+                    
+                    <!-- Search and Filter Controls for Members Sermons -->
+                    <div class="sermons-controls">
+                        <div class="search-box">
+                            <input type="text" id="membersSermonSearch" placeholder="Search members sermons..." data-en-placeholder="Search members sermons..." data-my-placeholder="အဖွဲ့ဝင် ဓမ္မဟောကြားချက်များ ရှာဖွေရန်...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        
+                        <div class="filter-controls">
+                            <select id="membersPastorFilter" class="filter-select">
+                                <option value="" data-en="All Pastors" data-my="ဓမ္မဆရာများ အားလုံး">All Pastors</option>
+                                <option value="Pastor Paul" data-en="Pastor Paul" data-my="ဓမ္မဆရာ ပေါလ်">Pastor Paul</option>
+                                <option value="Pastor John" data-en="Pastor John" data-my="ဓမ္မဆရာ ဂျွန်">Pastor John</option>
+                                <option value="Pastor Sarah" data-en="Pastor Sarah" data-my="ဓမ္မဆရာ ဆာရာ">Pastor Sarah</option>
+                            </select>
+                            
+                            <select id="membersDateFilter" class="filter-select">
+                                <option value="" data-en="All Dates" data-my="ရက်စွဲများ အားလုံး">All Dates</option>
+                                <option value="2025" data-en="2025" data-my="၂၀၂၅">2025</option>
+                                <option value="2024" data-en="2024" data-my="၂၀၂၄">2024</option>
+                                <option value="2023" data-en="2023" data-my="၂၀၂၃">2023</option>
+                            </select>
+                            
+                            <select id="membersCategoryFilter" class="filter-select">
+                                <option value="" data-en="All Categories" data-my="အမျိုးအစားများ အားလုံး">All Categories</option>
+                                <option value="worship" data-en="Worship Service" data-my="ဘုရားဝတ်ပြုချိန်">Worship Service</option>
+                                <option value="bible-study" data-en="Bible Study" data-my="သမ္မာကျမ်းလေ့လာခြင်း">Bible Study</option>
+                                <option value="prayer" data-en="Prayer Meeting" data-my="ဆုတောင်းခြင်း အစည်းအဝေး">Prayer Meeting</option>
+                                <option value="youth" data-en="Youth Ministry" data-my="လူငယ်ဝတ်ပြုခြင်း">Youth Ministry</option>
+                                <option value="special" data-en="Special Event" data-my="အထူးအစီအစဉ်">Special Event</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Members Sermons Grid -->
+                    <div class="sermons-grid" id="membersSermonsGrid">
+                        <!-- Members-only sermons will be populated by JavaScript -->
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- Members Sermon Modal -->
+    <div id="membersSermonModal" class="modal">
+        <div class="modal-content sermon-modal">
+            <span class="close">&times;</span>
+            <div id="membersSermonModalContent">
+                <!-- Modal content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-en="Gospel Baptist Church" data-my="သတင်းကောင်း ဗတ္တစ်တ် ဘုရားကျောင်း">Gospel Baptist Church</h3>
+                    <p data-en="Sharing the love of Christ with our community" data-my="ခရစ်တော်၏ မေတ္တာကို ကျွန်ုပ်တို့ လူမှုအသိုင်းအဝိုင်းနှင့် မျှဝေခြင်း">Sharing the love of Christ with our community</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-en="Connect With Us" data-my="ကျွန်ုပ်တို့နှင့် ဆက်သွယ်ပါ">Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/groups/194934027750815/" target="_blank" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                            <span data-en="Facebook" data-my="ဖေ့စ်ဘွတ်">Facebook</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 data-en="Contact Info" data-my="ဆက်သွယ်ရန် အချက်အလက်">Contact Info</h3>
+                    <p>Email: desmoinesgbc@gmail.com</p>
+                    <p>Phone: +1 515 346 5562</p>
+                    <p data-en="Address: 6222 University Ave, Des Moines, IA 50311" data-my="လိပ်စာ: ၆၂၂၂ ယူနီဗာစီတီ လမ်း၊ ဒက်စ်မွိုင်းန်း၊ အိုင်အေ ၅၀၃၁၁">Address: 6222 University Ave, Des Moines, IA 50311</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Gospel Baptist Church. <span data-en="All rights reserved." data-my="အခွင့်အရေးအားလုံး ထိန်းသိမ်းထားပါသည်။">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="members.js"></script>
+</body>
+</html>

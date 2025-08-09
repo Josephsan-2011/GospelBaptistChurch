@@ -1,0 +1,18 @@
+[
+  {
+    "id": 2,
+    "title": "sermon",
+    "date": "2025-08-09",
+    "description": "",
+    "scripture": "",
+    "transcript": "",
+    "category": "worship",
+    "visibility": "public",
+    "featured": true,
+    "status": "published",
+    "pastor": "Pastor Paul",
+    "uploadDate": "2025-08-09T19:55:20.920Z",
+    "files": {},
+    "formats": []
+  }
+]

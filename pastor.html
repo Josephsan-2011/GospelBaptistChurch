@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gospel Baptist Church - Pastor Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Header with Logo -->
+    <header class="top-header">
+        <div class="container">
+            <div class="logo">
+                <img src="gbclogos.png" alt="Gospel Baptist Church Logo" class="logo-image">
+                <h1 class="logo-text" data-en="Gospel Baptist Church" data-my="သတင်းကောင်း ဗတ္တစ်တ် ဘုရားကျောင်း">Gospel Baptist Church</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link" data-en="Home" data-my="မူလစာမျက်">Home</a></li>
+                <li><a href="calendar.html" class="nav-link" data-en="Calendar" data-my="က္ခဒိန်">Calendar</a></li>
+                <li><a href="sermons.html" class="nav-link" data-en="Sermons" data-my="ဓမ္မဟောကြားချက်များ">Sermons</a></li>
+                <li><a href="blog.html" class="nav-link" data-en="News" data-my="သတင်း">News</a></li>
+                <li><a href="contact.html" class="nav-link" data-en="Contact" data-my="ဆက်သွယ်ရန်">Contact</a></li>
+                <li><a href="members.html" class="nav-link" data-en="Members" data-my="အဖွဲ့ဝင်များ">Members</a></li>
+            </ul>
+            
+            <div class="language-toggle">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="my">MY</button>
+            </div>
+            
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Pastor Dashboard Section -->
+    <section class="pastor-dashboard-section">
+        <div class="container">
+            <div class="pastor-header">
+                <h1 class="page-title" data-en="Pastor's Dashboard" data-my="ဓမ္မဆရာ၏ ဒက်ရှ်ဘုတ်">Pastor's Dashboard</h1>
+                <p class="pastor-subtitle" data-en="Manage sermons, news, and church communications" data-my="ဓမ္မဟောကြားချက်များ၊ သတင်းများနှင့် ဘုရားကျောင်း ဆက်သွယ်ရေးများကို စီမံရန်">Manage sermons, news, and church communications</p>
+                <button class="btn btn-secondary logout-btn" onclick="logout()" data-en="Logout" data-my="ထွက်ရန်">Logout</button>
+            </div>
+            
+            <!-- Pastor Sermon Upload Section -->
+            <div class="pastor-upload-section">
+                <h2 class="section-title" data-en="Sermon Upload" data-my="ဓမ္မဟောကြားချက် အပ်လုဒ်">Sermon Upload</h2>
+                
+                <form id="sermonUploadForm" class="sermon-upload-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sermonTitle" data-en="Sermon Title" data-my="ဓမ္မဟောကြားချက် ခေါင်းစဉ်">Sermon Title</label>
+                            <input type="text" id="sermonTitle" name="title" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sermonDate" data-en="Date" data-my="ရက်စွဲ">Date</label>
+                            <input type="date" id="sermonDate" name="date" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sermonDescription" data-en="Description" data-my="ဖော်ပြချက်">Description</label>
+                        <textarea id="sermonDescription" name="description" rows="3" placeholder="Brief description of the sermon..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sermonScripture" data-en="Scripture Reference" data-my="သမ္မာကျမ်းစာ ကိုးကားချက်">Scripture Reference</label>
+                        <input type="text" id="sermonScripture" name="scripture" placeholder="e.g., John 3:16">
+                    </div>
+                    
+                    <!-- Media Upload Section -->
+                    <div class="media-upload-section">
+                        <h3 data-en="Media Files" data-my="မီဒီယာ ဖိုင်များ">Media Files</h3>
+                        
+                        <!-- Cover Photo Upload -->
+                        <div class="upload-group">
+                            <label for="coverPhoto" data-en="Cover Photo (JPG, PNG, GIF, WebP, BMP, TIFF, SVG)" data-my="အဖုံးဓာတ်ပုံ (JPG, PNG, GIF, WebP, BMP, TIFF, SVG)">Cover Photo (JPG, PNG, GIF, WebP, BMP, TIFF, SVG)</label>
+                            <div class="file-upload-area" id="coverPhotoArea">
+                                <i class="fas fa-image"></i>
+                                <p data-en="Click to upload cover photo (supports JPG, PNG, GIF, WebP, BMP, TIFF, SVG)" data-my="အဖုံးဓာတ်ပုံ အပ်လုဒ်ရန် နှိပ်ပါ (JPG, PNG, GIF, WebP, BMP, TIFF, SVG ကို ထောက်ပံ့သည်)">Click to upload cover photo (supports JPG, PNG, GIF, WebP, BMP, TIFF, SVG)</p>
+                                <input type="file" id="coverPhoto" name="coverPhoto" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp,image/bmp,image/tiff,image/svg+xml" hidden>
+                            </div>
+                            <div class="file-preview" id="coverPhotoPreview"></div>
+                        </div>
+                        
+                        <!-- Additional Images Upload -->
+                        <div class="upload-group">
+                            <label for="additionalImages" data-en="Additional Images" data-my="ထပ်ဆောင်း ဓာတ်ပုံများ">Additional Images</label>
+                            <div class="file-upload-area" id="additionalImagesArea">
+                                <i class="fas fa-images"></i>
+                                <p data-en="Click to upload additional images (multiple files allowed)" data-my="ထပ်ဆောင်း ဓာတ်ပုံများ အပ်လုဒ်ရန် နှိပ်ပါ (ဖိုင်များစွာ ခွင့်ပြုထားပါသည်)">Click to upload additional images (multiple files allowed)</p>
+                                <input type="file" id="additionalImages" name="additionalImages" accept="image/*" multiple hidden>
+                            </div>
+                            <div class="file-preview" id="additionalImagesPreview"></div>
+                        </div>
+                        
+                        <!-- Video Upload -->
+                        <div class="upload-group">
+                            <label for="sermonVideo" data-en="Video File" data-my="ဗီဒီယို ဖိုင်">Video File</label>
+                            <div class="file-upload-area" id="videoArea">
+                                <i class="fas fa-video"></i>
+                                <p data-en="Click to upload video" data-my="ဗီဒီယို အပ်လုဒ်ရန် နှိပ်ပါ">Click to upload video</p>
+                                <input type="file" id="sermonVideo" name="video" accept="video/*" hidden>
+                            </div>
+                            <div class="file-preview" id="videoPreview"></div>
+                        </div>
+                        
+                        <!-- Audio Upload -->
+                        <div class="upload-group">
+                            <label for="sermonAudio" data-en="Audio File" data-my="အသံဖိုင်">Audio File</label>
+                            <div class="file-upload-area" id="audioArea">
+                                <i class="fas fa-music"></i>
+                                <p data-en="Click to upload audio" data-my="အသံဖိုင် အပ်လုဒ်ရန် နှိပ်ပါ">Click to upload audio</p>
+                                <input type="file" id="sermonAudio" name="audio" accept="audio/*" hidden>
+                            </div>
+                            <div class="file-preview" id="audioPreview"></div>
+                        </div>
+                        
+                        <!-- Document Upload -->
+                        <div class="upload-group">
+                            <label for="sermonDocument" data-en="Document (PDF, Word)" data-my="စာရွက်စာတမ်း (PDF, Word)">Document (PDF, Word)</label>
+                            <div class="file-upload-area" id="documentArea">
+                                <i class="fas fa-file-alt"></i>
+                                <p data-en="Click to upload document" data-my="စာရွက်စာတမ်း အပ်လုဒ်ရန် နှိပ်ပါ">Click to upload document</p>
+                                <input type="file" id="sermonDocument" name="document" accept=".pdf,.doc,.docx" hidden>
+                            </div>
+                            <div class="file-preview" id="documentPreview"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Transcript Section -->
+                    <div class="form-group">
+                        <label for="sermonTranscript" data-en="Transcript" data-my="စာသား">Transcript</label>
+                        <textarea id="sermonTranscript" name="transcript" rows="10" placeholder="Enter the full sermon transcript here..."></textarea>
+                    </div>
+                    
+                    <!-- Sermon Settings -->
+                    <div class="sermon-settings">
+                        <h3 data-en="Sermon Settings" data-my="ဓမ္မဟောကြားချက် ဆက်တင်များ">Sermon Settings</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sermonCategory" data-en="Category" data-my="အမျိုးအစား">Category</label>
+                                <select id="sermonCategory" name="category">
+                                    <option value="worship" data-en="Worship Service" data-my="ဘုရားဝတ်ပြုချိန်">Worship Service</option>
+                                    <option value="bible-study" data-en="Bible Study" data-my="သမ္မာကျမ်းလေ့လာခြင်း">Bible Study</option>
+                                    <option value="prayer" data-en="Prayer Meeting" data-my="ဆုတောင်းခြင်း အစည်းအဝေး">Prayer Meeting</option>
+                                    <option value="youth" data-en="Youth Ministry" data-my="လူငယ်ဝတ်ပြုခြင်း">Youth Ministry</option>
+                                    <option value="special" data-en="Special Event" data-my="အထူးအစီအစဉ်">Special Event</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="sermonVisibility" data-en="Visibility" data-my="မြင်နိုင်မှု">Visibility</label>
+                                <select id="sermonVisibility" name="visibility">
+                                    <option value="public" data-en="Public" data-my="အများပြည်သူ">Public</option>
+                                    <option value="members" data-en="Members Only" data-my="အဖွဲ့ဝင်များ သာ">Members Only</option>
+                                    <option value="private" data-en="Private" data-my="ကိုယ်ပိုင်">Private</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="featuredSermon" name="featured">
+                                <span data-en="Feature this sermon on homepage" data-my="ဤဓမ္မဟောကြားချက်ကို မူလစာမျက်တွင် ပြသရန်">Feature this sermon on homepage</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" data-en="Upload Sermon" data-my="ဓမ္မဟောကြားချက် အပ်လုဒ်">Upload Sermon</button>
+                        <button type="button" class="btn btn-secondary" id="saveDraft" data-en="Save as Draft" data-my="ကြိုတင်ရေးသားချက် အဖြစ် သိမ်းရန်">Save as Draft</button>
+                        <button type="button" class="btn btn-secondary" id="previewSermon" data-en="Preview" data-my="ကြိုကြည့်ရန်">Preview</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Pastor News/Announcements Section -->
+            <div class="pastor-news-section">
+                <h2 class="section-title" data-en="Church News & Announcements" data-my="ဘုရားကျောင်း သတင်းများနှင့် ကြေညာချက်များ">Church News & Announcements</h2>
+                
+                <form id="newsForm" class="news-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="newsTitle" data-en="News Title" data-my="သတင်း ခေါင်းစဉ်">News Title</label>
+                            <input type="text" id="newsTitle" name="title" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="newsDate" data-en="Date" data-my="ရက်စွဲ">Date</label>
+                            <input type="date" id="newsDate" name="date" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newsCategory" data-en="Category" data-my="အမျိုးအစား">Category</label>
+                        <select id="newsCategory" name="category">
+                            <option value="announcement" data-en="Announcement" data-my="ကြေညာချက်">Announcement</option>
+                            <option value="event" data-en="Event" data-my="အစီအစဉ်">Event</option>
+                            <option value="prayer" data-en="Prayer Request" data-my="ဆုတောင်းခြင်း တောင်းဆိုချက်">Prayer Request</option>
+                            <option value="ministry" data-en="Ministry Update" data-my="ဝတ်ပြုခြင်း အပ်ဒိတ်">Ministry Update</option>
+                            <option value="general" data-en="General News" data-my="ယေဘုယျ သတင်း">General News</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newsContent" data-en="News Content" data-my="သတင်း အကြောင်းအရာ">News Content</label>
+                        <textarea id="newsContent" name="content" rows="8" placeholder="Write your news or announcement here..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newsPriority" data-en="Priority" data-my="ဦးစားပေး">Priority</label>
+                        <select id="newsPriority" name="priority">
+                            <option value="normal" data-en="Normal" data-my="ပုံမှန်">Normal</option>
+                            <option value="important" data-en="Important" data-my="အရေးကြီး">Important</option>
+                            <option value="urgent" data-en="Urgent" data-my="အရေးတကြီး">Urgent</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newsExpiry" data-en="Auto-Delete After" data-my="အလိုအလျောက် ဖျက်ရန်">Auto-Delete After</label>
+                        <select id="newsExpiry" name="expiry">
+                            <option value="never" data-en="Never (Keep Forever)" data-my="ဘယ်တော့မှ မဖျက်ပါ (ထာဝရ ထိန်းထားပါ)">Never (Keep Forever)</option>
+                            <option value="1" data-en="1 Day" data-my="၁ ရက်">1 Day</option>
+                            <option value="3" data-en="3 Days" data-my="၃ ရက်">3 Days</option>
+                            <option value="7" data-en="1 Week" data-my="၁ ပတ်">1 Week</option>
+                            <option value="14" data-en="2 Weeks" data-my="၂ ပတ်">2 Weeks</option>
+                            <option value="30" data-en="1 Month" data-my="၁ လ">1 Month</option>
+                            <option value="90" data-en="3 Months" data-my="၃ လ">3 Months</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="newsFeatured" name="featured">
+                            <span data-en="Pin this news to the top" data-my="ဤသတင်းကို အပေါ်ဆုံးတွင် ပြသရန်">Pin this news to the top</span>
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="newsEmail" name="sendEmail">
+                            <span data-en="Send email notification to members" data-my="အဖွဲ့ဝင်များထံ အီးမေးလ် အကြောင်းကြားချက် ပို့ရန်">Send email notification to members</span>
+                        </label>
+                    </div>
+                    
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" data-en="Publish News" data-my="သတင်း ထုတ်ပြန်ရန်">Publish News</button>
+                        <button type="button" class="btn btn-secondary" id="saveNewsDraft" data-en="Save as Draft" data-my="ကြိုတင်ရေးသားချက် အဖြစ် သိမ်းရန်">Save as Draft</button>
+                        <button type="button" class="btn btn-secondary" id="previewNews" data-en="Preview" data-my="ကြိုကြည့်ရန်">Preview</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Published News List -->
+            <div class="published-news">
+                <h2 class="section-title" data-en="Published News" data-my="ထုတ်ပြန်ပြီး သတင်းများ">Published News</h2>
+                
+                <div class="news-list" id="publishedNewsList">
+                    <!-- News will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Uploaded Sermons List -->
+            <div class="uploaded-sermons">
+                <h2 class="section-title" data-en="Uploaded Sermons" data-my="အပ်လုဒ်ပြုလုပ်ထားသော ဓမ္မဟောကြားချက်များ">Uploaded Sermons</h2>
+                
+                <div class="sermons-list" id="uploadedSermonsList">
+                    <!-- Sermons will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-en="Gospel Baptist Church" data-my="သတင်းကောင်း ဗတ္တစ်တ် ဘုရားကျောင်း">Gospel Baptist Church</h3>
+                    <p data-en="Sharing the love of Christ with our community" data-my="ခရစ်တော်၏ မေတ္တာကို ကျွန်ုပ်တို့ လူမှုအသိုင်းအဝိုင်းနှင့် မျှဝေခြင်း">Sharing the love of Christ with our community</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-en="Connect With Us" data-my="ကျွန်ုပ်တို့နှင့် ဆက်သွယ်ပါ">Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/groups/194934027750815/" target="_blank" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                            <span data-en="Facebook" data-my="ဖေ့စ်ဘွတ်">Facebook</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 data-en="Contact Info" data-my="ဆက်သွယ်ရန် အချက်အလက်">Contact Info</h3>
+                    <p>Email: desmoinesgbc@gmail.com</p>
+                    <p>Phone: +1 515 346 5562</p>
+                    <p data-en="Address: 6222 University Ave, Des Moines, IA 50311" data-my="လိပ်စာ: ၆၂၂၂ ယူနီဗာစီတီ လမ်း၊ ဒက်စ်မွိုင်းန်း၊ အိုင်အေ ၅၀၃၁၁">Address: 6222 University Ave, Des Moines, IA 50311</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Gospel Baptist Church. <span data-en="All rights reserved." data-my="အခွင့်အရေးအားလုံး ထိန်းသိမ်းထားပါသည်။">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="pastor.js"></script>
+</body>
+</html>

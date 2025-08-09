@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gospel Baptist Church - News</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Header with Logo -->
+    <header class="top-header">
+        <div class="container">
+            <div class="logo">
+                <img src="gbclogos.png" alt="Gospel Baptist Church Logo" class="logo-image">
+                <h1 class="logo-text" data-en="Gospel Baptist Church" data-my="သတင်းကောင်း ဗတ္တစ်တ် ဘုရားကျောင်း">Gospel Baptist Church</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link" data-en="Home" data-my="မူလစာမျက်">Home</a></li>
+                <li><a href="calendar.html" class="nav-link" data-en="Calendar" data-my="က္ခဒိန်">Calendar</a></li>
+                <li><a href="sermons.html" class="nav-link" data-en="Sermons" data-my="ဓမ္မဟောကြားချက်များ">Sermons</a></li>
+                <li><a href="blog.html" class="nav-link active" data-en="News" data-my="သတင်း">News</a></li>
+                <li><a href="contact.html" class="nav-link" data-en="Contact" data-my="ဆက်သွယ်ရန်">Contact</a></li>
+                <li><a href="#" class="nav-link members-link" data-en="Members" data-my="အဖွဲ့ဝင်များ">Members</a></li>
+            </ul>
+            
+            <div class="language-toggle">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="my">MY</button>
+            </div>
+            
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="blog-header">
+                <h1 class="page-title" data-en="Church News" data-my="ဘုရားကျောင်း သတင်း">Church News</h1>
+                <button class="btn btn-primary" id="addPostBtn" data-en="Add Post" data-my="ပို့စ် ထည့်ရန်">Add Post</button>
+            </div>
+            
+            <!-- Blog Controls -->
+            <div class="blog-controls">
+                <div class="search-box">
+                    <input type="text" id="blogSearch" placeholder="Search posts..." data-en-placeholder="Search posts..." data-my-placeholder="ပို့စ်များ ရှာဖွေရန်...">
+                    <i class="fas fa-search"></i>
+                </div>
+                
+                <div class="sort-controls">
+                    <select id="sortPosts" class="sort-select">
+                        <option value="newest" data-en="Newest First" data-my="အသစ်ဆုံး ဦးစွာ">Newest First</option>
+                        <option value="oldest" data-en="Oldest First" data-my="အဟောင်းဆုံး ဦးစွာ">Oldest First</option>
+                        <option value="title" data-en="By Title" data-my="ခေါင်းစဉ်ဖြင့်">By Title</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Blog Grid -->
+            <div class="blog-grid" id="blogGrid">
+                <!-- Blog posts will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Post Modal -->
+    <div id="addPostModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 data-en="Add New Post" data-my="ပို့စ်အသစ် ထည့်ရန်">Add New Post</h2>
+            <form id="addPostForm">
+                <div class="form-group">
+                    <label for="postTitle" data-en="Post Title" data-my="ပို့စ် ခေါင်းစဉ်">Post Title</label>
+                    <input type="text" id="postTitle" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="postDate" data-en="Date" data-my="ရက်စွဲ">Date</label>
+                    <input type="date" id="postDate" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="postImage" data-en="Image URL" data-my="ပုံ URL">Image URL</label>
+                    <input type="url" id="postImage" name="image" placeholder="https://example.com/image.jpg">
+                </div>
+                <div class="form-group">
+                    <label for="postContent" data-en="Content" data-my="အကြောင်းအရာ">Content</label>
+                    <textarea id="postContent" name="content" rows="8" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" data-en="Publish Post" data-my="ပို့စ် ထုတ်ဝေရန်">Publish Post</button>
+                    <button type="button" class="btn btn-secondary" id="cancelPostBtn" data-en="Cancel" data-my="ပယ်ဖျက်ရန်">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-en="Gospel Baptist Church" data-my="သတင်းကောင်း ဗတ္တစ်တ် ဘုရားကျောင်း">Gospel Baptist Church</h3>
+                    <p data-en="Sharing the love of Christ with our community" data-my="ခရစ်တော်၏ မေတ္တာကို ကျွန်ုပ်တို့ လူမှုအသိုင်းအဝိုင်းနှင့် မျှဝေခြင်း">Sharing the love of Christ with our community</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-en="Connect With Us" data-my="ကျွန်ုပ်တို့နှင့် ဆက်သွယ်ပါ">Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/groups/194934027750815/" target="_blank" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                            <span data-en="Facebook" data-my="ဖေ့စ်ဘွတ်">Facebook</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 data-en="Contact Info" data-my="ဆက်သွယ်ရန် အချက်အလက်">Contact Info</h3>
+                    <p>Email: desmoinesgbc@gmail.com</p>
+                    <p>Phone: +1 515 346 5562</p>
+                    <p data-en="Address: 6222 University Ave, Des Moines, IA 50311" data-my="လိပ်စာ: ၆၂၂၂ ယူနီဗာစီတီ လမ်း၊ ဒက်စ်မွိုင်းန်း၊ အိုင်အေ ၅၀၃၁၁">Address: 6222 University Ave, Des Moines, IA 50311</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Gospel Baptist Church. <span data-en="All rights reserved." data-my="အခွင့်အရေးအားလုံး ထိန်းသိမ်းထားပါသည်။">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="blog.js"></script>
+</body>
+</html>
