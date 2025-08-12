@@ -2116,6 +2116,19 @@ p {
     color: #CCCCCC;
 }
 
+.developer-credit {
+    margin-top: 0.75rem;
+}
+
+.developer-credit a {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+.developer-credit a:hover {
+    color: #CCCCCC;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .header .container {

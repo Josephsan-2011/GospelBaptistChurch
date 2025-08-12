@@ -248,6 +248,8 @@ function changeLanguage(lang) {
     
     // Update all translatable elements
     document.querySelectorAll('[data-en]').forEach(element => {
+        // Keep the entire pastor section in English at all times
+        if (element.closest('.about-pastor')) return;
         const key = element.dataset.en;
         if (translations[lang] && translations[lang][key]) {
             element.textContent = translations[lang][key];
@@ -256,6 +258,7 @@ function changeLanguage(lang) {
     
     // Update placeholders
     document.querySelectorAll('[data-en-placeholder]').forEach(element => {
+        if (element.closest('.about-pastor')) return;
         const key = element.dataset.enPlaceholder;
         if (translations[lang] && translations[lang][key]) {
             element.placeholder = translations[lang][key];
@@ -264,6 +267,7 @@ function changeLanguage(lang) {
     
     // Update select options
     document.querySelectorAll('option[data-en]').forEach(option => {
+        if (option.closest('.about-pastor')) return;
         const key = option.dataset.en;
         if (translations[lang] && translations[lang][key]) {
             option.textContent = translations[lang][key];
@@ -272,6 +276,7 @@ function changeLanguage(lang) {
     
     // Update scripture elements with data-my attributes
     document.querySelectorAll('[data-my]').forEach(element => {
+        if (element.closest('.about-pastor')) return;
         if (lang === 'my' && element.dataset.my) {
             element.textContent = element.dataset.my;
         } else if (lang === 'en' && element.dataset.en) {
@@ -497,13 +502,44 @@ function initScrollArrow() {
         scrollArrow.addEventListener('click', function() {
             const servicesSection = document.getElementById('services');
             if (servicesSection) {
-                servicesSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                // Custom smooth scroll with gentler easing and duration
+                const targetY = servicesSection.getBoundingClientRect().top + window.pageYOffset;
+                smoothScrollTo(targetY, 1200);
             }
         });
     }
+}
+
+// Smoothly scroll the window to a specific Y position with easing
+function smoothScrollTo(targetY, duration = 1000) {
+    // Respect user reduced motion preference
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+        window.scrollTo(0, targetY);
+        return;
+    }
+
+    const startY = window.pageYOffset;
+    const distance = targetY - startY;
+    let startTime = null;
+
+    // Ease in-out cubic
+    function ease(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function step(timestamp) {
+        if (startTime === null) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = ease(progress);
+        window.scrollTo(0, startY + distance * eased);
+        if (elapsed < duration) {
+            requestAnimationFrame(step);
+        }
+    }
+
+    requestAnimationFrame(step);
 }
 
 // Initialize hero slideshow functionality
@@ -606,6 +642,20 @@ function initHeroSlideshow() {
     let endX = 0;
     let isDragging = false;
 
+    // Prevent rapid multi-advance
+    let isTransitioning = false;
+    let lastChangeAt = 0;
+    const MIN_CHANGE_GAP_MS = 650;
+
+    function canChangeSlide() {
+        const now = Date.now();
+        if (isTransitioning || now - lastChangeAt < MIN_CHANGE_GAP_MS) return false;
+        isTransitioning = true;
+        lastChangeAt = now;
+        setTimeout(() => { isTransitioning = false; }, MIN_CHANGE_GAP_MS);
+        return true;
+    }
+
     function showSlide(index) {
         // Remove all classes from all slides and dots
         slides.forEach(slide => {
@@ -633,19 +683,34 @@ function initHeroSlideshow() {
         slideshow.style.minHeight = '500px';
     }
 
-    function nextSlide() {
+    function nextSlideInternal() {
         currentSlide = (currentSlide + 1) % totalSlides;
         showSlide(currentSlide);
     }
 
-    function prevSlide() {
+    function nextSlide() {
+        if (!canChangeSlide()) return;
+        nextSlideInternal();
+        restartAuto();
+    }
+
+    function prevSlideInternal() {
         currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
         showSlide(currentSlide);
     }
 
+    function prevSlide() {
+        if (!canChangeSlide()) return;
+        prevSlideInternal();
+        restartAuto();
+    }
+
     function goToSlide(index) {
+        if (index === currentSlide) return;
+        if (!canChangeSlide()) return;
         currentSlide = index;
         showSlide(currentSlide);
+        restartAuto();
     }
 
     // Build navigation dots dynamically to always match slide count
@@ -698,6 +763,7 @@ function initHeroSlideshow() {
     function handleTouchStart(e) {
         startX = e.touches[0].clientX;
         isDragging = true;
+        stopAuto();
     }
 
     function handleTouchMove(e) {
@@ -710,12 +776,14 @@ function initHeroSlideshow() {
         if (!isDragging) return;
         isDragging = false;
         handleSwipe();
+        startAuto();
     }
 
     function handleMouseDown(e) {
         startX = e.clientX;
         isDragging = true;
         slideshow.style.cursor = 'grabbing';
+        stopAuto();
     }
 
     function handleMouseMove(e) {
@@ -728,6 +796,7 @@ function initHeroSlideshow() {
         isDragging = false;
         slideshow.style.cursor = 'grab';
         handleSwipe();
+        startAuto();
     }
 
     function handleSwipe() {
@@ -745,16 +814,34 @@ function initHeroSlideshow() {
         }
     }
 
-    // Auto-advance slides every 8 seconds (slower to prevent "sleep mode")
-    let autoSlideInterval = setInterval(nextSlide, 8000);
+    // Auto-advance control
+    let autoSlideInterval;
+    function stopAuto() {
+        if (autoSlideInterval) {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = null;
+        }
+    }
+    function startAuto() {
+        stopAuto();
+        autoSlideInterval = setInterval(() => {
+            // Only advance if allowed (prevents multi-skip)
+            if (canChangeSlide()) {
+                nextSlideInternal();
+            }
+        }, 8000);
+    }
+    function restartAuto() {
+        startAuto();
+    }
 
-    // Pause auto-advance on hover
+    // Pause/resume on hover (desktop)
     slideshow.addEventListener('mouseenter', () => {
-        clearInterval(autoSlideInterval);
+        stopAuto();
     });
 
     slideshow.addEventListener('mouseleave', () => {
-        autoSlideInterval = setInterval(nextSlide, 8000);
+        startAuto();
     });
 
     // Ensure slideshow always shows full view by resetting to first slide periodically
@@ -770,6 +857,9 @@ function initHeroSlideshow() {
     slideshow.style.visibility = 'visible';
     slideshow.style.opacity = '1';
     
+    // Start auto after initial render
+    startAuto();
+
     // Reinitialize image modal for slideshow images
     initImageModal();
 }
@@ -1197,12 +1287,14 @@ function changeLanguage(lang) {
     
     // Add fading effect to all translatable elements
     elements.forEach(element => {
+        if (element.closest('.about-pastor')) return; // Skip pastor section
         element.classList.add('language-transitioning');
     });
     
     // Wait for fade out, then change content and fade in
     setTimeout(() => {
         elements.forEach(element => {
+            if (element.closest('.about-pastor')) return; // Keep English
             if (lang === 'my') {
                 element.textContent = element.getAttribute('data-my');
             } else {
@@ -1215,6 +1307,7 @@ function changeLanguage(lang) {
         // Update placeholders with fade effect
         const inputs = document.querySelectorAll('[data-en-placeholder][data-my-placeholder]');
         inputs.forEach(input => {
+            if (input.closest('.about-pastor')) return; // Skip pastor section
             input.style.opacity = '0';
             input.style.transform = 'translateY(-10px)';
             
@@ -1517,11 +1610,8 @@ function initPastorBioToggle() {
         originalChangeLanguage(lang);
         
         if (seeMoreBtn) {
-            if (isExpanded) {
-                seeMoreBtn.textContent = lang === 'my' ? originalSeeLessTextMy : originalSeeLessText;
-            } else {
-                seeMoreBtn.textContent = lang === 'my' ? originalSeeMoreTextMy : originalSeeMoreText;
-            }
+            // Force English text for the pastor bio toggle at all times
+            seeMoreBtn.textContent = isExpanded ? originalSeeLessText : originalSeeMoreText;
         }
     };
 }
