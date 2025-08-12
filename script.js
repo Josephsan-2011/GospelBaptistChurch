@@ -223,8 +223,8 @@ const translations = {
         'Saturday Evening Service': 'စနေညနေ ဘုရားဝတ်ပြုချိန်',
         '5:00 PM - 6:00 PM': 'ညနေ ၅ နာရီ - ၆ နာရီ',
         'Evening prayer and Bible study': 'ညနေခင်း ဆုတောင်းခြင်းနှင့် သမ္မာကျမ်းလေ့လာခြင်း',
-        'Welcome Message': 'ကြိုဆိုခြင်း စကားလုံး',
-        'We are delighted to welcome you to Gospel Baptist Church. Our church is a place where people from all walks of life come together to worship, learn, and grow in their faith. Whether you\'re a long-time believer or just beginning your spiritual journey, you\'ll find a warm and welcoming community here.': 'သတင်းကောင်း ဗတ္တစ်တ် ဘုရားကျောင်းသို့ သင့်အား ကြိုဆိုရသည်မှာ ဝမ်းမြောက်ပါသည်။ ကျွန်ုပ်တို့ ဘုရားကျောင်းသည် လူမျိုးစုံ လူတန်းစားများ စုဝေးကာ ကိုးကွယ်ခြင်း၊ သင်ယူခြင်းနှင့် ယုံကြည်ခြင်းတွင် ကြီးထွားရန် လာရောက်ကြသော နေရာဖြစ်ပါသည်။ သင်သည် ရှည်လျားသော ယုံကြည်သူ သို့မဟုတ် ဝိညာဉ်ရေးရာ ခရီးကို စတင်နေသူ ဖြစ်စေ၊ ဤနေရာတွင် နွေးထွေးပြီး ကြိုဆိုတတ်သော အသိုင်းအဝိုင်းကို တွေ့ရှိမည်ဖြစ်ပါသည်။',
+        'Welcome Message': 'လှိုက်လှဲစွာကြိုဆိုပါ၏',
+        'We are delighted to welcome you to Gospel Baptist Church. Our church is a place where people from all walks of life come together to worship, learn, and grow in their faith. Whether you\'re a long-time believer or just beginning your spiritual journey, you\'ll find a warm and welcoming community here.': 'သတင်းကောင်းနှစ်ခြင်းအသင်းတော်မှ သင့်အား ဝမ်းမြောက်စွာ ကြိုဆိုပါသည်။ကျွန်ုပ်တို့ဘုရားကျောင်းမှာ လူတန်းစားမရွှေး ဘာသာလူမျိုးမရွှေး စုဝေးကာ ကိုးကွယ်ခြင်း၊ သင်ယူခြင်း၊ယုံကြည်ခြင်း အစရှိသည်များကို ကြီးထွားရင့်ကျက်လာစေရန် စုဝေးသော နေရာပင် ဖြစ်ပါသည်။ သင်သည် ဝိညာဉ်ရေးရာ ကြီးထွားရင့်ကျက်သောသူ (သို့)ဝိညာဥ်ရေးရာ ခရီးကို စတင်နေသူဖြစ်စေ ဤနေရာမှ သင့်အား နွေးထွေးစွာ ကြိုဆိုတတ်သောအသိုင်းအဝိုင်းကို တွေ့ရှိမည်ဖြစ်ပါသည်။ ဘုရားသခင်ကို ချီးမွမ်းခြင်း၊ သူ၏ နှုတ်ကပတ်တော်ကို လေ့လာခြင်းနှင့် ခရစ်တော်နှင့်အတူ လျှောက်လှမ်းရာတွင် တစ်ဦးကို တစ်ဦး အားပေးခြင်းဖြင့် စုဝေးကြရန် တနင်္ဂနွေနှင့် စနေနေ့တိုင်း ကျွန်ုပ်တို့နှင့် တွဲလက်မြဲစေလိုပါသည်။ သင့်နှင့်ဆုံ တွေ့ရပြီး ကျွန်ုပ်တို့၏ ဘုရားသခင်အား အတူတကွ ဝတ်ပြုရခြင်းဖြင့် ဝမ်းမြောက်ခြင်းကို ခံစားရရှိရန် မျှော်လင့်ပါသည်။',
         'Join us every Sunday and Saturday as we gather to praise God, study His Word, and encourage one another in our walk with Christ. We look forward to meeting you and sharing in the joy of serving our Lord together.': 'ဘုရားသခင်ကို ချီးမွမ်းခြင်း၊ သူ၏ နှုတ်ကပတ်တော်ကို လေ့လာခြင်းနှင့် ခရစ်တော်နှင့်အတူ လျှောက်လှမ်းရာတွင် တစ်ဦးကို တစ်ဦး အားပေးခြင်းဖြင့် စုဝေးကြရန် တနင်္ဂနွေနှင့် စနေနေ့တိုင်း ကျွန်ုပ်တို့နှင့် ပူးပေါင်းပါ။ သင့်ကို တွေ့ဆုံရပြီး ကျွန်ုပ်တို့ သခင်ဘုရားကို အတူတကွ ဝတ်ပြုရခြင်း၏ ဝမ်းမြောက်ခြင်းကို မျှဝေရန် မျှော်လင့်ပါသည်။',
         'Support Our Ministry': 'ကျွန်ုပ်တို့၏ ဝတ်ပြုခြင်းကို ထောက်ပံ့ပါ',
         'Your generous donations help us continue our mission of spreading God\'s love and serving our community. Every contribution makes a difference in our ministry and outreach programs.': 'သင့်၏ ရက်ရောသော လှူဒါန်းမှုများသည် ဘုရားသခင်ကို ဖြန့်ဝေခြင်းနှင့် ကျွန်ုပ်တို့ လူမှုအသိုင်းအဝိုင်းကို ဝတ်ပြုခြင်း ဆက်လက်ပြုရန် ကူညီပေးပါသည်။ လှူဒါန်းမှု တစ်ခုချင်းစီသည် ကျွန်ုပ်တို့၏ ဝတ်ပြုခြင်းနှင့် ပြင်ပရောက်ရှိရေး အစီအစဉ်များတွင် အပြောင်းအလဲ ဖြစ်စေပါသည်။'
@@ -484,139 +484,25 @@ function initImageModal() {
 
     // Add click handlers to all slideshow slides to open category modal
     const slideshowSlides = document.querySelectorAll('.slide-card');
-    console.log('Found slideshow slides:', slideshowSlides.length);
     
-    // Test if slides are actually found
     if (slideshowSlides.length === 0) {
-        console.error('No slides found! Check if .slide-card elements exist in the DOM');
-        alert('No slides found! Check console for details');
         return;
     }
     
     slideshowSlides.forEach((slide, index) => {
-        console.log(`Setting up click handler for slide ${index}:`, slide.getAttribute('data-category'));
-        
         slide.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
-            console.log('Slide clicked!');
             const category = this.getAttribute('data-category');
-            console.log('Category:', category);
             
             if (category) {
-                // Open category modal
-                const categoryModal = document.getElementById('categoryModal');
-                const categoryModalTitle = document.getElementById('categoryModalTitle');
-                const categoryPhotosGrid = document.getElementById('categoryPhotosGrid');
-                
-                console.log('Modal elements found:', {
-                    modal: !!categoryModal,
-                    title: !!categoryModalTitle,
-                    grid: !!categoryPhotosGrid
-                });
-                
-                if (categoryModal && categoryModalTitle && categoryPhotosGrid) {
-                    // Get photos for this category from the existing categoryPhotos data
-                    const categoryPhotos = getCategoryPhotos(category);
-                    console.log('Photos for category:', categoryPhotos);
-                    
-                    const title = currentLanguage === 'my' ? getMyanmarTitle(category) : category;
-                    
-                    categoryModalTitle.textContent = title;
-                    categoryPhotosGrid.innerHTML = '';
-                    
-                    // Add photos to the grid
-                    categoryPhotos.forEach((photoSrc, index) => {
-                        const photoItem = document.createElement('div');
-                        photoItem.className = 'category-photo-item';
-                        
-                        const img = document.createElement('img');
-                        img.src = photoSrc;
-                        img.alt = `${category} Photo ${index + 1}`;
-                        img.onerror = function() {
-                            console.log('Image failed to load:', photoSrc);
-                            // Try alternative format if primary fails
-                            if (photoSrc.includes('.heic')) {
-                                this.src = photoSrc.replace('.heic', '.jpg');
-                            } else if (photoSrc.includes('.jpg')) {
-                                this.src = photoSrc.replace('.jpg', '.heic');
-                            }
-                        };
-                        
-                        // Make photos clickable to open in full size
-                        img.addEventListener('click', function() {
-                            openImageModal(photoSrc, `${category} Photo ${index + 1}`);
-                        });
-                        
-                        photoItem.appendChild(img);
-                        categoryPhotosGrid.appendChild(photoItem);
-                    });
-                    
-                    // Test if modal can be shown
-                    console.log('Modal before show:', categoryModal.classList.toString());
-                    categoryModal.classList.add('show');
-                    console.log('Modal after show:', categoryModal.classList.toString());
-                    document.body.style.overflow = 'hidden';
-                    console.log('Category modal opened successfully!');
-                    
-                    // Force a repaint
-                    categoryModal.offsetHeight;
-                    
-                    // Check if modal is visible
-                    const modalStyle = window.getComputedStyle(categoryModal);
-                    console.log('Modal display style:', modalStyle.display);
-                    console.log('Modal visibility:', modalStyle.visibility);
-                    console.log('Modal opacity:', modalStyle.opacity);
-                } else {
-                    console.error('Some modal elements not found:', {
-                        modal: categoryModal,
-                        title: categoryModalTitle,
-                        grid: categoryPhotosGrid
-                    });
-                }
-            } else {
-                console.error('No category found for slide');
+                // Redirect to gallery page with category parameter
+                const galleryUrl = `gallery.html?category=${encodeURIComponent(category)}`;
+                window.location.href = galleryUrl;
             }
         });
     });
-    
-    // Test the click functionality
-    console.log('Slideshow click handlers set up. Testing...');
-    slideshowSlides.forEach((slide, i) => {
-        console.log(`Slide ${i}: ${slide.getAttribute('data-category')} - Clickable: ${slide.onclick !== null}`);
-    });
-    
-    // Test if modal elements exist
-    const testModal = document.getElementById('categoryModal');
-    const testTitle = document.getElementById('categoryModalTitle');
-    const testGrid = document.getElementById('categoryPhotosGrid');
-    
-    console.log('Modal elements test:', {
-        modal: testModal,
-        title: testTitle,
-        grid: testGrid,
-        modalExists: !!testModal,
-        titleExists: !!testTitle,
-        gridExists: !!testGrid
-    });
-    
-    // Add test button functionality
-    const testModalBtn = document.getElementById('testModalBtn');
-    if (testModalBtn) {
-        testModalBtn.addEventListener('click', function() {
-            console.log('Test button clicked!');
-            if (testModal && testTitle && testGrid) {
-                testTitle.textContent = 'Test Modal';
-                testGrid.innerHTML = '<div style="padding: 20px; text-align: center;"><h3>Modal is working!</h3><p>This is a test to see if the modal can be opened.</p></div>';
-                testModal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-                console.log('Test modal opened successfully!');
-            } else {
-                console.error('Modal elements not found for test');
-            }
-        });
-    }
     
     // Add click handlers to other images on the page (optional)
     const allImages = document.querySelectorAll('img:not(.slide-image img)');
@@ -633,8 +519,6 @@ function initImageModal() {
             });
         }
     });
-    
-
 }
 
 function initHeroSlideshow() {
@@ -657,7 +541,7 @@ function initHeroSlideshow() {
     function showSlide(index) {
         // Remove all classes from all slides and dots
         slides.forEach(slide => {
-            slide.classList.remove('active', 'prev', 'next', 'far-left', 'far-right');
+            slide.classList.remove('active', 'prev', 'next');
         });
         dots.forEach(dot => dot.classList.remove('active'));
 
@@ -665,16 +549,16 @@ function initHeroSlideshow() {
         slides[index].classList.add('active');
         dots[index].classList.add('active');
 
-        // Add classes to surrounding slides for fade effect
+        // Add classes to surrounding slides for fade effect (only 3 slides visible)
         const prevIndex = (index - 1 + totalSlides) % totalSlides;
         const nextIndex = (index + 1) % totalSlides;
-        const farLeftIndex = (index - 2 + totalSlides) % totalSlides;
-        const farRightIndex = (index + 2) % totalSlides;
 
         slides[prevIndex].classList.add('prev');
         slides[nextIndex].classList.add('next');
-        slides[farLeftIndex].classList.add('far-left');
-        slides[farRightIndex].classList.add('far-right');
+
+        // Ensure slideshow container maintains full view
+        slideshow.style.overflow = 'visible';
+        slideshow.style.minHeight = '500px';
     }
 
     function nextSlide() {
@@ -765,8 +649,8 @@ function initHeroSlideshow() {
         }
     }
 
-    // Auto-advance slides every 5 seconds
-    let autoSlideInterval = setInterval(nextSlide, 5000);
+    // Auto-advance slides every 8 seconds (slower to prevent "sleep mode")
+    let autoSlideInterval = setInterval(nextSlide, 8000);
 
     // Pause auto-advance on hover
     slideshow.addEventListener('mouseenter', () => {
@@ -774,11 +658,21 @@ function initHeroSlideshow() {
     });
 
     slideshow.addEventListener('mouseleave', () => {
-        autoSlideInterval = setInterval(nextSlide, 5000);
+        autoSlideInterval = setInterval(nextSlide, 8000);
     });
+
+    // Ensure slideshow always shows full view by resetting to first slide periodically
+    let resetInterval = setInterval(() => {
+        // Always ensure the full slideshow view is visible
+        showSlide(currentSlide);
+    }, 15000); // Check every 15 seconds to prevent "sleep mode"
 
     // Initialize first slide
     showSlide(0);
+    
+    // Ensure slideshow is always visible and properly positioned
+    slideshow.style.visibility = 'visible';
+    slideshow.style.opacity = '1';
     
     // Reinitialize image modal for slideshow images
     initImageModal();
@@ -846,7 +740,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initHeroSlideshow();
     initParallaxEffects();
     initPastorBioToggle();
-    initCategoryGallery();
+
     initScrollAnimations();
     
     // Start photo slider if on home page
@@ -1348,201 +1242,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Category Gallery Modal functionality
-function initCategoryGallery() {
-    const galleryCategories = document.querySelectorAll('.gallery-category');
-    const categoryModal = document.getElementById('categoryModal');
-    const categoryModalTitle = document.getElementById('categoryModalTitle');
-    const categoryPhotosGrid = document.getElementById('categoryPhotosGrid');
-    const categoryModalClose = document.querySelector('.category-modal-close');
-    
-    if (!galleryCategories.length || !categoryModal) return;
-    
-    // Category photo data - mapping each category to its photos
-    const categoryPhotos = {
-        'Church Camp': [
-            'ChurchWebsiteIMG/Church Camp/IMG_20250811_112731 (2).heic',
-            'ChurchWebsiteIMG/Church Camp/IMG_20250811_112731 (2).jpg'
-        ],
-        'Church Picnic': [
-            'ChurchWebsiteIMG/Church Picnic/IMG_20250811_112731 (1).jpg',
-            'ChurchWebsiteIMG/Church Picnic/IMG_20250811_112731 (1).heic'
-        ],
-        'Church Sunday School': [
-            'ChurchWebsiteIMG/Church Sunday School/IMG_20250811_112731 (3).jpg',
-            'ChurchWebsiteIMG/Church Sunday School/IMG_20250811_112731 (3).heic'
-        ],
-        'Church General Photos': [
-            'ChurchWebsiteIMG/Church General Photos/IMG_20250811_122655 (2).jpg',
-            'ChurchWebsiteIMG/Church General Photos/IMG_20250811_122655.jpg',
-            'ChurchWebsiteIMG/Church General Photos/IMG_20250811_113656 (2).heic',
-            'ChurchWebsiteIMG/Church General Photos/IMG_20250811_113656 (3).heic',
-            'ChurchWebsiteIMG/Church General Photos/IMG_20250811_113656 (4).heic',
-            'ChurchWebsiteIMG/Church General Photos/IMG_20250811_113656.heic',
-            'ChurchWebsiteIMG/Church General Photos/IMG_20250811_112731 (1).heic'
-        ],
-        'Pastor Paul Family': [
-            'pastorpaulface.jpeg',
-            'groupphoto1.jpg',
-            'groupphoto2.jpg',
-            'groupphoto3.jpg',
-            'groupphoto4.jpg'
-        ],
-        'Church Mother-Father Day': [
-            'ChurchWebsiteIMG/Church Mother-Father Day/IMG_20250811_112731 (4).jpg',
-            'ChurchWebsiteIMG/Church Mother-Father Day/IMG_20250811_112731 (4).heic'
-        ],
-        'Church Baptism': [
-            'ChurchWebsiteIMG/Church Baptism/IMG_20250811_122655 (1).jpg',
-            'ChurchWebsiteIMG/Church Baptism/IMG_20250811_112730.jpg',
-            'ChurchWebsiteIMG/Church Baptism/IMG_20250811_112731 (5).jpg',
-            'ChurchWebsiteIMG/Church Baptism/IMG_20250811_112731 (1).jpg',
-            'ChurchWebsiteIMG/Church Baptism/IMG_20250811_112731 (2).jpg',
-            'ChurchWebsiteIMG/Church Baptism/IMG_20250811_112731.jpg'
-        ],
-        'Church Holidays': [
-            'ChurchWebsiteIMG/Church Holidays/IMG_20250811_112731 (5).jpg',
-            'ChurchWebsiteIMG/Church Holidays/IMG_20250811_112731 (5).heic'
-        ],
-        'Church Service': [
-            'groupphoto1.jpg',
-            'groupphoto2.jpg',
-            'groupphoto3.jpg',
-            'groupphoto4.jpg',
-            '22da419d-bed7-4b7a-b5cf-b358b72a52df.jpeg',
-            'decbacbe-3bc2-46c5-abe1-d053315c2cf8.jpeg',
-            '6240a6a8-b9af-407b-b6e4-c6c30696a790.jpeg',
-            'c021b34a-9a07-4cb7-8273-1f27c3290b26.jpeg',
-            '2178f80d-791e-471e-bbc2-29944e8110e5.jpeg',
-            '04c076b0-80b4-4ae9-931c-4ede7caf64ee.jpeg',
-            'bcea2b5b-c71d-40de-aecf-4962ce0e45f9.jpeg',
-            '69dec00b-04c9-4aa7-80fb-4bcc9794efad.jpeg',
-            '0c5d283d-f9c0-4eb3-be1d-d99f58b2c337.jpeg',
-            'd2747f43-8cc9-4e90-8575-ae4b72d37a0d.jpeg',
-            '24ac8627-206f-4c68-868a-db1c267a9210.jpeg',
-            'cfe69ec6-9938-4688-84de-19cbc6d16556.jpeg',
-            '82f5617e-1796-4c90-bfda-44305bdff44b.jpeg',
-            '4307166a-1572-4a1f-8b50-b29a786f4d5c.jpeg',
-            'bb1cb074-1743-484e-9944-a9d2f8850224.jpeg',
-            'f9d14d07-b0bd-47f3-9a53-9f05ad402997.jpeg',
-            'aca20ea2-21f6-4bba-9fcf-9c654bcfd2fa.jpeg',
-            '0685e7fc-4237-4cc9-a02a-59860c16e264.jpeg',
-            'a6fc6c3b-01e8-42ec-8f1b-8328e74ef54a.jpeg',
-            '8885d7a2-2fb1-4189-86f8-066341c8a925.jpeg',
-            'c9b07451-3679-4b5b-94e8-b1d413adb687.jpeg',
-            'ccf7a885-7b15-4d0f-84b1-4930c7fec341.jpeg',
-            'IMG_20250811_113656.jpg',
-            'IMG_20250811_113351.jpg',
-            'IMG_20250811_112730.jpg',
-            'IMG_20250811_112731 (5).jpg',
-            'IMG_20250811_112731 (1).jpg',
-            'IMG_20250811_112731 (2).jpg',
-            'IMG_20250811_112731 (3).jpg',
-            'IMG_20250811_112731 (4).jpg',
-            'IMG_20250811_112731.jpg'
-        ]
-    };
-    
-    // Function to open category modal
-    function openCategoryModal(category) {
-        const photos = categoryPhotos[category] || [];
-        const title = currentLanguage === 'my' ? getMyanmarTitle(category) : category;
-        
-        categoryModalTitle.textContent = title;
-        categoryPhotosGrid.innerHTML = '';
-        
-        // Add photos to the grid
-        photos.forEach((photoSrc, index) => {
-            const photoItem = document.createElement('div');
-            photoItem.className = 'category-photo-item';
-            
-            const img = document.createElement('img');
-            img.src = photoSrc;
-            img.alt = `${category} Photo ${index + 1}`;
-            img.onerror = function() {
-                // Try alternative format if primary fails
-                if (photoSrc.includes('.heic')) {
-                    this.src = photoSrc.replace('.heic', '.jpg');
-                } else if (photoSrc.includes('.jpg')) {
-                    this.src = photoSrc.replace('.jpg', '.heic');
-                }
-            };
-            
-            // Make photos clickable to open in full size
-            img.addEventListener('click', function() {
-                openImageModal(photoSrc, `${category} Photo ${index + 1}`);
-            });
-            
-            photoItem.appendChild(img);
-            categoryPhotosGrid.appendChild(photoItem);
-        });
-        
-        categoryModal.classList.add('show');
-        document.body.style.overflow = 'hidden';
-    }
-    
-    // Function to get Myanmar title
-    function getMyanmarTitle(category) {
-        const myanmarTitles = {
-            'Church Camp': 'ဘုရားကျောင်း စခန်း',
-            'Church Picnic': 'ဘုရားကျောင်း စားသောက်ပွဲ',
-            'Church Sunday School': 'ဘုရားကျောင်း တနင်္ဂနွေကျောင်း',
-            'Church General Photos': 'ဘုရားကျောင်း ယေဘုယျ ဓာတ်ပုံများ',
-            'Pastor Paul Family': 'ဓမ္မဆရာ ပေါလ် မိသားစု',
-            'Church Mother-Father Day': 'ဘုရားကျောင်း အမေနေ့-အဖေနေ့',
-            'Church Baptism': 'ဘုရားကျောင်း နှစ်ခြင်းမင်္ဂလာ',
-            'Church Holidays': 'ဘုရားကျောင်း အားလပ်ရက်များ',
-            'Church Service': 'ဘုရားကျောင်း ဝတ်ပြုချိန်'
-        };
-        return myanmarTitles[category] || category;
-    }
-    
-    // Function to open image modal (reuse existing functionality)
-    function openImageModal(src, caption) {
-        const imageModal = document.getElementById('imageModal');
-        const modalImage = document.getElementById('modalImage');
-        const modalCaption = document.getElementById('modalCaption');
-        
-        if (imageModal && modalImage && modalCaption) {
-            modalImage.src = src;
-            modalCaption.textContent = caption;
-            imageModal.style.display = 'block';
-            imageModal.classList.add('show');
-        }
-    }
-    
-    // Add click event to each category
-    galleryCategories.forEach(category => {
-        category.addEventListener('click', function() {
-            const categoryName = this.getAttribute('data-category');
-            openCategoryModal(categoryName);
-        });
-    });
-    
-    // Close modal when clicking close button
-    if (categoryModalClose) {
-        categoryModalClose.addEventListener('click', function() {
-            categoryModal.classList.remove('show');
-            document.body.style.overflow = 'auto';
-        });
-    }
-    
-    // Close modal when clicking outside
-    categoryModal.addEventListener('click', function(e) {
-        if (e.target === categoryModal) {
-            categoryModal.classList.remove('show');
-            document.body.style.overflow = 'auto';
-        }
-    });
-    
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && categoryModal.classList.contains('show')) {
-            categoryModal.classList.remove('show');
-            document.body.style.overflow = 'auto';
-        }
-    });
-}
+
 
 // Global function to get photos for a specific category
 function getCategoryPhotos(category) {
@@ -1565,18 +1265,16 @@ function getCategoryPhotos(category) {
             'ChurchWebsiteIMG/Church Picnic/4307166a-1572-4a1f-8b50-b29a786f4d5c.jpeg',
             'ChurchWebsiteIMG/Church Picnic/bb1cb074-1743-484e-9944-a9d2f8850224.jpeg',
             'ChurchWebsiteIMG/Church Picnic/f9d14d07-b0bd-47f3-9a53-9f05ad402997.jpeg',
-            'ChurchWebsiteIMG/Church Picnic/aca20ea2-21f6-4bba-9cf-9c654bcfd2fa.jpeg',
+            'ChurchWebsiteIMG/Church Picnic/aca20ea2-21f6-4bba-9fcf-9c654bcfd2fa.jpeg',
             'ChurchWebsiteIMG/Church Picnic/0685e7fc-4237-4cc9-a02a-59860c16e264.jpeg',
             'ChurchWebsiteIMG/Church Picnic/a6fc6c3b-01e8-42ec-8f1b-8328e74ef54a.jpeg',
-            'ChurchWebsiteIMG/Church Picnic/8885d7a2-2fb1-4189-86f8-066341c8a925.jpeg',
-            'ChurchWebsiteIMG/Church Picnic/c9b07451-3679-4b5b-94e8-b1d413adb687.jpeg',
             'ChurchWebsiteIMG/Church Picnic/ccf7a885-7b15-4d0f-84b1-4930c7fec341.jpeg'
         ],
         'Church Sunday School': [
             'ChurchWebsiteIMG/Church Sunday School/groupphoto3.jpg',
-            'IMG_20250811_112731 (3).jpg',
-            'IMG_20250811_112731 (4).jpg',
-            'IMG_20250811_113656 (1).heic'
+            'ChurchWebsiteIMG/Church Sunday School/IMG_20250811_112731 (3).jpg',
+            'ChurchWebsiteIMG/Church Sunday School/IMG_20250811_112731 (4).jpg',
+            'ChurchWebsiteIMG/Church Sunday School/IMG_20250811_113656 (1).heic'
         ],
         'Church General Photos': [
             'ChurchWebsiteIMG/Church General Photos/IMG_20250811_122655 (2).jpg',
@@ -1616,28 +1314,17 @@ function getCategoryPhotos(category) {
             'groupphoto2.jpg',
             'groupphoto3.jpg',
             'groupphoto4.jpg',
-            '22da419d-bed7-4b7a-b5cf-b358b72a52df.jpeg',
-            'decbacbe-3bc2-46c5-abe1-d053315c2cf8.jpeg',
             '6240a6a8-b9af-407b-b6e4-c6c30696a790.jpeg',
-            'c021b34a-9a07-4cb7-8273-1f27c3290b26.jpeg',
             '2178f80d-791e-471e-bbc2-29944e8110e5.jpeg',
-            '04c076b0-80b4-4ae9-931c-4ede7caf64ee.jpeg',
-            'bcea2b5b-c71d-40de-aecf-4962ce0e45f9.jpeg',
             '69dec00b-04c9-4aa7-80fb-4bcc9794efad.jpeg',
             '0c5d283d-f9c0-4eb3-be1d-d99f58b2c337.jpeg',
             'd2747f43-8cc9-4e90-8575-ae4b72d37a0d.jpeg',
-            '24ac8627-206f-4c68-868a-db1c267a9210.jpeg',
-            'cfe69ec6-9938-4688-84de-19cbc6d16556.jpeg',
             '82f5617e-1796-4c90-bfda-44305bdff44b.jpeg',
             '4307166a-1572-4a1f-8b50-b29a786f4d5c.jpeg',
             'bb1cb074-1743-484e-9944-a9d2f8850224.jpeg',
             'f9d14d07-b0bd-47f3-9a53-9f05ad402997.jpeg',
             'aca20ea2-21f6-4bba-9fcf-9c654bcfd2fa.jpeg',
-            '0685e7fc-4237-4cc9-a02a-59860c16e264.jpeg',
-            'a6fc6c3b-01e8-42ec-8f1b-8328e74ef54a.jpeg',
             '8885d7a2-2fb1-4189-86f8-066341c8a925.jpeg',
-            'c9b07451-3679-4b5b-94e8-b1d413adb687.jpeg',
-            'ccf7a885-7b15-4d0f-84b1-4930c7fec341.jpeg',
             'IMG_20250811_113656.jpg',
             'IMG_20250811_113351.jpg',
             'IMG_20250811_112730.jpg',

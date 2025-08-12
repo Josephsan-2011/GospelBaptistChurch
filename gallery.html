@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Photo Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gallery-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .gallery-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .gallery-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-item-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .gallery-item-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: var(--text-gray);
+        }
+        
+        .error {
+            text-align: center;
+            padding: 3rem;
+            color: #e74c3c;
+        }
+        
+        .no-images {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-gray);
+        }
+        
+        .no-images i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .gallery-title {
+                font-size: 2rem;
+            }
+            
+            .gallery-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="top-header">
+        <div class="container">
+            <div class="logo">
+                <img src="gbclogos.png" alt="GBC Logo" class="logo-image">
+                <div class="logo-text">
+                    <h1>Gospel Baptist Church</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="calendar.html" class="nav-link">Calendar</a></li>
+                <li><a href="sermons.html" class="nav-link">Sermons</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="members.html" class="nav-link members-link">Members</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Gallery Header -->
+    <section class="gallery-header">
+        <div class="container">
+            <h1 class="gallery-title" id="categoryTitle">Photo Gallery</h1>
+            <p class="gallery-subtitle" id="categorySubtitle">Browse through our collection of church memories</p>
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
+        </div>
+    </section>
+
+    <!-- Gallery Container -->
+    <section class="gallery-container">
+        <div id="galleryContent">
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading gallery...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+        <div class="image-modal-content">
+            <span class="image-modal-close">&times;</span>
+            <img id="modalImage" src="" alt="Full size image">
+            <div class="image-modal-caption" id="modalCaption"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Gospel Baptist Church</h3>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                                            <p>Email: desmoinesgbc@gmail.com</p>
+                    <p>Phone: +95 123 456 789</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Gospel Baptist Church. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Gallery page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get category from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
+            
+            if (!category) {
+                showError('No category specified');
+                return;
+            }
+            
+            // Update page title and header
+            document.title = `${category} - Church Photo Gallery`;
+            document.getElementById('categoryTitle').textContent = category;
+            document.getElementById('categorySubtitle').textContent = `Photos from ${category}`;
+            
+            // Load gallery images
+            loadGallery(category);
+            
+            // Initialize image modal
+            initImageModal();
+        });
+        
+        function loadGallery(category) {
+            const galleryContent = document.getElementById('galleryContent');
+            
+            // Get photos for this category
+            const photos = getCategoryPhotos(category);
+            
+            if (!photos || photos.length === 0) {
+                showNoImages();
+                return;
+            }
+            
+            // Create gallery grid
+            const galleryGrid = document.createElement('div');
+            galleryGrid.className = 'gallery-grid';
+            
+            photos.forEach((photoSrc, index) => {
+                const galleryItem = createGalleryItem(photoSrc, category, index);
+                galleryGrid.appendChild(galleryItem);
+            });
+            
+            // Replace loading with gallery
+            galleryContent.innerHTML = '';
+            galleryContent.appendChild(galleryGrid);
+        }
+        
+        function createGalleryItem(photoSrc, category, index) {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            
+            const img = document.createElement('img');
+            img.src = photoSrc;
+            img.alt = `${category} Photo ${index + 1}`;
+            img.loading = 'lazy';
+            
+            // Handle image errors
+            img.onerror = function() {
+                this.src = 'template.png'; // Fallback image
+                this.alt = 'Image not available';
+            };
+            
+            const overlay = document.createElement('div');
+            overlay.className = 'gallery-item-overlay';
+            overlay.innerHTML = `
+                <div class="gallery-item-title">${category}</div>
+                <div class="gallery-item-description">Photo ${index + 1}</div>
+            `;
+            
+            // Make clickable to open in modal
+            item.addEventListener('click', function() {
+                openImageModal(photoSrc, `${category} Photo ${index + 1}`);
+            });
+            
+            item.appendChild(img);
+            item.appendChild(overlay);
+            
+            return item;
+        }
+        
+        function showError(message) {
+            const galleryContent = document.getElementById('galleryContent');
+            galleryContent.innerHTML = `
+                <div class="error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Error</h3>
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+        
+        function showNoImages() {
+            const galleryContent = document.getElementById('galleryContent');
+            galleryContent.innerHTML = `
+                <div class="no-images">
+                    <i class="fas fa-images"></i>
+                    <h3>No Images Found</h3>
+                    <p>This category doesn't have any images yet.</p>
+                </div>
+            `;
+        }
+        
+        function initImageModal() {
+            const imageModal = document.getElementById('imageModal');
+            const modalClose = document.querySelector('.image-modal-close');
+            
+            // Close modal when clicking close button
+            if (modalClose) {
+                modalClose.addEventListener('click', function() {
+                    imageModal.style.display = 'none';
+                    imageModal.classList.remove('show');
+                });
+            }
+            
+            // Close modal when clicking outside
+            imageModal.addEventListener('click', function(e) {
+                if (e.target === imageModal) {
+                    imageModal.style.display = 'none';
+                    imageModal.classList.remove('show');
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && imageModal.style.display === 'block') {
+                    imageModal.style.display = 'none';
+                    imageModal.classList.remove('show');
+                }
+            });
+        }
+        
+        function openImageModal(src, caption) {
+            const imageModal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            
+            if (imageModal && modalImage && modalCaption) {
+                modalImage.src = src;
+                modalCaption.textContent = caption;
+                imageModal.style.display = 'block';
+                imageModal.classList.add('show');
+            }
+        }
+    </script>
+</body>
+</html>
