@@ -2096,6 +2096,16 @@ p {
     gap: 1rem;
 }
 
+/* Make footer contact links clickable styled like developer credit */
+.footer-section a {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+.footer-section a:hover {
+    color: #CCCCCC;
+}
+
 .social-link {
     display: flex;
     align-items: center;
