@@ -289,6 +289,24 @@ function initMobileMenu() {
     const navList = document.querySelector('.nav-list');
     
     if (mobileToggle && navList) {
+        // Accessibility attributes and identifiers
+        if (!navList.id) {
+            navList.id = 'primary-navigation';
+        }
+        mobileToggle.setAttribute('aria-controls', navList.id);
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        navList.setAttribute('aria-hidden', 'true');
+        navList.setAttribute('role', 'menu');
+        navList.querySelectorAll('a.nav-link').forEach(link => link.setAttribute('role', 'menuitem'));
+
+        // Ensure backdrop exists
+        let backdrop = document.querySelector('.mobile-menu-backdrop');
+        if (!backdrop) {
+            backdrop = document.createElement('div');
+            backdrop.className = 'mobile-menu-backdrop';
+            document.body.appendChild(backdrop);
+        }
+
         mobileToggle.addEventListener('click', () => {
             // Toggle menu and hamburger animation
             navList.classList.toggle('active');
@@ -297,8 +315,14 @@ function initMobileMenu() {
             // Prevent body scroll when menu is open
             if (navList.classList.contains('active')) {
                 document.body.style.overflow = 'hidden';
+                mobileToggle.setAttribute('aria-expanded', 'true');
+                navList.setAttribute('aria-hidden', 'false');
+                backdrop.classList.add('active');
             } else {
                 document.body.style.overflow = '';
+                mobileToggle.setAttribute('aria-expanded', 'false');
+                navList.setAttribute('aria-hidden', 'true');
+                backdrop.classList.remove('active');
             }
         });
         
@@ -308,6 +332,10 @@ function initMobileMenu() {
                 navList.classList.remove('active');
                 mobileToggle.classList.remove('active');
                 document.body.style.overflow = '';
+                mobileToggle.setAttribute('aria-expanded', 'false');
+                navList.setAttribute('aria-hidden', 'true');
+                const backdropEl = document.querySelector('.mobile-menu-backdrop');
+                if (backdropEl) backdropEl.classList.remove('active');
             });
         });
         
@@ -317,15 +345,46 @@ function initMobileMenu() {
                 navList.classList.remove('active');
                 mobileToggle.classList.remove('active');
                 document.body.style.overflow = '';
+                mobileToggle.setAttribute('aria-expanded', 'false');
+                navList.setAttribute('aria-hidden', 'true');
+                const backdropEl = document.querySelector('.mobile-menu-backdrop');
+                if (backdropEl) backdropEl.classList.remove('active');
             }
         });
         
+        // Close when clicking backdrop
+        backdrop.addEventListener('click', () => {
+            navList.classList.remove('active');
+            mobileToggle.classList.remove('active');
+            document.body.style.overflow = '';
+            mobileToggle.setAttribute('aria-expanded', 'false');
+            navList.setAttribute('aria-hidden', 'true');
+            backdrop.classList.remove('active');
+        });
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navList.classList.contains('active')) {
+                navList.classList.remove('active');
+                mobileToggle.classList.remove('active');
+                document.body.style.overflow = '';
+                mobileToggle.setAttribute('aria-expanded', 'false');
+                navList.setAttribute('aria-hidden', 'true');
+                const backdropEl = document.querySelector('.mobile-menu-backdrop');
+                if (backdropEl) backdropEl.classList.remove('active');
+            }
+        });
+
         // Close mobile menu on window resize (if screen becomes larger)
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
                 navList.classList.remove('active');
                 mobileToggle.classList.remove('active');
                 document.body.style.overflow = '';
+                mobileToggle.setAttribute('aria-expanded', 'false');
+                navList.setAttribute('aria-hidden', 'true');
+                const backdropEl = document.querySelector('.mobile-menu-backdrop');
+                if (backdropEl) backdropEl.classList.remove('active');
             }
         });
     }
@@ -525,8 +584,17 @@ function initHeroSlideshow() {
     const slideshow = document.querySelector('.hero-slideshow');
     if (!slideshow) return;
 
+    // Keep only slides that represent categories
+    const allSlides = slideshow.querySelectorAll('.slide-card');
+    allSlides.forEach(slide => {
+        if (!slide.hasAttribute('data-category')) {
+            slide.remove();
+        }
+    });
+
     const slides = slideshow.querySelectorAll('.slide-card');
-    const dots = slideshow.querySelectorAll('.nav-dot');
+    const navContainer = slideshow.querySelector('.slideshow-nav');
+    let dots = slideshow.querySelectorAll('.nav-dot');
     const prevBtn = slideshow.querySelector('.prev');
     const nextBtn = slideshow.querySelector('.next');
     
@@ -543,11 +611,15 @@ function initHeroSlideshow() {
         slides.forEach(slide => {
             slide.classList.remove('active', 'prev', 'next');
         });
-        dots.forEach(dot => dot.classList.remove('active'));
+        if (dots && dots.length) {
+            dots.forEach(dot => dot.classList.remove('active'));
+        }
 
         // Add active class to current slide and dot
         slides[index].classList.add('active');
-        dots[index].classList.add('active');
+        if (dots && dots[index]) {
+            dots[index].classList.add('active');
+        }
 
         // Add classes to surrounding slides for fade effect (only 3 slides visible)
         const prevIndex = (index - 1 + totalSlides) % totalSlides;
@@ -576,6 +648,28 @@ function initHeroSlideshow() {
         showSlide(currentSlide);
     }
 
+    // Build navigation dots dynamically to always match slide count
+    if (navContainer) {
+        navContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+            dot.addEventListener('click', () => goToSlide(i));
+            navContainer.appendChild(dot);
+        }
+        dots = slideshow.querySelectorAll('.nav-dot');
+    }
+
+    // If a slide image fails to load (e.g., unsupported format), hide the image and mark the slide
+    slideshow.querySelectorAll('.slide-image img').forEach(img => {
+        img.addEventListener('error', () => {
+            img.style.display = 'none';
+            const slideCard = img.closest('.slide-card');
+            if (slideCard) slideCard.classList.add('image-missing');
+        });
+    });
+
     // Event listeners
     if (nextBtn) {
         nextBtn.addEventListener('click', nextSlide);
@@ -585,9 +679,11 @@ function initHeroSlideshow() {
         prevBtn.addEventListener('click', prevSlide);
     }
 
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => goToSlide(index));
-    });
+    if (dots && dots.length) {
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => goToSlide(index));
+        });
+    }
 
     // Touch and mouse event handlers
     slideshow.addEventListener('touchstart', handleTouchStart, { passive: true });
@@ -740,6 +836,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initHeroSlideshow();
     initParallaxEffects();
     initPastorBioToggle();
+    initImageLoadingEnhancements();
 
     initScrollAnimations();
     
@@ -1057,6 +1154,15 @@ function initNavigation() {
             // Add active class to clicked link
             this.classList.add('active');
         });
+    });
+
+    // Highlight current page on load
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPath || (currentPath === '' && href === 'index.html')) {
+            link.classList.add('active');
+        }
     });
 }
 
@@ -1418,4 +1524,57 @@ function initPastorBioToggle() {
             }
         }
     };
+}
+
+// Global image loading enhancements for desktop and mobile
+function initImageLoadingEnhancements() {
+    function enhanceImage(img) {
+        if (!img) return;
+
+        // Add error fallback for any image on the site
+        if (!img.dataset.fallbackBound) {
+            img.addEventListener('error', () => {
+                if (img.src && !img.src.endsWith('template.png')) {
+                    img.src = 'template.png';
+                }
+            });
+            img.dataset.fallbackBound = 'true';
+        }
+
+        // Critical image: first hero slide image loads eagerly, others lazy
+        const firstHeroImage = document.querySelector('.hero-slideshow .slide-card .slide-image img');
+        const isFirstHero = firstHeroImage && img === firstHeroImage;
+        if (isFirstHero) {
+            img.loading = 'eager';
+            img.decoding = 'sync';
+            img.setAttribute('fetchpriority', 'high');
+        } else if (!img.loading) {
+            img.loading = 'lazy';
+            img.decoding = 'async';
+        }
+
+        // Improve responsiveness for slideshow images
+        if (img.closest('.hero-slideshow')) {
+            img.sizes = '(max-width: 480px) 300px, (max-width: 768px) 350px, 400px';
+        }
+    }
+
+    // Enhance all current images
+    document.querySelectorAll('img').forEach(enhanceImage);
+
+    // Observe future images (e.g., gallery content injected on DOMContentLoaded)
+    const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+            mutation.addedNodes.forEach(node => {
+                if (node.nodeType !== 1) return; // ELEMENT_NODE
+                if (node.tagName === 'IMG') {
+                    enhanceImage(node);
+                } else {
+                    node.querySelectorAll && node.querySelectorAll('img').forEach(enhanceImage);
+                }
+            });
+        }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
 }

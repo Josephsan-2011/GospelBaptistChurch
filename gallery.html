@@ -297,7 +297,10 @@
             
             // Handle image errors
             img.onerror = function() {
-                this.src = 'template.png'; // Fallback image
+                // Hide broken image without using a placeholder
+                this.style.display = 'none';
+                const parent = this.parentElement;
+                if (parent) parent.classList.add('image-missing');
                 this.alt = 'Image not available';
             };
             

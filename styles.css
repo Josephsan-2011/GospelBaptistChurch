@@ -549,11 +549,18 @@ p {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 300ms ease, filter 300ms ease;
+    will-change: transform;
 }
 
-.slide-card:hover .slide-image img {
-    transform: scale(1.1);
+/* Smooth hover only on active slide */
+.slide-card.active .slide-image img {
+    transform: scale(1);
+}
+
+.slide-card.active:hover .slide-image img {
+    transform: scale(1.06);
+    filter: brightness(1.02);
 }
 
 .slide-content {
@@ -613,9 +620,10 @@ p {
 }
 
 /* Slide Card Hover Effects */
-.slide-card:hover {
+/* Subtle lift on active slide only */
+.slide-card.active:hover {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-    transform: translateY(-5px);
+    transform: translateY(-4px);
 }
 
 /* Slideshow Navigation */
@@ -671,7 +679,7 @@ p {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 10;
+    z-index: 20; /* Above slides for reliable tapping */
 }
 
 .slideshow-control:hover {
@@ -1396,32 +1404,12 @@ p {
     align-items: center;
 }
 
-.map-placeholder {
-    background: var(--background-accent);
-    border: 2px dashed var(--border-color);
-    border-radius: var(--border-radius);
-    padding: 3rem 2rem;
-    text-align: center;
+.location-image {
     width: 100%;
-    max-width: 400px;
-    transition: all 0.3s ease;
-}
-
-.map-placeholder:hover {
-    border-color: var(--primary-color);
-    background: var(--background-gray);
-}
-
-.map-placeholder i {
-    font-size: 4rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.map-placeholder p {
-    color: var(--text-gray);
-    font-size: 1rem;
-    line-height: 1.5;
+    max-width: 600px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    object-fit: cover;
 }
 
 .service-grid {
