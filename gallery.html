@@ -286,6 +286,74 @@
             galleryContent.appendChild(galleryGrid);
         }
         
+        function getCategoryPhotos(category) {
+            // Map categories to their photo folders
+            const categoryPhotos = {
+                'Church Baptism': [
+                    'ChurchWebsiteIMG/Church Baptism/churchbaptism1.jpg',
+                    'ChurchWebsiteIMG/Church Baptism/churchbaptism2.jpg',
+                    'ChurchWebsiteIMG/Church Baptism/churchbaptism3.jpg',
+                    'ChurchWebsiteIMG/Church Baptism/churchbaptism4.jpg',
+                    'ChurchWebsiteIMG/Church Baptism/churchbaptism6.jpg'
+                ],
+                'Church Camp': [
+                    'ChurchWebsiteIMG/Church Camp/churchcamp.jpg'
+                ],
+                'Church General Photos': [
+                    'ChurchWebsiteIMG/Church General Photos/IMG_20250811_112731 (1).heic',
+                    'ChurchWebsiteIMG/Church General Photos/IMG_20250811_122655 (2).jpg',
+                    'ChurchWebsiteIMG/Church General Photos/IMG_20250811_122655.jpg',
+                    'ChurchWebsiteIMG/Church General Photos/IMG_20250811_113656 (2).heic',
+                    'ChurchWebsiteIMG/Church General Photos/IMG_20250811_113656 (3).heic',
+                    'ChurchWebsiteIMG/Church General Photos/IMG_20250811_113656 (4).heic',
+                    'ChurchWebsiteIMG/Church General Photos/IMG_20250811_113656.heic'
+                ],
+                'Church Holidays': [
+                    'ChurchWebsiteIMG/Church Holidays/IMG_20250811_122655 (3).jpg'
+                ],
+                'Church Mother & Father Day': [
+                    'ChurchWebsiteIMG/Church Mother-Father Day/IMG_20250811_113351.jpg',
+                    'ChurchWebsiteIMG/Church Mother-Father Day/groupphoto1.jpg',
+                    'ChurchWebsiteIMG/Church Mother-Father Day/groupphoto2.jpg',
+                    'ChurchWebsiteIMG/Church Mother-Father Day/groupphoto4.jpg'
+                ],
+                'Church Picnic': [
+                    'ChurchWebsiteIMG/Church Picnic/picniccover.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/04c076b0-80b4-4ae9-931c-4ede7caf64ee.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/69dec00b-04c9-4aa7-80fb-4bcc9794efad.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/0c5d283d-f9c0-4eb3-be1d-d99f58b2c337.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/decbacbe-3bc2-46c5-abe1-d053315c2cf8.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/6240a6a8-b9af-407b-b6e4-c6c30696a790.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/c021b34a-9a07-4cb7-8273-1f27c3290b26.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/2178f80d-791e-471e-bbc2-29944e8110e5.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/bcea2b5b-c71d-40de-aecf-4962ce0e45f9.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/d2747f43-8cc9-4e90-8575-ae4b72d37a0d.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/cfe69ec6-9938-4688-84de-19cbc6d16556.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/82f5617e-1796-4c90-bfda-44305bdff44b.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/bb1cb074-1743-484e-9944-a9d2f8850224.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/f9d14d07-b0bd-47f3-9a53-9f05ad402997.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/aca20ea2-21f6-4bba-9fcf-9c654bcfd2fa.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/ccf7a885-7b15-4d0f-84b1-4930c7fec341.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/0685e7fc-4237-4cc9-a02a-59860c16e264.jpeg',
+                    'ChurchWebsiteIMG/Church Picnic/a6fc6c3b-01e8-42ec-8f1b-8328e74ef54a.jpeg'
+                ],
+                'Church Sunday School': [
+                    'ChurchWebsiteIMG/Church Sunday School/groupphoto3.jpg',
+                    'ChurchWebsiteIMG/Church Sunday School/IMG_20250811_113656 (1).heic',
+                    'ChurchWebsiteIMG/Church Sunday School/IMG_20250811_112731 (3).jpg',
+                    'ChurchWebsiteIMG/Church Sunday School/IMG_20250811_112731 (4).jpg'
+                ],
+                'Pastor Paul Family': [
+                    'ChurchWebsiteIMG/Pastor Paul Family/IMG_20250811_113656.jpg',
+                    'ChurchWebsiteIMG/Pastor Paul Family/8885d7a2-2fb1-4189-86f8-066341c8a925.jpeg',
+                    'ChurchWebsiteIMG/Pastor Paul Family/c9b07451-3679-4b5b-94e8-b1d413adb687.jpeg'
+                ]
+                // Add more categories here as needed
+            };
+            
+            return categoryPhotos[category] || [];
+        }
+        
         function createGalleryItem(photoSrc, category, index) {
             const item = document.createElement('div');
             item.className = 'gallery-item';

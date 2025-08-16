@@ -1,0 +1,434 @@
+{
+  "scan_summary": {
+    "total_categories": 9,
+    "total_images": 44,
+    "total_size_mb": 41.79,
+    "scan_date": "2025-08-16T16:26:55.488842",
+    "scan_timestamp": 1755379615.48886
+  },
+  "categories": {
+    "Pastor Paul Family": {
+      "category": "Pastor Paul Family",
+      "display_name": "Pastor Paul Family",
+      "images": [
+        {
+          "filename": "8885d7a2-2fb1-4189-86f8-066341c8a925.jpeg",
+          "path": "ChurchWebsiteIMG/Pastor Paul Family/8885d7a2-2fb1-4189-86f8-066341c8a925.jpeg",
+          "size_bytes": 45671,
+          "size_mb": 0.04,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:35:24"
+        },
+        {
+          "filename": "IMG_20250811_113656.jpg",
+          "path": "ChurchWebsiteIMG/Pastor Paul Family/IMG_20250811_113656.jpg",
+          "size_bytes": 199483,
+          "size_mb": 0.19,
+          "extension": ".jpg",
+          "modified": "2025-08-11T11:38:02"
+        },
+        {
+          "filename": "c9b07451-3679-4b5b-94e8-b1d413adb687.jpeg",
+          "path": "ChurchWebsiteIMG/Pastor Paul Family/c9b07451-3679-4b5b-94e8-b1d413adb687.jpeg",
+          "size_bytes": 537379,
+          "size_mb": 0.51,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:34:48"
+        }
+      ],
+      "total_count": 3,
+      "last_updated": "2025-08-16T16:26:55.423620"
+    },
+    "Church Holidays": {
+      "category": "Church Holidays",
+      "display_name": "Church Holidays",
+      "images": [
+        {
+          "filename": "IMG_20250811_122655 (3).jpg",
+          "path": "ChurchWebsiteIMG/Church Holidays/IMG_20250811_122655 (3).jpg",
+          "size_bytes": 147957,
+          "size_mb": 0.14,
+          "extension": ".jpg",
+          "modified": "2025-08-11T12:29:00"
+        }
+      ],
+      "total_count": 1,
+      "last_updated": "2025-08-16T16:26:55.447324"
+    },
+    "Church General Photos": {
+      "category": "Church General Photos",
+      "display_name": "Church General Photos",
+      "images": [
+        {
+          "filename": "IMG_20250811_112731 (1).heic",
+          "path": "ChurchWebsiteIMG/Church General Photos/IMG_20250811_112731 (1).heic",
+          "size_bytes": 3024345,
+          "size_mb": 2.88,
+          "extension": ".heic",
+          "modified": "2025-08-11T11:32:58"
+        },
+        {
+          "filename": "IMG_20250811_113656 (2).heic",
+          "path": "ChurchWebsiteIMG/Church General Photos/IMG_20250811_113656 (2).heic",
+          "size_bytes": 3883113,
+          "size_mb": 3.7,
+          "extension": ".heic",
+          "modified": "2025-08-11T11:38:02"
+        },
+        {
+          "filename": "IMG_20250811_113656 (3).heic",
+          "path": "ChurchWebsiteIMG/Church General Photos/IMG_20250811_113656 (3).heic",
+          "size_bytes": 3664970,
+          "size_mb": 3.5,
+          "extension": ".heic",
+          "modified": "2025-08-11T11:38:02"
+        },
+        {
+          "filename": "IMG_20250811_113656 (4).heic",
+          "path": "ChurchWebsiteIMG/Church General Photos/IMG_20250811_113656 (4).heic",
+          "size_bytes": 567119,
+          "size_mb": 0.54,
+          "extension": ".heic",
+          "modified": "2025-08-11T11:38:02"
+        },
+        {
+          "filename": "IMG_20250811_113656.heic",
+          "path": "ChurchWebsiteIMG/Church General Photos/IMG_20250811_113656.heic",
+          "size_bytes": 1259640,
+          "size_mb": 1.2,
+          "extension": ".heic",
+          "modified": "2025-08-11T11:38:02"
+        },
+        {
+          "filename": "IMG_20250811_122655 (2).jpg",
+          "path": "ChurchWebsiteIMG/Church General Photos/IMG_20250811_122655 (2).jpg",
+          "size_bytes": 262216,
+          "size_mb": 0.25,
+          "extension": ".jpg",
+          "modified": "2025-08-11T12:29:00"
+        },
+        {
+          "filename": "IMG_20250811_122655.jpg",
+          "path": "ChurchWebsiteIMG/Church General Photos/IMG_20250811_122655.jpg",
+          "size_bytes": 216374,
+          "size_mb": 0.21,
+          "extension": ".jpg",
+          "modified": "2025-08-11T12:29:00"
+        }
+      ],
+      "total_count": 7,
+      "last_updated": "2025-08-16T16:26:55.448579"
+    },
+    "Church Camp": {
+      "category": "Church Camp",
+      "display_name": "Church Camp",
+      "images": [
+        {
+          "filename": "churchcamp.jpg",
+          "path": "ChurchWebsiteIMG/Church Camp/churchcamp.jpg",
+          "size_bytes": 3640004,
+          "size_mb": 3.47,
+          "extension": ".jpg",
+          "modified": "2025-08-11T11:32:58"
+        }
+      ],
+      "total_count": 1,
+      "last_updated": "2025-08-16T16:26:55.455154"
+    },
+    "Church Picnic": {
+      "category": "Church Picnic",
+      "display_name": "Church Picnic",
+      "images": [
+        {
+          "filename": "04c076b0-80b4-4ae9-931c-4ede7caf64ee.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/04c076b0-80b4-4ae9-931c-4ede7caf64ee.jpeg",
+          "size_bytes": 252024,
+          "size_mb": 0.24,
+          "extension": ".jpeg",
+          "modified": "2025-08-11T12:16:58"
+        },
+        {
+          "filename": "0685e7fc-4237-4cc9-a02a-59860c16e264.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/0685e7fc-4237-4cc9-a02a-59860c16e264.jpeg",
+          "size_bytes": 180198,
+          "size_mb": 0.17,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:35:53"
+        },
+        {
+          "filename": "0c5d283d-f9c0-4eb3-be1d-d99f58b2c337.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/0c5d283d-f9c0-4eb3-be1d-d99f58b2c337.jpeg",
+          "size_bytes": 181064,
+          "size_mb": 0.17,
+          "extension": ".jpeg",
+          "modified": "2025-08-11T12:16:57"
+        },
+        {
+          "filename": "2178f80d-791e-471e-bbc2-29944e8110e5.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/2178f80d-791e-471e-bbc2-29944e8110e5.jpeg",
+          "size_bytes": 158673,
+          "size_mb": 0.15,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:39:05"
+        },
+        {
+          "filename": "6240a6a8-b9af-407b-b6e4-c6c30696a790.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/6240a6a8-b9af-407b-b6e4-c6c30696a790.jpeg",
+          "size_bytes": 230974,
+          "size_mb": 0.22,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:39:48"
+        },
+        {
+          "filename": "69dec00b-04c9-4aa7-80fb-4bcc9794efad.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/69dec00b-04c9-4aa7-80fb-4bcc9794efad.jpeg",
+          "size_bytes": 160244,
+          "size_mb": 0.15,
+          "extension": ".jpeg",
+          "modified": "2025-08-11T12:16:58"
+        },
+        {
+          "filename": "82f5617e-1796-4c90-bfda-44305bdff44b.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/82f5617e-1796-4c90-bfda-44305bdff44b.jpeg",
+          "size_bytes": 264681,
+          "size_mb": 0.25,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:37:13"
+        },
+        {
+          "filename": "a6fc6c3b-01e8-42ec-8f1b-8328e74ef54a.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/a6fc6c3b-01e8-42ec-8f1b-8328e74ef54a.jpeg",
+          "size_bytes": 167319,
+          "size_mb": 0.16,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:35:37"
+        },
+        {
+          "filename": "aca20ea2-21f6-4bba-9fcf-9c654bcfd2fa.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/aca20ea2-21f6-4bba-9fcf-9c654bcfd2fa.jpeg",
+          "size_bytes": 174772,
+          "size_mb": 0.17,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:36:18"
+        },
+        {
+          "filename": "bb1cb074-1743-484e-9944-a9d2f8850224.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/bb1cb074-1743-484e-9944-a9d2f8850224.jpeg",
+          "size_bytes": 198045,
+          "size_mb": 0.19,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:36:41"
+        },
+        {
+          "filename": "bcea2b5b-c71d-40de-aecf-4962ce0e45f9.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/bcea2b5b-c71d-40de-aecf-4962ce0e45f9.jpeg",
+          "size_bytes": 223526,
+          "size_mb": 0.21,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:38:37"
+        },
+        {
+          "filename": "c021b34a-9a07-4cb7-8273-1f27c3290b26.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/c021b34a-9a07-4cb7-8273-1f27c3290b26.jpeg",
+          "size_bytes": 127166,
+          "size_mb": 0.12,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:39:34"
+        },
+        {
+          "filename": "ccf7a885-7b15-4d0f-84b1-4930c7fec341.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/ccf7a885-7b15-4d0f-84b1-4930c7fec341.jpeg",
+          "size_bytes": 143306,
+          "size_mb": 0.14,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:36:03"
+        },
+        {
+          "filename": "cfe69ec6-9938-4688-84de-19cbc6d16556.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/cfe69ec6-9938-4688-84de-19cbc6d16556.jpeg",
+          "size_bytes": 207652,
+          "size_mb": 0.2,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:37:25"
+        },
+        {
+          "filename": "d2747f43-8cc9-4e90-8575-ae4b72d37a0d.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/d2747f43-8cc9-4e90-8575-ae4b72d37a0d.jpeg",
+          "size_bytes": 278893,
+          "size_mb": 0.27,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:38:03"
+        },
+        {
+          "filename": "decbacbe-3bc2-46c5-abe1-d053315c2cf8.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/decbacbe-3bc2-46c5-abe1-d053315c2cf8.jpeg",
+          "size_bytes": 142927,
+          "size_mb": 0.14,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:39:58"
+        },
+        {
+          "filename": "f9d14d07-b0bd-47f3-9a53-9f05ad402997.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/f9d14d07-b0bd-47f3-9a53-9f05ad402997.jpeg",
+          "size_bytes": 183702,
+          "size_mb": 0.18,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:36:29"
+        },
+        {
+          "filename": "picniccover.jpeg",
+          "path": "ChurchWebsiteIMG/Church Picnic/picniccover.jpeg",
+          "size_bytes": 273957,
+          "size_mb": 0.26,
+          "extension": ".jpeg",
+          "modified": "2025-08-09T15:36:54"
+        }
+      ],
+      "total_count": 18,
+      "last_updated": "2025-08-16T16:26:55.456323"
+    },
+    "Church Service": {
+      "category": "Church Service",
+      "display_name": "Church Service",
+      "images": [],
+      "total_count": 0,
+      "last_updated": "2025-08-16T16:26:55.479398"
+    },
+    "Church Mother-Father Day": {
+      "category": "Church Mother-Father Day",
+      "display_name": "Church Mother & Father Day",
+      "images": [
+        {
+          "filename": "IMG_20250811_113351.jpg",
+          "path": "ChurchWebsiteIMG/Church Mother-Father Day/IMG_20250811_113351.jpg",
+          "size_bytes": 3365284,
+          "size_mb": 3.21,
+          "extension": ".jpg",
+          "modified": "2025-08-11T11:34:49"
+        },
+        {
+          "filename": "groupphoto1.jpg",
+          "path": "ChurchWebsiteIMG/Church Mother-Father Day/groupphoto1.jpg",
+          "size_bytes": 301079,
+          "size_mb": 0.29,
+          "extension": ".jpg",
+          "modified": "2025-08-09T12:32:31"
+        },
+        {
+          "filename": "groupphoto2.jpg",
+          "path": "ChurchWebsiteIMG/Church Mother-Father Day/groupphoto2.jpg",
+          "size_bytes": 179846,
+          "size_mb": 0.17,
+          "extension": ".jpg",
+          "modified": "2025-08-09T12:32:31"
+        },
+        {
+          "filename": "groupphoto4.jpg",
+          "path": "ChurchWebsiteIMG/Church Mother-Father Day/groupphoto4.jpg",
+          "size_bytes": 205763,
+          "size_mb": 0.2,
+          "extension": ".jpg",
+          "modified": "2025-08-09T12:32:31"
+        }
+      ],
+      "total_count": 4,
+      "last_updated": "2025-08-16T16:26:55.479862"
+    },
+    "Church Sunday School": {
+      "category": "Church Sunday School",
+      "display_name": "Church Sunday School",
+      "images": [
+        {
+          "filename": "IMG_20250811_112731 (3).jpg",
+          "path": "ChurchWebsiteIMG/Church Sunday School/IMG_20250811_112731 (3).jpg",
+          "size_bytes": 300100,
+          "size_mb": 0.29,
+          "extension": ".jpg",
+          "modified": "2025-08-11T11:32:58"
+        },
+        {
+          "filename": "IMG_20250811_112731 (4).jpg",
+          "path": "ChurchWebsiteIMG/Church Sunday School/IMG_20250811_112731 (4).jpg",
+          "size_bytes": 230595,
+          "size_mb": 0.22,
+          "extension": ".jpg",
+          "modified": "2025-08-11T11:32:58"
+        },
+        {
+          "filename": "IMG_20250811_113656 (1).heic",
+          "path": "ChurchWebsiteIMG/Church Sunday School/IMG_20250811_113656 (1).heic",
+          "size_bytes": 3357127,
+          "size_mb": 3.2,
+          "extension": ".heic",
+          "modified": "2025-08-11T11:38:02"
+        },
+        {
+          "filename": "groupphoto3.jpg",
+          "path": "ChurchWebsiteIMG/Church Sunday School/groupphoto3.jpg",
+          "size_bytes": 157128,
+          "size_mb": 0.15,
+          "extension": ".jpg",
+          "modified": "2025-08-09T12:32:31"
+        }
+      ],
+      "total_count": 4,
+      "last_updated": "2025-08-16T16:26:55.483853"
+    },
+    "Church Baptism": {
+      "category": "Church Baptism",
+      "display_name": "Church Baptism",
+      "images": [
+        {
+          "filename": "churchbaptism1.jpg",
+          "path": "ChurchWebsiteIMG/Church Baptism/churchbaptism1.jpg",
+          "size_bytes": 2792082,
+          "size_mb": 2.66,
+          "extension": ".jpg",
+          "modified": "2025-08-11T11:33:31"
+        },
+        {
+          "filename": "churchbaptism2.jpg",
+          "path": "ChurchWebsiteIMG/Church Baptism/churchbaptism2.jpg",
+          "size_bytes": 3151864,
+          "size_mb": 3.01,
+          "extension": ".jpg",
+          "modified": "2025-08-11T11:32:58"
+        },
+        {
+          "filename": "churchbaptism3.jpg",
+          "path": "ChurchWebsiteIMG/Church Baptism/churchbaptism3.jpg",
+          "size_bytes": 2840276,
+          "size_mb": 2.71,
+          "extension": ".jpg",
+          "modified": "2025-08-11T11:32:58"
+        },
+        {
+          "filename": "churchbaptism4.jpg",
+          "path": "ChurchWebsiteIMG/Church Baptism/churchbaptism4.jpg",
+          "size_bytes": 2919479,
+          "size_mb": 2.78,
+          "extension": ".jpg",
+          "modified": "2025-08-11T11:33:29"
+        },
+        {
+          "filename": "churchbaptism5.jpg",
+          "path": "ChurchWebsiteIMG/Church Baptism/churchbaptism5.jpg",
+          "size_bytes": 2792082,
+          "size_mb": 2.66,
+          "extension": ".jpg",
+          "modified": "2025-08-11T11:32:58"
+        },
+        {
+          "filename": "churchbaptism6.jpg",
+          "path": "ChurchWebsiteIMG/Church Baptism/churchbaptism6.jpg",
+          "size_bytes": 233144,
+          "size_mb": 0.22,
+          "extension": ".jpg",
+          "modified": "2025-08-11T12:29:00"
+        }
+      ],
+      "total_count": 6,
+      "last_updated": "2025-08-16T16:26:55.486207"
+    }
+  }
+}

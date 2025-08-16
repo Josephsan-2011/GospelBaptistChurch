@@ -600,7 +600,7 @@ function initImageModal() {
     });
     
     // Add click handlers to other images on the page (optional)
-    const allImages = document.querySelectorAll('img:not(.slide-image img)');
+    const allImages = document.querySelectorAll('img');
     allImages.forEach(img => {
         // Skip small icons and buttons
         if (img.width > 100 && img.height > 100) {
@@ -619,14 +619,6 @@ function initImageModal() {
 function initHeroSlideshow() {
     const slideshow = document.querySelector('.hero-slideshow');
     if (!slideshow) return;
-
-    // Keep only slides that represent categories
-    const allSlides = slideshow.querySelectorAll('.slide-card');
-    allSlides.forEach(slide => {
-        if (!slide.hasAttribute('data-category')) {
-            slide.remove();
-        }
-    });
 
     const slides = slideshow.querySelectorAll('.slide-card');
     const navContainer = slideshow.querySelector('.slideshow-nav');

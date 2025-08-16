@@ -2909,3 +2909,15 @@ textarea:focus {
         max-width: 200px;
     }
 }
+
+/* Center single category slide */
+.slideshow-container:has(.slide-card:only-child) {
+    justify-content: center;
+    align-items: center;
+}
+
+.slideshow-container:has(.slide-card:only-child) .slide-card {
+    position: relative;
+    transform: none;
+    opacity: 1;
+}
