@@ -10,6 +10,7 @@ const translations = {
         'Sermons': 'Sermons',
         'News': 'News',
         'Contact': 'Contact',
+        'Edit': 'Edit',
     
         
         // Common
@@ -123,6 +124,7 @@ const translations = {
         'Sermons': 'ဓမ္မဟောကြားချက်များ',
         'News': 'ကြေညာချက်',
         'Contact': 'ဆက်သွယ်ရန်',
+        'Edit': 'တည်းဖြတ်ရန်',
     
         
         // Common
@@ -893,6 +895,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initParallaxEffects();
     initPastorBioToggle();
     initImageLoadingEnhancements();
+    initAuthentication(); // Initialize authentication system
 
     initScrollAnimations();
     
@@ -974,10 +977,35 @@ function initAuthentication() {
     if (token && userRole) {
         // Verify token with server
         checkAuthStatus();
-    } else {
-        // If not authenticated, show login modal
-        showLoginModal();
     }
+    // Don't automatically show login modal - wait for user to click login button
+    
+    // Add event listeners for login buttons
+    const loginBtn = document.getElementById('loginBtn');
+    const mainLoginBtn = document.getElementById('mainLoginBtn');
+    
+    if (loginBtn) {
+        console.log('Login button found, adding event listener');
+        loginBtn.addEventListener('click', () => {
+            console.log('Login button clicked!');
+            showLoginModal();
+        });
+    } else {
+        console.log('Login button not found');
+    }
+    
+    if (mainLoginBtn) {
+        console.log('Main login button found, adding event listener');
+        mainLoginBtn.addEventListener('click', () => {
+            console.log('Main login button clicked!');
+            showLoginModal();
+        });
+    } else {
+        console.log('Main login button not found');
+    }
+    
+    // Update UI based on authentication status
+    updateAuthUI();
 }
 
 // Check authentication status with server
@@ -985,7 +1013,7 @@ async function checkAuthStatus() {
     const token = localStorage.getItem('authToken');
     
     if (!token) {
-        showLoginModal();
+        updateAuthUI();
         return;
     }
     
@@ -1002,9 +1030,11 @@ async function checkAuthStatus() {
             // Token is invalid, clear storage and show login
             localStorage.removeItem('authToken');
             localStorage.removeItem('userRole');
-            showLoginModal();
+            updateAuthUI();
+        } else {
+            // If authenticated, update UI
+            updateAuthUI();
         }
-        // If authenticated, continue with normal flow
     } catch (error) {
         console.error('Error checking auth status:', error);
         // On error, assume not authenticated
@@ -1016,6 +1046,15 @@ async function checkAuthStatus() {
 
 // Show login modal
 function showLoginModal() {
+    console.log('showLoginModal called');
+    
+    // Check if modal already exists
+    if (document.getElementById('loginModal')) {
+        console.log('Modal already exists, showing it');
+        document.getElementById('loginModal').style.display = 'block';
+        return;
+    }
+    
     const modalHtml = `
         <div class="modal" id="loginModal" style="display: block;">
             <div class="modal-content">
@@ -1628,4 +1667,91 @@ function initImageLoadingEnhancements() {
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
+}
+
+// Update authentication UI based on login status
+function updateAuthUI() {
+    const token = localStorage.getItem('authToken');
+    const userRole = localStorage.getItem('userRole');
+    const loginBtn = document.getElementById('loginBtn');
+    const mainLoginBtn = document.getElementById('mainLoginBtn');
+    
+    if (token && userRole) {
+        // User is authenticated - show logout button
+        if (loginBtn) {
+            loginBtn.innerHTML = `<i class="fas fa-sign-out-alt"></i> ${userRole === 'pastor' ? 'Pastor Logout' : 'Member Logout'}`;
+            loginBtn.onclick = () => logout();
+            loginBtn.className = 'btn btn-secondary';
+        }
+        
+        if (mainLoginBtn) {
+            mainLoginBtn.innerHTML = `<i class="fas fa-sign-out-alt"></i> ${userRole === 'pastor' ? 'Pastor Logout' : 'Member Logout'}`;
+            mainLoginBtn.onclick = () => logout();
+            mainLoginBtn.className = 'btn btn-secondary';
+        }
+        
+        // Update login section content
+        const loginSection = document.querySelector('.login-section');
+        if (loginSection) {
+            const loginContent = loginSection.querySelector('.login-content');
+            if (loginContent) {
+                loginContent.innerHTML = `
+                    <h2 class="section-title fade-in" data-en="Welcome Back!" data-my="ပြန်လည်ကြိုဆိုပါသည်!">Welcome Back!</h2>
+                    <div class="login-info slide-up">
+                        <p data-en="You are logged in as a ${userRole === 'pastor' ? 'Pastor' : 'Member'}" data-my="သင်သည် ${userRole === 'pastor' ? 'ဓမ္မဆရာ' : 'အဖွဲ့ဝင်'} အဖြစ် ဝင်ရောက်ထားပါသည်">You are logged in as a ${userRole === 'pastor' ? 'Pastor' : 'Member'}</p>
+                        
+                        <div class="login-actions">
+                            ${userRole === 'pastor' ? `
+                                <a href="pastor.html" class="btn btn-primary btn-large" data-en="Go to Pastor Dashboard" data-my="ဓမ္မဆရာ ဒက်ရှ်ဘုတ်သို့ သွားရန်">Go to Pastor Dashboard</a>
+                            ` : ''}
+                            <button class="btn btn-secondary btn-large" onclick="logout()" data-en="Logout" data-my="ထွက်ရန်">Logout</button>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+    } else {
+        // User is not authenticated - show login buttons
+        if (loginBtn) {
+            loginBtn.innerHTML = `<i class="fas fa-sign-in-alt"></i> Login`;
+            loginBtn.onclick = () => showLoginModal();
+            loginBtn.className = 'btn btn-primary';
+        }
+        
+        if (mainLoginBtn) {
+            mainLoginBtn.innerHTML = `<i class="fas fa-sign-in-alt"></i> Login Now`;
+            mainLoginBtn.onclick = () => showLoginModal();
+            mainLoginBtn.className = 'btn btn-primary btn-large';
+        }
+    }
+}
+
+// Logout function
+function logout() {
+    const token = localStorage.getItem('authToken');
+    
+    if (token) {
+        try {
+            fetch('http://localhost:3000/api/auth/logout', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).catch(error => {
+                console.error('Logout error:', error);
+            });
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
+    }
+    
+    // Clear local storage
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userRole');
+    
+    // Update UI
+    updateAuthUI();
+    
+    // Show success message
+    showSuccessMessage('Logged out successfully!');
 }

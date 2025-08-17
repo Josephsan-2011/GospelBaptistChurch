@@ -14,31 +14,5 @@
     "uploadDate": "2025-08-09T19:55:20.920Z",
     "files": {},
     "formats": []
-  },
-  {
-    "id": 3,
-    "title": "NOLONGERSLAVES",
-    "date": "2025-08-09",
-    "description": "NOLONGERSLAVES",
-    "scripture": "John 3:16",
-    "transcript": "SONGS",
-    "category": "worship",
-    "visibility": "public",
-    "featured": true,
-    "status": "published",
-    "pastor": "Pastor Paul",
-    "uploadDate": "2025-08-09T22:49:29.549Z",
-    "files": {
-      "audio": {
-        "filename": "No Longer Slaves (Official Lyric Video) - Jonathan David and Melissa Helser  We Will Not Be Shaken (2)-1754779769509-51249194.mp3",
-        "originalName": "No Longer Slaves (Official Lyric Video) - Jonathan David and Melissa Helser  We Will Not Be Shaken (2).mp3",
-        "path": "/uploads/sermons/audio/No Longer Slaves (Official Lyric Video) - Jonathan David and Melissa Helser  We Will Not Be Shaken (2)-1754779769509-51249194.mp3",
-        "size": 8866932
-      }
-    },
-    "formats": [
-      "transcript",
-      "audio"
-    ]
   }
 ]

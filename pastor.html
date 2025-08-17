@@ -6,6 +6,247 @@
     <title>Gospel Baptist Church - Pastor Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Calendar Management Styles */
+        .pastor-calendar-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .calendar-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .calendar-events-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .calendar-event-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+        
+        .calendar-event-item:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .calendar-event-item.past-event {
+            opacity: 0.6;
+            background: #f1f3f4;
+        }
+        
+        .event-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+        }
+        
+        .event-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .event-info {
+            flex: 1;
+        }
+        
+        .event-title {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .event-date {
+            margin: 0 0 0.5rem 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .event-date i {
+            margin-right: 0.5rem;
+            color: #999;
+        }
+        
+        .event-description {
+            margin: 0;
+            color: #777;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .event-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        
+        .no-events {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 2rem;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .close:hover {
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+        
+        .form-group input:disabled,
+        .form-group select:disabled {
+            background-color: #f8f9fa;
+            cursor: not-allowed;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .checkbox-label input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .calendar-event-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .event-actions {
+                width: 100%;
+                justify-content: stretch;
+            }
+            
+            .btn-sm {
+                flex: 1;
+                text-align: center;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+                padding: 1.5rem;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .form-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Top Header with Logo -->
@@ -27,11 +268,16 @@
                 <li><a href="sermons.html" class="nav-link" data-en="Sermons" data-my="ဓမ္မဟောကြားချက်များ">Sermons</a></li>
                 <li><a href="blog.html" class="nav-link" data-en="News" data-my="ကြေညာချက်">News</a></li>
                 <li><a href="contact.html" class="nav-link" data-en="Contact" data-my="ဆက်သွယ်ရန်">Contact</a></li>
+                <li><a href="edit.html" class="nav-link edit-link" data-en="Edit" data-my="တည်းဖြတ်ရန်">Edit</a></li>
             </ul>
             
             <div class="language-toggle">
                 <button class="lang-btn active" data-lang="en">EN</button>
                 <button class="lang-btn" data-lang="my">MY</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <button class="btn btn-secondary" id="logoutBtn" onclick="logout()" data-en="Logout" data-my="ထွက်ရန်">Logout</button>
             </div>
             
             <div class="mobile-menu-toggle">
@@ -48,9 +294,26 @@
             <div class="pastor-header">
                 <h1 class="page-title" data-en="Pastor's Dashboard" data-my="ဓမ္မဆရာ၏ ဒက်ရှ်ဘုတ်">Pastor's Dashboard</h1>
                 <p class="pastor-subtitle" data-en="Manage sermons, news, and church communications" data-my="ဓမ္မဟောကြားချက်များ၊ သတင်းများနှင့် ဘုရားကျောင်း ဆက်သွယ်ရေးများကို စီမံရန်">Manage sermons, news, and church communications</p>
-                <button class="btn btn-secondary logout-btn" onclick="logout()" data-en="Logout" data-my="ထွက်ရန်">Logout</button>
+                <div class="pastor-actions">
+                    <a href="edit.html" class="btn btn-primary" data-en="Edit Dashboard" data-my="တည်းဖြတ်ရန် ဒက်ရှ်ဘုတ်">Edit Dashboard</a>
+                    <button class="btn btn-secondary logout-btn" onclick="logout()" data-en="Logout" data-my="ထွက်ရန်">Logout</button>
+                </div>
             </div>
             
+            <!-- Calendar Management Section -->
+            <div class="pastor-calendar-section">
+                <h2 class="section-title" data-en="Calendar Management" data-my="က္ခဒိန် စီမံခန့်ခွဲမှု">Calendar Management</h2>
+                
+                <div class="calendar-controls">
+                    <button class="btn btn-primary" id="addCalendarEventBtn" data-en="Add New Event" data-my="အစီအစဉ်အသစ် ထည့်ရန်">Add New Event</button>
+                    <button class="btn btn-secondary" id="refreshCalendarBtn" data-en="Refresh Events" data-my="အစီအစဉ်များ ပြန်လည်စတင်ရန်">Refresh Events</button>
+                </div>
+                
+                <div class="calendar-events-list" id="calendarEventsList">
+                    <!-- Calendar events will be populated by JavaScript -->
+                </div>
+            </div>
+
             <!-- Pastor Sermon Upload Section -->
             <div class="pastor-upload-section">
                 <h2 class="section-title" data-en="Sermon Upload" data-my="ဓမ္မဟောကြားချက် အပ်လုဒ်">Sermon Upload</h2>
@@ -284,6 +547,78 @@
             </div>
         </div>
     </section>
+
+    <!-- Calendar Event Modal -->
+    <div id="calendarEventModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="calendarModalTitle" data-en="Add New Event" data-my="အစီအစဉ်အသစ် ထည့်ရန်">Add New Event</h2>
+            <form id="calendarEventForm">
+                <div class="form-group">
+                    <label for="calendarEventTitle" data-en="Event Title" data-my="အစီအစဉ် ခေါင်းစဉ်">Event Title</label>
+                    <input type="text" id="calendarEventTitle" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="calendarEventDate" data-en="Date" data-my="ရက်စွဲ">Date</label>
+                    <input type="date" id="calendarEventDate" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="calendarEventTime" data-en="Time" data-my="အချိန်">Time</label>
+                    <input type="time" id="calendarEventTime" name="time" required>
+                </div>
+                <div class="form-group">
+                    <label for="calendarEventDescription" data-en="Description" data-my="ဖော်ပြချက်">Description</label>
+                    <textarea id="calendarEventDescription" name="description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="calendarEventColor" data-en="Color" data-my="အရောင်">Color</label>
+                    <select id="calendarEventColor" name="color">
+                        <option value="#FF0000" data-en="Red" data-my="အနီရောင်">Red</option>
+                        <option value="#0066CC" data-en="Blue" data-my="အပြာရောင်">Blue</option>
+                        <option value="#00AA00" data-en="Green" data-my="အစိမ်းရောင်">Green</option>
+                        <option value="#FFAA00" data-en="Orange" data-my="လိမ္မော်ရောင်">Orange</option>
+                        <option value="#9933CC" data-en="Purple" data-my="ခရမ်းရောင်">Purple</option>
+                        <option value="#FF6600" data-en="Dark Orange" data-my="အနက်ရောင် လိမ္မော်">Dark Orange</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="calendarEventDuration" data-en="Duration (hours)" data-my="ကြာချိန် (နာရီ)">Duration (hours)</label>
+                    <input type="number" id="calendarEventDuration" name="duration" min="0.5" max="24" step="0.5" value="1">
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="calendarEventAllDay" name="allDay">
+                        <span data-en="All Day Event" data-my="တစ်နေ့လုံး အစီအစဉ်">All Day Event</span>
+                    </label>
+                </div>
+                
+                <script>
+                    // Handle all day event checkbox
+                    document.getElementById('calendarEventAllDay').addEventListener('change', function() {
+                        const timeInput = document.getElementById('calendarEventTime');
+                        const durationInput = document.getElementById('calendarEventDuration');
+                        
+                        if (this.checked) {
+                            timeInput.disabled = true;
+                            durationInput.disabled = true;
+                            timeInput.value = '00:00';
+                            durationInput.value = '24';
+                        } else {
+                            timeInput.disabled = false;
+                            durationInput.disabled = false;
+                            timeInput.value = '12:00';
+                            durationInput.value = '1';
+                        }
+                    });
+                </script>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" data-en="Save Event" data-my="အစီအစဉ် သိမ်းရန်">Save Event</button>
+                    <button type="button" class="btn btn-danger" id="deleteCalendarEventBtn" data-en="Delete Event" data-my="အစီအစဉ် ဖျက်ရန်" style="display: none;">Delete Event</button>
+                    <button type="button" class="btn btn-secondary" id="cancelCalendarEventBtn" data-en="Cancel" data-my="ပယ်ဖျက်ရန်">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Image Modal -->
     <div id="imageModal" class="image-modal">
