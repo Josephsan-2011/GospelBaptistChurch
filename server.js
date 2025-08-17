@@ -62,23 +62,20 @@ app.post('/api/auth/login', (req, res) => {
     const { password, role } = req.body;
     
     // Simple password validation (in production, use proper authentication)
-    const validPasswords = {
-        member: '12345',
-        pastor: '54321'
-    };
+    const validPassword = '54321'; // Pastor password only
     
-    if (!password || !role || !validPasswords[role]) {
-        return res.status(400).json({ error: 'Invalid credentials' });
+    if (!password || password !== validPassword) {
+        return res.status(401).json({ error: 'Invalid password' });
     }
     
-    if (password !== validPasswords[role]) {
-        return res.status(401).json({ error: 'Invalid password' });
+    if (role !== 'pastor') {
+        return res.status(403).json({ error: 'Pastor access only' });
     }
     
     // Generate session token
     const token = Math.random().toString(36).substring(2) + Date.now().toString(36);
     const session = {
-        role: role,
+        role: 'pastor', // Always set as pastor
         loginTime: new Date().toISOString(),
         lastActivity: new Date().toISOString()
     };
@@ -97,7 +94,7 @@ app.post('/api/auth/login', (req, res) => {
         success: true,
         token: token,
         role: role,
-        message: `${role === 'pastor' ? 'Pastor' : 'Member'} login successful`
+        message: 'Pastor login successful'
     });
 });
 

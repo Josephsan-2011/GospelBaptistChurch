@@ -1059,17 +1059,12 @@ function showLoginModal() {
         <div class="modal" id="loginModal" style="display: block;">
             <div class="modal-content">
                 <span class="close" onclick="closeLoginModal()">&times;</span>
-                <h2 data-en="Church Member Login" data-my="ဘုရားကျောင်း အဖွဲ့ဝင် ဝင်ရောက်ခြင်း">Church Member Login</h2>
-                
-                <div class="login-tabs">
-                    <button class="tab-btn active" onclick="switchTab('member')" data-en="Member Login" data-my="အဖွဲ့ဝင် ဝင်ရောက်ခြင်း">Member Login</button>
-                    <button class="tab-btn" onclick="switchTab('pastor')" data-en="Pastor Login" data-my="ဓမ္မဆရာ ဝင်ရောက်ခြင်း">Pastor Login</button>
-                </div>
+                <h2 data-en="Pastor Login" data-my="ဓမ္မဆရာ ဝင်ရောက်ခြင်း">Pastor Login</h2>
                 
                 <form id="loginForm" class="login-form">
                     <div class="form-group">
                         <label for="loginPassword" data-en="Enter 5-Digit Password" data-my="၅ လုံး စကားဝှက် ထည့်သွင်းပါ">Enter 5-Digit Password</label>
-                        <input type="password" id="loginPassword" maxlength="5" pattern="[0-9]{5}" placeholder="12345" required>
+                        <input type="password" id="loginPassword" maxlength="5" pattern="[0-9]{5}" placeholder="54321" required>
                         <small data-en="Enter a 5-digit number" data-my="၅ လုံး ဂဏန်း ထည့်သွင်းပါ">Enter a 5-digit number</small>
                     </div>
                     
@@ -1080,8 +1075,8 @@ function showLoginModal() {
                 </form>
                 
                 <div class="login-info">
-                    <p><strong data-en="Member Password:" data-my="အဖွဲ့ဝင် စကားဝှက်:">Member Password:</strong> 12345</p>
                     <p><strong data-en="Pastor Password:" data-my="ဓမ္မဆရာ စကားဝှက်:">Pastor Password:</strong> 54321</p>
+                    <p data-en="Only pastors can access the management dashboard" data-my="ဓမ္မဆရာများသာ စီမံခန့်ခွဲမှု ဒက်ရှ်ဘုတ်ကို ဝင်ရောက်နိုင်ပါသည်">Only pastors can access the management dashboard</p>
                 </div>
             </div>
         </div>
@@ -1098,26 +1093,13 @@ function showLoginModal() {
     });
 }
 
-// Switch between member and pastor login tabs
-function switchTab(type) {
-    const tabs = document.querySelectorAll('.tab-btn');
-    tabs.forEach(tab => tab.classList.remove('active'));
-    
-    if (type === 'member') {
-        tabs[0].classList.add('active');
-        document.getElementById('loginForm').setAttribute('data-type', 'member');
-    } else {
-        tabs[1].classList.add('active');
-        document.getElementById('loginForm').setAttribute('data-type', 'pastor');
-    }
-}
+
 
 // Handle login form submission
 async function handleLogin(e) {
     e.preventDefault();
     
     const password = document.getElementById('loginPassword').value;
-    const loginType = document.getElementById('loginForm').getAttribute('data-type') || 'member';
     
     try {
         const response = await fetch('http://localhost:3000/api/auth/login', {
@@ -1127,7 +1109,7 @@ async function handleLogin(e) {
             },
             body: JSON.stringify({
                 password: password,
-                role: loginType
+                role: 'pastor'
             })
         });
         
@@ -1141,12 +1123,8 @@ async function handleLogin(e) {
             closeLoginModal();
             showSuccessMessage(data.message);
             
-            // Redirect based on role
-            if (data.role === 'pastor') {
-                window.location.href = 'pastor.html';
-            } else {
-                window.location.href = 'index.html';
-            }
+            // Redirect to pastor dashboard
+            window.location.href = 'pastor.html';
         } else {
             showErrorMessage(data.error || 'Login failed');
         }
