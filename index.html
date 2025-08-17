@@ -55,6 +55,7 @@
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
     
+    
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -158,11 +159,16 @@
                 <li><a href="sermons.html" class="nav-link" data-en="Sermons" data-my="ဓမ္မဟောကြားချက်များ">Sermons</a></li>
                 <li><a href="blog.html" class="nav-link" data-en="News" data-my="ကြေညာချက်">News</a></li>
                 <li><a href="contact.html" class="nav-link" data-en="Contact" data-my="ဆက်သွယ်ရန်">Contact</a></li>
+                <li><a href="edit.html" class="nav-link edit-link" data-en="Edit" data-my="တည်းဖြတ်ရန်">Edit</a></li>
             </ul>
             
             <div class="language-toggle">
                 <button class="lang-btn active" data-lang="en">EN</button>
                 <button class="lang-btn" data-lang="my">MY</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <button class="btn btn-primary" id="loginBtn" data-en="Login" data-my="ဝင်ရောက်ရန်">Login</button>
             </div>
             
             <div class="mobile-menu-toggle">
@@ -427,9 +433,39 @@ His ministry is marked by a heart for people, a vision for the church, and an un
         </div>
     </section>
 
-
-
-
+    <!-- Login Section -->
+    <section class="login-section">
+        <div class="container">
+            <div class="login-content">
+                <h2 class="section-title fade-in" data-en="Member & Pastor Access" data-my="အဖွဲ့ဝင်နှင့် ဓမ္မဆရာ ဝင်ရောက်ခြင်း">Member & Pastor Access</h2>
+                <div class="login-info slide-up">
+                    <p data-en="Church members and pastors can access additional content and management features by logging in below." data-my="ဘုရားကျောင်း အဖွဲ့ဝင်များနှင့် ဓမ္မဆရာများသည် အောက်ပါ ဝင်ရောက်ခြင်းဖြင့် အပိုအကြောင်းအရာများနှင့် စီမံခန့်ခွဲမှု လုပ်ဆောင်ချက်များကို ဝင်ရောက်နိုင်ပါသည်။">Church members and pastors can access additional content and management features by logging in below.</p>
+                    
+                    <div class="login-features">
+                        <div class="feature-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <h4 data-en="Member Access" data-my="အဖွဲ့ဝင် ဝင်ရောက်ခြင်း">Member Access</h4>
+                                <p data-en="Access members-only sermons and content" data-my="အဖွဲ့ဝင်များသာ ဝင်ရောက်နိုင်သော ဓမ္မဟောကြားချက်များနှင့် အကြောင်းအရာများ">Access members-only sermons and content</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-cross"></i>
+                            <div>
+                                <h4 data-en="Pastor Access" data-my="ဓမ္မဆရာ ဝင်ရောက်ခြင်း">Pastor Access</h4>
+                                <p data-en="Manage sermons, news, calendar events, and website content" data-my="ဓမ္မဟောကြားချက်များ၊ သတင်းများ၊ က္ခဒိန်အစီအစဉ်များနှင့် ဝဘ်ဆိုက် အကြောင်းအရာများကို စီမံခန့်ခွဲရန်">Manage sermons, news, calendar events, and website content</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="login-actions">
+                        <button class="btn btn-primary btn-large" id="mainLoginBtn" data-en="Login Now" data-my="ယခု ဝင်ရောက်ရန်">Login Now</button>
+                        <p class="login-note" data-en="Use the passwords provided by church administration" data-my="ဘုရားကျောင်း အုပ်ချုပ်ရေးမှ ပေးထားသော စကားဝှက်များကို အသုံးပြုပါ">Use the passwords provided by church administration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Image Modal -->
     <div id="imageModal" class="image-modal">

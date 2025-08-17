@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gospel Baptist Church - Pastor Edit Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Edit Dashboard Specific Styles */
+        .edit-dashboard {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem 0;
+            margin-top: 200px; /* Add margin to account for the top header and navigation */
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .dashboard-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .dashboard-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            margin-top: 1rem;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .calendar-icon { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .sermons-icon { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .news-icon { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .settings-icon { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .card-description {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: var(--text-dark);
+            border: 1px solid #dee2e6;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .edit-dashboard {
+                margin-top: 160px; /* Adjust for mobile layout */
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .dashboard-title {
+                font-size: 2rem;
+            }
+
+            .dashboard-card {
+                padding: 1.5rem;
+            }
+
+            .card-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .card-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .top-header .container {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .logo-image {
+                height: 60px; /* Smaller logo for mobile */
+            }
+            
+            .logo-text {
+                font-size: 1.2rem; /* Smaller text for mobile */
+            }
+        }
+        
+        /* News Management Styles */
+        .news-form {
+            max-width: 100%;
+        }
+        
+        .news-form h3 {
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            text-align: center;
+        }
+        
+        .news-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+        
+        .news-item:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .news-info {
+            flex: 1;
+            margin-right: 1rem;
+        }
+        
+        .news-info h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+        
+        .news-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .news-meta span {
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .news-date {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .news-category {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        .news-status {
+            background: #e8f5e8;
+            color: #388e3c;
+        }
+        
+        .status-draft {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        
+        .news-priority {
+            background: #ffebee;
+            color: #d32f2f;
+        }
+        
+        .priority-important {
+            background: #fff8e1;
+            color: #f57f17;
+        }
+        
+        .priority-urgent {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .news-featured {
+            background: #ff6b35;
+            color: white;
+        }
+        
+        .news-excerpt {
+            margin: 0;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .news-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .checkbox-label input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        
+        @media (max-width: 480px) {
+            .edit-dashboard {
+                margin-top: 140px; /* Further adjust for very small screens */
+            }
+            
+            .dashboard-header {
+                padding: 1.5rem 0;
+            }
+            
+            .dashboard-title {
+                font-size: 1.8rem;
+            }
+            
+            .dashboard-subtitle {
+                font-size: 1rem;
+            }
+            
+            .back-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Authentication Check */
+        .auth-required {
+            display: none;
+        }
+
+        .auth-required.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header with Logo -->
+    <header class="top-header">
+        <div class="container">
+            <div class="logo">
+                <img src="gbclogos.png" alt="Gospel Baptist Church Logo" class="logo-image">
+                <h1 class="logo-text" data-en="GBC – Gospel Baptist Church" data-my="GBC – သတင်းကောင်းနှစ်ခြင်းအသင်းတော်">GBC – Gospel Baptist Church</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link" data-en="Home" data-my="မူလစာမျက်">Home</a></li>
+                <li><a href="calendar.html" class="nav-link" data-en="Calendar" data-my="က္ခဒိန်">Calendar</a></li>
+                <li><a href="sermons.html" class="nav-link" data-en="Sermons" data-my="ဓမ္မဟောကြားချက်များ">Sermons</a></li>
+                <li><a href="blog.html" class="nav-link" data-en="News" data-my="ကြေညာချက်">News</a></li>
+                <li><a href="contact.html" class="nav-link" data-en="Contact" data-my="ဆက်သွယ်ရန်">Contact</a></li>
+                <li><a href="edit.html" class="nav-link edit-link active" data-en="Edit" data-my="တည်းဖြတ်ရန်">Edit</a></li>
+            </ul>
+            
+            <div class="language-toggle">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="my">MY</button>
+            </div>
+            
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Edit Dashboard -->
+    <div class="edit-dashboard auth-required">
+        <div class="dashboard-header">
+            <div class="container">
+                <h1 class="dashboard-title" data-en="Pastor Edit Dashboard" data-my="ဆရာကြီး တည်းဖြတ်ရန် ဒက်ရှ်ဘုတ်">Pastor Edit Dashboard</h1>
+                <p class="dashboard-subtitle" data-en="Manage your church website content and settings" data-my="သင့်ဘုရားကျောင်း ဝဘ်ဆိုက် အကြောင်းအရာနှင့် ဆက်တင်များကို စီမံခန့်ခွဲရန်">Manage your church website content and settings</p>
+                <a href="pastor.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                    <span data-en="Back to Pastor Dashboard" data-my="ဆရာကြီး ဒက်ရှ်ဘုတ်သို့ ပြန်သွားရန်">Back to Pastor Dashboard</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Calendar Management -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-icon calendar-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title" data-en="Calendar Management" data-my="က္ခဒိန် စီမံခန့်ခွဲမှု">Calendar Management</h3>
+                    </div>
+                </div>
+                <p class="card-description" data-en="Manage church events, add new events, edit existing events, and organize your church calendar." data-my="ဘုရားကျောင်း ပွဲများကို စီမံခန့်ခွဲရန်၊ ပွဲအသစ်များ ထည့်သွင်းရန်၊ ပွဲများကို တည်းဖြတ်ရန်၊ သင့်ဘုရားကျောင်း က္ခဒိန်ကို စီစဉ်ရန်">Manage church events, add new events, edit existing events, and organize your church calendar.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalEvents">0</div>
+                        <div class="stat-label" data-en="Total Events" data-my="ပွဲစုစုပေါင်း">Total Events</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="upcomingEvents">0</div>
+                        <div class="stat-label" data-en="Upcoming" data-my="ရောက်ရှိလာမည့်">Upcoming</div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <a href="calendar.html" class="action-btn btn-primary">
+                        <i class="fas fa-eye"></i>
+                        <span data-en="View Calendar" data-my="က္ခဒိန်ကို ကြည့်ရှုရန်">View Calendar</span>
+                    </a>
+                    <button class="action-btn btn-success" onclick="openEventModal()">
+                        <i class="fas fa-plus"></i>
+                        <span data-en="Add New Event" data-my="ပွဲအသစ် ထည့်သွင်းရန်">Add New Event</span>
+                    </button>
+                    <button class="action-btn btn-secondary" onclick="openEventEditModal()">
+                        <i class="fas fa-edit"></i>
+                        <span data-en="Edit Events" data-my="ပွဲများကို တည်းဖြတ်ရန်">Edit Events</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sermons Management -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-icon sermons-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title" data-en="Sermons Management" data-my="ဓမ္မဟောကြားချက်များ စီမံခန့်ခွဲမှု">Sermons Management</h3>
+                    </div>
+                </div>
+                <p class="card-description" data-en="Upload new sermons, edit existing sermons, manage sermon metadata, and organize your sermon library." data-my="ဓမ္မဟောကြားချက်အသစ်များ တင်ရန်၊ ဓမ္မဟောကြားချက်များကို တည်းဖြတ်ရန်၊ ဓမ္မဟောကြားချက် မက်တာဒေတာကို စီမံခန့်ခွဲရန်၊ သင့်ဓမ္မဟောကြားချက် စာကြည့်တိုက်ကို စီစဉ်ရန်">Upload new sermons, edit existing sermons, manage sermon metadata, and organize your sermon library.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalSermons">0</div>
+                        <div class="stat-label" data-en="Total Sermons" data-my="ဓမ္မဟောကြားချက် စုစုပေါင်း">Total Sermons</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="publicSermons">0</div>
+                        <div class="stat-label" data-en="Public" data-my="အများပြည်သူ">Public</div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <a href="pastor.html" class="action-btn btn-primary">
+                        <i class="fas fa-eye"></i>
+                        <span data-en="View Sermons" data-my="ဓမ္မဟောကြားချက်များကို ကြည့်ရှုရန်">View Sermons</span>
+                    </a>
+                    <button class="action-btn btn-success" onclick="openSermonUploadModal()">
+                        <i class="fas fa-upload"></i>
+                        <span data-en="Upload New Sermon" data-my="ဓမ္မဟောကြားချက်အသစ် တင်ရန်">Upload New Sermon</span>
+                    </button>
+                    <button class="action-btn btn-secondary" onclick="openSermonEditModal()">
+                        <i class="fas fa-edit"></i>
+                        <span data-en="Edit Sermons" data-my="ဓမ္မဟောကြားချက်များကို တည်းဖြတ်ရန်">Edit Sermons</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- News Management -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-icon news-icon">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title" data-en="News Management" data-my="သတင်းများ စီမံခန့်ခွဲမှု">News Management</h3>
+                    </div>
+                </div>
+                <p class="card-description" data-en="Create news articles, edit existing news, manage announcements, and keep your congregation informed." data-my="သတင်းဆောင်းပါးများ ဖန်တီးရန်၊ သတင်းများကို တည်းဖြတ်ရန်၊ ကြေညာချက်များကို စီမံခန့်ခွဲရန်၊ သင့်အသင်းတော်ကို အသိပေးရန်">Create news articles, edit existing news, manage announcements, and keep your congregation informed.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalNews">0</div>
+                        <div class="stat-label" data-en="Total News" data-my="သတင်း စုစုပေါင်း">Total News</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="publishedNews">0</div>
+                        <div class="stat-label" data-en="Published" data-my="ထုတ်ဝေပြီး">Published</div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <a href="blog.html" class="action-btn btn-primary">
+                        <i class="fas fa-eye"></i>
+                        <span data-en="View News" data-my="သတင်းများကို ကြည့်ရှုရန်">View News</span>
+                    </a>
+                    <button class="action-btn btn-success" onclick="openNewsCreateModal()">
+                        <i class="fas fa-plus"></i>
+                        <span data-en="Create News" data-my="သတင်းအသစ် ဖန်တီးရန်">Create News</span>
+                    </button>
+                    <button class="action-btn btn-secondary" onclick="openNewsEditModal()">
+                        <i class="fas fa-edit"></i>
+                        <span data-en="Edit News" data-my="သတင်းများကို တည်းဖြတ်ရန်">Edit News</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Website Settings -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-icon settings-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title" data-en="Website Settings" data-my="ဝဘ်ဆိုက် ဆက်တင်များ">Website Settings</h3>
+                    </div>
+                </div>
+                <p class="card-description" data-en="Manage website appearance, contact information, service times, and other general settings." data-my="ဝဘ်ဆိုက် အသွင်အပြင်၊ ဆက်သွယ်ရန် အချက်အလက်၊ ဝတ်ပြုချိန်များ၊ အခြား ယေဘုယျ ဆက်တင်များကို စီမံခန့်ခွဲရန်">Manage website appearance, contact information, service times, and other general settings.</p>
+                
+                <div class="card-actions">
+                    <button class="action-btn btn-primary" onclick="openGeneralSettingsModal()">
+                        <i class="fas fa-cog"></i>
+                        <span data-en="General Settings" data-my="ယေဘုယျ ဆက်တင်များ">General Settings</span>
+                    </button>
+                    <button class="action-btn btn-secondary" onclick="openAppearanceSettingsModal()">
+                        <i class="fas fa-palette"></i>
+                        <span data-en="Appearance" data-my="အသွင်အပြင်">Appearance</span>
+                    </button>
+                    <button class="action-btn btn-secondary" onclick="openContactSettingsModal()">
+                        <i class="fas fa-address-book"></i>
+                        <span data-en="Contact Info" data-my="ဆက်သွယ်ရန် အချက်အလက်">Contact Info</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication Required Message -->
+    <div class="auth-required" id="authMessage" style="display: none;">
+        <div class="container" style="text-align: center; padding: 4rem 2rem;">
+            <h2>Authentication Required</h2>
+            <p>Please log in as a pastor to access this page.</p>
+            <a href="pastor.html" class="btn btn-primary">Go to Login</a>
+        </div>
+    </div>
+
+    <!-- Event Management Modal -->
+    <div id="eventModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Event Management</h2>
+            <div id="eventModalContent">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Sermon Upload Modal -->
+    <div id="sermonModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Sermon Management</h2>
+            <div id="sermonModalContent">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- News Management Modal -->
+    <div id="newsModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>News Management</h2>
+            <div id="newsModalContent">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Website Settings</h2>
+            <div id="settingsModalContent">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="edit.js"></script>
+</body>
+</html>

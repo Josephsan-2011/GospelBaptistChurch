@@ -1,0 +1,30 @@
+[
+  {
+    "id": 3,
+    "title": "nEws",
+    "date": "2025-08-17",
+    "category": "announcement",
+    "content": "NEWS",
+    "priority": "important",
+    "featured": true,
+    "sendEmail": false,
+    "status": "draft",
+    "publishDate": "2025-08-17T02:17:58.323Z",
+    "expiryDate": "2025-08-18T02:17:58.323Z",
+    "author": "Pastor"
+  },
+  {
+    "id": 4,
+    "title": "news",
+    "date": "2025-08-17",
+    "category": "announcement",
+    "content": "news",
+    "priority": "urgent",
+    "featured": true,
+    "sendEmail": false,
+    "status": "published",
+    "publishDate": "2025-08-17T02:24:41.002Z",
+    "expiryDate": "2025-08-18T02:24:41.002Z",
+    "author": "Pastor"
+  }
+]
