@@ -309,9 +309,7 @@ async function simulateUpload(formData, isDraft) {
             
             if (visibility === 'public') {
                 visibilityMessage = 'The sermon will appear on the public Sermons page.';
-            } else if (visibility === 'members') {
-                visibilityMessage = 'The sermon will appear in the Members area only.';
-            } else if (visibility === 'private') {
+             else if (visibility === 'private') {
                 visibilityMessage = 'The sermon is private and only visible to you.';
             }
             
