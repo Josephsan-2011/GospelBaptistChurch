@@ -761,38 +761,7 @@ p {
     }
 }
 
-/* Members Page Styles */
-.members-section {
-    padding: 5rem 0;
-    background: var(--background-gray);
-    min-height: 100vh;
-}
 
-.members-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.logout-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-}
-
-/* General Members Section */
-.general-members-section {
-    margin-bottom: 3rem;
-}
-
-.members-dashboard {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
 
 .dashboard-card {
     background: var(--background-light);
@@ -2298,9 +2267,7 @@ p {
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 24 24'%3E%3Cpath d='M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'/%3E%3C/svg%3E");
     }
     
-    .nav-list .members-link::before {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 24 24'%3E%3Cpath d='M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H17c-.8 0-1.54.37-2.01.99L14 10h-2l-.99-1.01A2.5 2.5 0 0 0 8.54 8H7.46c-.8 0-1.54.37-2.01.99L4.5 14.5H7v6h13z'/%3E%3C/svg%3E");
-    }
+
     
     /* Mobile menu animations */
     @keyframes slideDown {
@@ -2550,14 +2517,7 @@ img[width][height]:hover {
         grid-template-columns: 1fr;
     }
     
-    .members-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .members-dashboard {
-        grid-template-columns: 1fr;
-    }
+
     
     .dashboard-card {
         padding: 1.5rem;
@@ -2671,130 +2631,15 @@ textarea:focus {
     }
 }
 
-/* Members-Only Sermons Section */
-.members-sermons-section {
-    margin-top: 3rem;
-    padding: 2rem;
-    background: var(--background-gray);
-    border-radius: var(--border-radius);
-    border: 1px solid var(--border-color);
-}
 
-.members-sermons-section .section-description {
-    color: var(--text-gray);
-    margin-bottom: 2rem;
-    font-style: italic;
-}
 
-.sermon-card.members-only {
-    position: relative;
-    border: 2px solid #8B4513;
-    background: linear-gradient(135deg, #fff9f0 0%, #ffffff 100%);
-}
 
-.sermon-card.members-only:hover {
-    border-color: #A0522D;
-    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
-}
 
-.members-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #8B4513;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
 
-.members-badge-header {
-    background: #8B4513;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 1rem;
-    text-align: center;
-}
 
-.sermon-card.members-only .sermon-image {
-    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
-}
 
-.sermon-card.members-only .sermon-image i {
-    color: #fff9f0;
-}
 
-.sermon-card.members-only .sermon-title {
-    color: #8B4513;
-}
 
-.sermon-card.members-only .format-badge {
-    background: rgba(139, 69, 19, 0.1);
-    color: #8B4513;
-    border: 1px solid rgba(139, 69, 19, 0.3);
-}
-
-.sermon-card.members-only .format-badge:hover {
-    background: rgba(139, 69, 19, 0.2);
-}
-
-/* Members Sermon Modal Styles */
-#membersSermonModal .modal-content {
-    max-width: 900px;
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-#membersSermonModal .sermon-details {
-    padding: 1rem;
-}
-
-#membersSermonModal .members-badge-header {
-    margin-bottom: 1.5rem;
-}
-
-#membersSermonModal .sermon-section {
-    margin: 2rem 0;
-    padding: 1.5rem;
-    background: var(--background-gray);
-    border-radius: var(--border-radius);
-    border-left: 4px solid #8B4513;
-}
-
-#membersSermonModal .sermon-section h3 {
-    color: #8B4513;
-    margin-bottom: 1rem;
-}
-
-#membersSermonModal .transcript-content {
-    line-height: 1.8;
-    color: var(--text-dark);
-}
-
-/* Responsive adjustments for members sermons */
-@media (max-width: 768px) {
-    .members-sermons-section {
-        padding: 1rem;
-        margin-top: 2rem;
-    }
-    
-    .members-badge {
-        font-size: 0.7rem;
-        padding: 3px 6px;
-    }
-    
-    #membersSermonModal .modal-content {
-        margin: 10px;
-        max-width: calc(100vw - 20px);
-    }
-}
 
 /* Upload Success Modal Styles */
 .success-modal {

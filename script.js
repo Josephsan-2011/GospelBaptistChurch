@@ -10,7 +10,7 @@ const translations = {
         'Sermons': 'Sermons',
         'News': 'News',
         'Contact': 'Contact',
-        'Members': 'Members',
+    
         
         // Common
         'Gospel Baptist Church': 'Gospel Baptist Church',
@@ -123,7 +123,7 @@ const translations = {
         'Sermons': 'ဓမ္မဟောကြားချက်များ',
         'News': 'ကြေညာချက်',
         'Contact': 'ဆက်သွယ်ရန်',
-        'Members': 'အဖွဲ့ဝင်များ',
+    
         
         // Common
         'Gospel Baptist Church': 'သတင်းကောင်းနှစ်ခြင်းအသင်းတော်',
@@ -395,32 +395,7 @@ function initMobileMenu() {
     }
 }
 
-// Members-only authentication
-function initMembersAuth() {
-    const membersLinks = document.querySelectorAll('.members-link');
-    
-    membersLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // Check if user is already authenticated
-            const token = localStorage.getItem('authToken');
-            const role = localStorage.getItem('userRole');
-            
-            if (token && (role === 'member' || role === 'pastor')) {
-                // User is authenticated, redirect to appropriate page
-                if (role === 'pastor') {
-                    window.location.href = 'pastor.html';
-                } else {
-                    window.location.href = 'members.html';
-                }
-            } else {
-                // User is not authenticated, show login modal
-                showLoginModal();
-            }
-        });
-    });
-}
+
 
 // Modal functionality
 function initModals() {
@@ -909,7 +884,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize other functionality
     initMobileMenu();
-    initMembersAuth();
     initModals();
     initFormValidation();
     initSmoothScrolling();
@@ -1132,7 +1106,7 @@ async function handleLogin(e) {
             if (data.role === 'pastor') {
                 window.location.href = 'pastor.html';
             } else {
-                window.location.href = 'members.html';
+                window.location.href = 'index.html';
             }
         } else {
             showErrorMessage(data.error || 'Login failed');
@@ -1181,12 +1155,7 @@ function showErrorMessage(message) {
     }, 3000);
 }
 
-// Check if user is authenticated as member
-function isMemberAuthenticated() {
-    const token = localStorage.getItem('authToken');
-    const role = localStorage.getItem('userRole');
-    return token && (role === 'member' || role === 'pastor');
-}
+
 
 // Check if user is authenticated as pastor
 function isPastorAuthenticated() {

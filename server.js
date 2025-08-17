@@ -211,9 +211,7 @@ let sermonIdCounter = 1;
 let news = [];
 let newsIdCounter = 1;
 
-// In-memory storage for members (in production, use a database)
-let members = [];
-let memberIdCounter = 1;
+
 
 // Load existing sermons from file if it exists
 const sermonsFile = path.join(__dirname, 'sermons.json');
@@ -261,30 +259,7 @@ function saveNews() {
     }
 }
 
-// Load members from file
-function loadMembers() {
-    try {
-        const membersFile = path.join(__dirname, 'data', 'members.json');
-        if (fs.existsSync(membersFile)) {
-            const data = fs.readFileSync(membersFile, 'utf8');
-            members = JSON.parse(data);
-            memberIdCounter = Math.max(...members.map(m => m.id), 0) + 1;
-        }
-    } catch (error) {
-        console.error('Error loading members:', error);
-        members = [];
-    }
-}
 
-// Save members to file
-function saveMembers() {
-    try {
-        const membersFile = path.join(__dirname, 'data', 'members.json');
-        fs.writeFileSync(membersFile, JSON.stringify(members, null, 2));
-    } catch (error) {
-        console.error('Error saving members:', error);
-    }
-}
 
 // Routes
 
