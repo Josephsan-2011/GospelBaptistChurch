@@ -21,10 +21,110 @@ function checkPastorAuth() {
     return token && role === 'pastor';
 }
 
-// Show authentication required message
+// Show authentication required message and login modal
 function showAuthMessage() {
     document.getElementById('authMessage').style.display = 'block';
     document.querySelector('.edit-dashboard').style.display = 'none';
+    
+    // Show login modal
+    showLoginModal();
+}
+
+// Show login modal
+function showLoginModal() {
+    const modalHtml = `
+        <div class="modal" id="loginModal" style="display: block;">
+            <div class="modal-content">
+                <span class="close" onclick="closeLoginModal()">&times;</span>
+                <h2 data-en="Pastor Login Required" data-my="ဓမ္မဆရာ ဝင်ရောက်ခြင်း လိုအပ်ပါသည်">Pastor Login Required</h2>
+                
+                <p data-en="You need to be logged in as a pastor to access the Edit Dashboard." data-my="Edit Dashboard ကို ဝင်ရောက်ရန် ဓမ္မဆရာအဖြစ် ဝင်ရောက်ရန် လိုအပ်ပါသည်">You need to be logged in as a pastor to access the Edit Dashboard.</p>
+                
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="loginPassword" data-en="Enter 5-Digit Password" data-my="၅ လုံး စကားဝှက် ထည့်သွင်းပါ">Enter 5-Digit Password</label>
+                        <input type="password" id="loginPassword" maxlength="5" pattern="[0-9]{5}" placeholder="54321" required>
+                        <small data-en="Enter a 5-digit number" data-my="၅ လုံး ဂဏန်း ထည့်သွင်းပါ">Enter a 5-digit number</small>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" data-en="Login" data-my="ဝင်ရောက်ရန်">Login</button>
+                        <button type="button" class="btn btn-secondary" onclick="closeLoginModal()" data-en="Cancel" data-my="ပယ်ဖျက်ရန်">Cancel</button>
+                    </div>
+                </form>
+                
+                <div class="login-info">
+                    <p><strong data-en="Pastor Password:" data-my="ဓမ္မဆရာ စကားဝှက်:">Pastor Password:</strong> 54321</p>
+                    <p data-en="Only pastors can access the management dashboard" data-my="ဓမ္မဆရာများသာ စီမံခန့်ခွဲမှု ဒက်ရှ်ဘုတ်ကို ဝင်ရောက်နိုင်ပါသည်">Only pastors can access the management dashboard</p>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    
+    // Handle form submission
+    document.getElementById('loginForm').addEventListener('submit', handleLogin);
+    
+    // Handle password input (only allow numbers)
+    document.getElementById('loginPassword').addEventListener('input', function(e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    });
+}
+
+// Close login modal
+function closeLoginModal() {
+    const modal = document.getElementById('loginModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+// Handle login form submission
+async function handleLogin(e) {
+    e.preventDefault();
+    
+    const password = document.getElementById('loginPassword').value;
+    
+    try {
+        const response = await fetch('http://localhost:3000/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                password: password,
+                role: 'pastor'
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Store authentication token and role
+            localStorage.setItem('authToken', data.token);
+            localStorage.setItem('userRole', data.role);
+            
+            closeLoginModal();
+            
+            // Hide auth message and show dashboard
+            document.getElementById('authMessage').style.display = 'none';
+            document.querySelector('.edit-dashboard').style.display = 'block';
+            
+            // Initialize the dashboard
+            initDashboard();
+            initModals();
+            loadDashboardStats();
+            
+            // Show success message
+            alert('Login successful! Welcome to the Edit Dashboard.');
+        } else {
+            alert(data.error || 'Login failed. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error during login:', error);
+        alert('Error during login. Please try again.');
+    }
 }
 
 // Initialize dashboard
