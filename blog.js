@@ -1,67 +1,83 @@
 // Blog functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Sample blog posts data
-    let blogPosts = [
-        {
-            id: 1,
-            title: 'Welcome to Our New Website',
-            date: '2025-08-09',
-            content: 'We are excited to welcome you to our new church website! This platform will help us stay connected with our congregation and share the love of Christ with our community. Here you will find information about our services, upcoming events, sermons, and ways to get involved in our ministry.',
-            excerpt: 'We are excited to welcome you to our new church website! This platform will help us stay connected...',
-            image: 'https://via.placeholder.com/400x250/FF0000/FFFFFF?text=Welcome',
-            author: 'Church Staff'
-        },
-        {
-            id: 2,
-            title: 'Summer Youth Camp Registration Now Open',
-            date: '2025-08-05',
-            content: 'Registration is now open for our annual summer youth camp! This year\'s theme is "Walking with Jesus" and will include Bible study, outdoor activities, worship, and fellowship. The camp will be held from August 15-20 at the beautiful Mountain View Retreat Center. Space is limited, so please register early.',
-            excerpt: 'Registration is now open for our annual summer youth camp! This year\'s theme is "Walking with Jesus"...',
-            image: 'https://via.placeholder.com/400x250/0066CC/FFFFFF?text=Youth+Camp',
-            author: 'Youth Ministry'
-        },
-        {
-            id: 3,
-            title: 'Community Outreach Program Success',
-            date: '2025-07-28',
-            content: 'Our recent community outreach program was a tremendous success! We were able to serve over 200 families in our community through food distribution, health screenings, and prayer support. Thank you to all the volunteers who made this possible. This is just the beginning of our commitment to serving our neighbors.',
-            excerpt: 'Our recent community outreach program was a tremendous success! We were able to serve over 200 families...',
-            image: 'https://via.placeholder.com/400x250/00AA00/FFFFFF?text=Outreach',
-            author: 'Outreach Committee'
-        },
-        {
-            id: 4,
-            title: 'New Bible Study Classes Starting',
-            date: '2025-07-20',
-            content: 'We are excited to announce new Bible study classes starting next month! We will be offering classes for all age groups, including a special study on the Book of Romans for adults, a youth study on building faith, and a children\'s program focused on Bible stories. Classes will meet weekly and childcare will be provided.',
-            excerpt: 'We are excited to announce new Bible study classes starting next month! We will be offering classes...',
-            image: 'https://via.placeholder.com/400x250/FFAA00/FFFFFF?text=Bible+Study',
-            author: 'Education Ministry'
-        },
-        {
-            id: 5,
-            title: 'Prayer Request Update',
-            date: '2025-07-15',
-            content: 'Thank you for your continued prayers for the Johnson family. We are happy to report that Sarah Johnson\'s surgery was successful and she is recovering well. The family expresses their gratitude for all the prayers and support during this difficult time. Please continue to keep them in your prayers as Sarah continues her recovery.',
-            excerpt: 'Thank you for your continued prayers for the Johnson family. We are happy to report that Sarah Johnson\'s surgery...',
-            image: 'https://via.placeholder.com/400x250/FF0000/FFFFFF?text=Prayer',
-            author: 'Prayer Team'
-        }
-    ];
-
-    let filteredPosts = [...blogPosts];
+    // News posts data - will be loaded from server
+    let blogPosts = [];
+    let filteredPosts = [];
     const blogGrid = document.getElementById('blogGrid');
     const searchInput = document.getElementById('blogSearch');
     const sortSelect = document.getElementById('sortPosts');
-    const addPostBtn = document.getElementById('addPostBtn');
-    const addPostModal = document.getElementById('addPostModal');
-    const addPostForm = document.getElementById('addPostForm');
-    const cancelPostBtn = document.getElementById('cancelPostBtn');
+    const statusFilter = document.getElementById('statusFilter');
+
 
     // Initialize blog
-    function initBlog() {
+    async function initBlog() {
+        await loadNewsFromServer();
         renderBlogPosts(filteredPosts);
         setupBlogControls();
+        
+        // Set default status filter to "published"
+        if (statusFilter) {
+            statusFilter.value = 'published';
+        }
+    }
+    
+    // Load news from server
+    async function loadNewsFromServer() {
+        try {
+            console.log('Loading news from server...');
+            const response = await fetch('http://localhost:3000/api/news');
+            
+            if (response.ok) {
+                const newsData = await response.json();
+                console.log('Loaded news data:', newsData);
+                
+                // Transform server news data to blog post format
+                blogPosts = newsData.map(news => ({
+                    id: news.id,
+                    title: news.title || 'Untitled',
+                    date: news.date || news.publishDate || new Date().toISOString().split('T')[0],
+                    content: news.content || '',
+                    excerpt: (news.content || '').substring(0, 150) + '...',
+                    image: news.image || 'https://via.placeholder.com/400x250/FF0000/FFFFFF?text=News',
+                    author: news.author || 'Church Staff',
+                    category: news.category || 'general',
+                    status: news.status || 'published',
+                    priority: news.priority || 'normal',
+                    featured: news.featured || false
+                }));
+                
+                // Sort by date (newest first)
+                blogPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                // Apply default filter (published only)
+                filteredPosts = blogPosts.filter(post => post.status === 'published');
+                console.log('Processed blog posts:', blogPosts);
+            } else {
+                console.error('Failed to load news:', response.status, response.statusText);
+                // Fallback to sample data if server fails
+                loadSampleData();
+            }
+        } catch (error) {
+            console.error('Error loading news from server:', error);
+            // Fallback to sample data if server fails
+            loadSampleData();
+        }
+    }
+    
+    // Load sample data as fallback
+    function loadSampleData() {
+        blogPosts = [
+            {
+                id: 1,
+                title: 'Welcome to Our New Website',
+                date: '2025-08-09',
+                content: 'We are excited to welcome you to our new church website! This platform will help us stay connected with our congregation and share the love of Christ with our community.',
+                excerpt: 'We are excited to welcome you to our new church website! This platform will help us stay connected...',
+                image: 'https://via.placeholder.com/400x250/FF0000/FFFFFF?text=Welcome',
+                author: 'Church Staff'
+            }
+        ];
+        filteredPosts = [...blogPosts];
     }
 
     // Render blog posts
@@ -100,6 +116,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="blog-meta">
                     <span class="blog-date"><i class="fas fa-calendar"></i> ${formatDate(post.date)}</span>
                     <span class="blog-author"><i class="fas fa-user"></i> ${post.author}</span>
+                    <span class="blog-status status-${post.status}">${post.status}</span>
+                    ${post.category ? `<span class="blog-category">${post.category}</span>` : ''}
+                    ${post.featured ? '<span class="blog-featured">📌 Featured</span>' : ''}
                 </div>
                 <p class="blog-excerpt">${post.excerpt}</p>
                 <button class="btn btn-primary" onclick="showBlogPost(${post.id})">
@@ -122,32 +141,29 @@ document.addEventListener('DOMContentLoaded', function() {
         if (sortSelect) {
             sortSelect.addEventListener('change', sortBlogPosts);
         }
-
-        // Add post button
-        if (addPostBtn) {
-            addPostBtn.addEventListener('click', showAddPostModal);
+        
+        // Status filter functionality
+        if (statusFilter) {
+            statusFilter.addEventListener('change', filterBlogPosts);
         }
 
-        // Add post form
-        if (addPostForm) {
-            addPostForm.addEventListener('submit', handleAddPost);
-        }
 
-        // Cancel post button
-        if (cancelPostBtn) {
-            cancelPostBtn.addEventListener('click', hideAddPostModal);
-        }
     }
 
     // Filter blog posts
     function filterBlogPosts() {
         const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        const statusFilterValue = statusFilter ? statusFilter.value : 'all';
         
         filteredPosts = blogPosts.filter(post => {
-            return !searchTerm || 
+            const matchesSearch = !searchTerm || 
                 post.title.toLowerCase().includes(searchTerm) ||
                 post.content.toLowerCase().includes(searchTerm) ||
                 post.author.toLowerCase().includes(searchTerm);
+            
+            const matchesStatus = statusFilterValue === 'all' || post.status === statusFilterValue;
+            
+            return matchesSearch && matchesStatus;
         });
 
         renderBlogPosts(filteredPosts);
@@ -173,54 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
         renderBlogPosts(filteredPosts);
     }
 
-    // Show add post modal
-    function showAddPostModal() {
-        if (addPostModal) {
-            addPostModal.style.display = 'block';
-            // Set default date to today
-            const dateInput = document.getElementById('postDate');
-            if (dateInput) {
-                dateInput.value = new Date().toISOString().split('T')[0];
-            }
-        }
-    }
 
-    // Hide add post modal
-    function hideAddPostModal() {
-        if (addPostModal) {
-            addPostModal.style.display = 'none';
-            if (addPostForm) {
-                addPostForm.reset();
-            }
-        }
-    }
-
-    // Handle add post form submission
-    function handleAddPost(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(addPostForm);
-        const newPost = {
-            id: Date.now(),
-            title: formData.get('title'),
-            date: formData.get('date'),
-            content: formData.get('content'),
-            excerpt: formData.get('content').substring(0, 150) + '...',
-            image: formData.get('image') || 'https://via.placeholder.com/400x250/FF0000/FFFFFF?text=New+Post',
-            author: 'Church Staff'
-        };
-
-        // Add to beginning of array
-        blogPosts.unshift(newPost);
-        filteredPosts = [...blogPosts];
-        
-        // Re-render and hide modal
-        renderBlogPosts(filteredPosts);
-        hideAddPostModal();
-        
-        // Show success message
-        showSuccessMessage('Post published successfully!');
-    }
 
     // Show blog post details
     window.showBlogPost = function(postId) {
@@ -309,6 +278,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize blog
     initBlog();
 
+    // Refresh news from server
+    window.refreshNews = async function() {
+        await loadNewsFromServer();
+        renderBlogPosts(filteredPosts);
+        showSuccessMessage('News refreshed successfully!');
+    };
+    
     // Export functions for external use
     window.blogManager = {
         blogPosts,
@@ -317,6 +293,6 @@ document.addEventListener('DOMContentLoaded', function() {
         filterBlogPosts,
         sortBlogPosts,
         showBlogPost,
-        addPost: handleAddPost
+        refreshNews
     };
 });

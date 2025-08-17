@@ -6,6 +6,76 @@
     <title>Gospel Baptist Church - News</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .news-info-note {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
+        .news-info-note p {
+            margin: 0;
+            color: #1976d2;
+            font-size: 0.9rem;
+        }
+        
+        .refresh-controls {
+            display: flex;
+            align-items: center;
+        }
+        
+        .refresh-controls .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .refresh-controls .btn i {
+            font-size: 0.8rem;
+        }
+        
+        /* News status and category styling */
+        .blog-status, .blog-category, .blog-featured {
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+        
+        .status-published {
+            background: #e8f5e8;
+            color: #388e3c;
+        }
+        
+        .status-draft {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        
+        .blog-category {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        .blog-featured {
+            background: #ff6b35;
+            color: white;
+        }
+        
+        .blog-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
     <!-- Top Header with Logo -->
@@ -27,6 +97,7 @@
                 <li><a href="sermons.html" class="nav-link" data-en="Sermons" data-my="ဓမ္မဟောကြားချက်များ">Sermons</a></li>
                 <li><a href="blog.html" class="nav-link active" data-en="News" data-my="ကြေညာချက်">News</a></li>
                 <li><a href="contact.html" class="nav-link" data-en="Contact" data-my="ဆက်သွယ်ရန်">Contact</a></li>
+                <li><a href="edit.html" class="nav-link edit-link" data-en="Edit" data-my="တည်းဖြတ်ရန်">Edit</a></li>
             </ul>
             
             <div class="language-toggle">
@@ -47,7 +118,9 @@
         <div class="container">
             <div class="blog-header">
                 <h1 class="page-title" data-en="Church News" data-my="ဘုရားကျောင်း ကြေညာချက်">Church News</h1>
-                <button class="btn btn-primary" id="addPostBtn" data-en="Add Post" data-my="ပို့စ် ထည့်ရန်">Add Post</button>
+                <div class="news-info-note">
+                    <p data-en="News articles are managed by pastors in the Edit Dashboard" data-my="သတင်းဆောင်းပါးများကို ဓမ္မဆရာများက Edit Dashboard တွင် စီမံခန့်ခွဲပါသည်">News articles are managed by pastors in the Edit Dashboard</p>
+                </div>
             </div>
             
             <!-- Blog Controls -->
@@ -61,8 +134,20 @@
                     <select id="sortPosts" class="sort-select">
                         <option value="newest" data-en="Newest First" data-my="အသစ်ဆုံး ဦးစွာ">Newest First</option>
                         <option value="oldest" data-en="Oldest First" data-my="အဟောင်းဆုံး ဦးစွာ">Oldest First</option>
-                        <option value="title" data-en="By Title" data-my="ခေါင်းစဉ်ဖြင့်">By Title</option>
+                        <option value="title" data-en="By Title" data-my="ခေါင်းစဉ်ဖင့်">By Title</option>
                     </select>
+                    
+                    <select id="statusFilter" class="sort-select">
+                        <option value="published" data-en="Published Only" data-my="ထုတ်ဝေပြီးသာ">Published Only</option>
+                        <option value="all" data-en="All Status" data-my="အခြေအနေအားလုံး">All Status</option>
+                        <option value="draft" data-en="Drafts Only" data-my="ကြိုတင်ရေးသားချက်သာ">Drafts Only</option>
+                    </select>
+                </div>
+                
+                <div class="refresh-controls">
+                    <button class="btn btn-secondary" onclick="refreshNews()" data-en="Refresh News" data-my="သတင်းများ ပြန်လည်စတင်ရန်">
+                        <i class="fas fa-sync-alt"></i> Refresh News
+                    </button>
                 </div>
             </div>
             
@@ -73,8 +158,8 @@
         </div>
     </section>
 
-    <!-- Add Post Modal -->
-    <div id="addPostModal" class="modal">
+
+
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2 data-en="Add New Post" data-my="ပို့စ်အသစ် ထည့်ရန်">Add New Post</h2>

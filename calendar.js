@@ -1,53 +1,67 @@
 // Calendar functionality using FullCalendar
 document.addEventListener('DOMContentLoaded', function() {
-    // Sample events data
-    const sampleEvents = [
-        {
-            id: '1',
-            title: 'Sunday Service',
-            start: '2025-08-10T13:00:00',
-            end: '2025-08-10T15:00:00',
-            description: 'Main worship service with preaching and fellowship',
-            color: '#FF0000',
-            allDay: false
-        },
-        {
-            id: '2',
-            title: 'Saturday Service',
-            start: '2025-08-09T17:00:00',
-            end: '2025-08-09T18:00:00',
-            description: 'Evening prayer and Bible study',
-            color: '#0066CC',
-            allDay: false
-        },
-        {
-            id: '3',
-            title: 'Prayer Meeting',
-            start: '2025-08-12T19:00:00',
-            end: '2025-08-12T20:00:00',
-            description: 'Weekly prayer meeting for church members',
-            color: '#00AA00',
-            allDay: false
-        },
-        {
-            id: '4',
-            title: 'Youth Group',
-            start: '2025-08-15T18:00:00',
-            end: '2025-08-15T19:30:00',
-            description: 'Youth group activities and Bible study',
-            color: '#FFAA00',
-            allDay: false
-        },
-        {
-            id: '5',
-            title: 'Bible Study',
-            start: '2025-08-14T19:00:00',
-            end: '2025-08-14T20:30:00',
-            description: 'Adult Bible study class',
-            color: '#0066CC',
-            allDay: false
+    // Load events from localStorage or use sample events as fallback
+    function loadEvents() {
+        const savedEvents = localStorage.getItem('calendarEvents');
+        if (savedEvents) {
+            try {
+                return JSON.parse(savedEvents);
+            } catch (error) {
+                console.error('Error parsing saved events:', error);
+            }
         }
-    ];
+        
+        // Fallback to sample events if no saved events
+        return [
+            {
+                id: '1',
+                title: 'Sunday Service',
+                start: '2025-08-10T13:00:00',
+                end: '2025-08-10T15:00:00',
+                description: 'Main worship service with preaching and fellowship',
+                color: '#FF0000',
+                allDay: false
+            },
+            {
+                id: '2',
+                title: 'Saturday Service',
+                start: '2025-08-09T17:00:00',
+                end: '2025-08-09T18:00:00',
+                description: 'Evening prayer and Bible study',
+                color: '#0066CC',
+                allDay: false
+            },
+            {
+                id: '3',
+                title: 'Prayer Meeting',
+                start: '2025-08-12T19:00:00',
+                end: '2025-08-12T20:00:00',
+                description: 'Weekly prayer meeting for church members',
+                color: '#00AA00',
+                allDay: false
+            },
+            {
+                id: '4',
+                title: 'Youth Group',
+                start: '2025-08-15T18:00:00',
+                end: '2025-08-15T19:30:00',
+                description: 'Youth group activities and Bible study',
+                color: '#FFAA00',
+                allDay: false
+            },
+            {
+                id: '5',
+                title: 'Bible Study',
+                start: '2025-08-14T19:00:00',
+                end: '2025-08-14T20:30:00',
+                description: 'Adult Bible study class',
+                color: '#0066CC',
+                allDay: false
+            }
+        ];
+    }
+    
+    let sampleEvents = loadEvents();
 
     // Initialize calendar
     const calendarEl = document.getElementById('calendar');
@@ -82,12 +96,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
     calendar.render();
 
+    // Function to refresh events from localStorage
+    function refreshEventsFromStorage() {
+        const savedEvents = localStorage.getItem('calendarEvents');
+        if (savedEvents) {
+            try {
+                const newEvents = JSON.parse(savedEvents);
+                // Clear existing events
+                calendar.removeAllEvents();
+                // Add new events
+                newEvents.forEach(event => {
+                    calendar.addEvent(event);
+                });
+                // Update sampleEvents array
+                sampleEvents = newEvents;
+            } catch (error) {
+                console.error('Error refreshing events:', error);
+            }
+        }
+    }
+
+    // Refresh events when page loads
+    refreshEventsFromStorage();
+
     // Event management
     let currentEventId = null;
     const eventModal = document.getElementById('eventModal');
     const eventForm = document.getElementById('eventForm');
     const addEventBtn = document.getElementById('addEventBtn');
     const todayBtn = document.getElementById('todayBtn');
+    const refreshEventsBtn = document.getElementById('refreshEventsBtn');
     const deleteEventBtn = document.getElementById('deleteEventBtn');
 
     // Add event button
@@ -105,6 +143,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (todayBtn) {
         todayBtn.addEventListener('click', function() {
             calendar.today();
+        });
+    }
+    
+    // Refresh events button
+    if (refreshEventsBtn) {
+        refreshEventsBtn.addEventListener('click', function() {
+            refreshEventsFromStorage();
+            showSuccessMessage('Events refreshed successfully!');
         });
     }
 
@@ -177,6 +223,9 @@ document.addEventListener('DOMContentLoaded', function() {
         calendar.addEvent(newEvent);
         sampleEvents.push(newEvent);
         
+        // Save to localStorage
+        localStorage.setItem('calendarEvents', JSON.stringify(sampleEvents));
+        
         // Show success message
         showSuccessMessage('Event added successfully!');
     }
@@ -205,6 +254,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 color: eventData.color
             };
         }
+        
+        // Save to localStorage
+        localStorage.setItem('calendarEvents', JSON.stringify(sampleEvents));
 
         showSuccessMessage('Event updated successfully!');
     }
@@ -221,6 +273,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (eventIndex !== -1) {
             sampleEvents.splice(eventIndex, 1);
         }
+        
+        // Save to localStorage
+        localStorage.setItem('calendarEvents', JSON.stringify(sampleEvents));
 
         showSuccessMessage('Event deleted successfully!');
     }
@@ -301,6 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateEvent,
         deleteEvent,
         showEventDetails,
-        updateCalendarLanguage
+        updateCalendarLanguage,
+        refreshEventsFromStorage
     };
 });
