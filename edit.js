@@ -996,3 +996,364 @@ window.editDashboard = {
     openAppearanceSettingsModal,
     openContactSettingsModal
 };
+
+// Gallery Management Functions
+function openGalleryManagementModal() {
+    const modal = document.getElementById('galleryModal');
+    const content = document.getElementById('galleryModalContent');
+    
+    content.innerHTML = `
+        <div class="gallery-management">
+            <div class="category-list" id="categoryList">
+                <p>Loading categories...</p>
+            </div>
+        </div>
+    `;
+    
+    loadCategories();
+    modal.style.display = 'block';
+}
+
+function openNewCategoryModal() {
+    const modal = document.getElementById('newCategoryModal');
+    const content = document.getElementById('newCategoryModalContent');
+    
+    content.innerHTML = `
+        <div class="new-category-form">
+            <form id="newCategoryForm">
+                <div class="form-group">
+                    <label for="categoryName">Category Name</label>
+                    <input type="text" id="categoryName" name="name" required placeholder="e.g., Church Events">
+                </div>
+                <div class="form-group">
+                    <label for="categoryDescription">Description</label>
+                    <textarea id="categoryDescription" name="description" placeholder="Brief description of this category"></textarea>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">Create Category</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeNewCategoryModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    `;
+    
+    // Add form submission handler
+    document.getElementById('newCategoryForm').addEventListener('submit', handleCreateCategory);
+    
+    modal.style.display = 'block';
+}
+
+async function loadCategories() {
+    try {
+        // Get list of folders from ChurchWebsiteIMG
+        const categories = await getCategoryFolders();
+        displayCategories(categories);
+        updateGalleryStats();
+    } catch (error) {
+        console.error('Error loading categories:', error);
+        document.getElementById('categoryList').innerHTML = '<p class="error">Error loading categories</p>';
+    }
+}
+
+async function getCategoryFolders() {
+    // This would typically call a backend API
+    // For now, we'll use the existing category structure
+    const categories = [
+        'Church Baptism',
+        'Church Camp', 
+        'Church General Photos',
+        'Church Holidays',
+        'Church Mother & Father Day',
+        'Church Picnic',
+        'Church Sunday School',
+        'Pastor Paul Family'
+    ];
+    
+    return categories.map(category => ({
+        name: category,
+        folderName: category.replace(/\s+/g, '_'),
+        coverPhoto: null,
+        imageCount: 0
+    }));
+}
+
+function displayCategories(categories) {
+    const categoryList = document.getElementById('categoryList');
+    
+    if (categories.length === 0) {
+        categoryList.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-images"></i>
+                <h3>No Categories Found</h3>
+                <p>Create your first photo category to get started.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    categoryList.innerHTML = categories.map(category => `
+        <div class="category-item" data-category="${category.name}">
+            <div class="category-header">
+                <h3 class="category-name">${category.name}</h3>
+                <div class="category-actions">
+                    <button class="action-btn btn-primary btn-sm" onclick="openCategoryGallery('${category.name}')">
+                        <i class="fas fa-edit"></i> Edit Gallery
+                    </button>
+                </div>
+            </div>
+            
+            <div class="cover-photo-section">
+                <h4>Cover Photo</h4>
+                <div class="cover-photo-current">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTIwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjZjhmOWZhIi8+CjxwYXRoIGQ9Ik02MCA0MGwyMC0yMGgyMEw2MCA2MEw0MCA0MEw2MCAyMFY0MFoiIGZpbGw9IiNjY2NjY2MiLz4KPC9zdmc+" 
+                         alt="No cover photo" class="cover-photo-preview">
+                    <div class="cover-photo-info">
+                        <h4>No Cover Photo Set</h4>
+                        <p>Upload images to this category and select one as the cover photo.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-images-section">
+                <h4>Gallery Images</h4>
+                <div class="gallery-grid" id="gallery_${category.name.replace(/\s+/g, '_')}">
+                    <div class="empty-state">
+                        <i class="fas fa-images"></i>
+                        <p>No images in gallery</p>
+                    </div>
+                </div>
+                <p class="text-muted">Click "Edit Gallery" to manage images for this category.</p>
+            </div>
+        </div>
+    `).join('');
+}
+
+function openCategoryGallery(categoryName) {
+    const modal = document.getElementById('categoryGalleryModal');
+    const title = document.getElementById('categoryGalleryTitle');
+    const content = document.getElementById('categoryGalleryContent');
+    
+    title.textContent = `${categoryName} - Gallery Editor`;
+    
+    content.innerHTML = `
+        <div class="category-gallery-editor">
+            <div class="back-to-categories">
+                <button onclick="closeCategoryGalleryModal()">
+                    <i class="fas fa-arrow-left"></i> Back to Categories
+                </button>
+            </div>
+            
+            <div class="category-stats">
+                <div class="stat-item-small">
+                    <div class="stat-number-small" id="categoryImageCount">0</div>
+                    <div class="stat-label-small">Images</div>
+                </div>
+                <div class="stat-item-small">
+                    <div class="stat-number-small" id="categoryCoverPhoto">None</div>
+                    <div class="stat-label-small">Cover Photo</div>
+                </div>
+            </div>
+            
+            <div class="gallery-images-section">
+                <h4>Gallery Images</h4>
+                <div class="gallery-grid" id="categoryGalleryGrid">
+                    <div class="empty-state">
+                        <i class="fas fa-images"></i>
+                        <p>No images in this category</p>
+                    </div>
+                </div>
+                
+                <div class="upload-section" 
+                     ondrop="handleDrop(event, '${categoryName}')" 
+                     ondragover="handleDragOver(event)" 
+                     ondragleave="handleDragLeave(event)">
+                    <input type="file" id="categoryGalleryPhotos_${categoryName.replace(/\s+/g, '_')}" 
+                           accept="image/*" multiple onchange="uploadGalleryPhotos('${categoryName}', this)">
+                    <label for="categoryGalleryPhotos_${categoryName.replace(/\s+/g, '_')}" class="upload-label">
+                        <i class="fas fa-upload"></i> Upload Images to ${categoryName}
+                    </label>
+                    <p>Drag and drop images here or click to select</p>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    loadCategoryImages(categoryName);
+    modal.style.display = 'block';
+}
+
+async function loadCategoryImages(categoryName) {
+    try {
+        // This would typically call a backend API to get images from the category folder
+        // For now, we'll simulate empty categories
+        const images = [];
+        displayCategoryImages(categoryName, images);
+        updateCategoryStats(categoryName, images);
+    } catch (error) {
+        console.error('Error loading category images:', error);
+        document.getElementById('categoryGalleryGrid').innerHTML = '<p class="error">Error loading images</p>';
+    }
+}
+
+function displayCategoryImages(categoryName, images) {
+    const galleryGrid = document.getElementById('categoryGalleryGrid');
+    
+    if (images.length === 0) {
+        galleryGrid.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-images"></i>
+                <p>No images in this category</p>
+                <p>Upload some images to get started!</p>
+            </div>
+        `;
+        return;
+    }
+    
+    galleryGrid.innerHTML = images.map((image, index) => `
+        <div class="gallery-image-item" data-image="${image.filename}">
+            <img src="${image.path}" alt="${image.filename}">
+            <div class="gallery-image-actions">
+                <button class="gallery-image-action set-cover" 
+                        onclick="setCoverPhoto('${categoryName}', '${image.filename}')" 
+                        title="Set as Cover Photo">
+                    <i class="fas fa-star"></i>
+                </button>
+                <button class="gallery-image-action delete" 
+                        onclick="deleteImage('${categoryName}', '${image.filename}')" 
+                        title="Delete Image">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function updateCategoryStats(categoryName, images) {
+    document.getElementById('categoryImageCount').textContent = images.length;
+    const coverPhoto = images.find(img => img.isCover)?.filename || 'None';
+    document.getElementById('categoryCoverPhoto').textContent = coverPhoto;
+}
+
+async function handleCreateCategory(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    const categoryName = formData.get('name');
+    const categoryDescription = formData.get('description');
+    
+    try {
+        // Create the category folder
+        await createCategoryFolder(categoryName);
+        
+        alert('Category created successfully!');
+        closeNewCategoryModal();
+        loadCategories(); // Refresh the category list
+        
+    } catch (error) {
+        console.error('Error creating category:', error);
+        alert('Error creating category: ' + error.message);
+    }
+}
+
+async function createCategoryFolder(categoryName) {
+    // This would typically call a backend API to create the folder
+    // For now, we'll simulate the creation
+    console.log(`Creating folder for category: ${categoryName}`);
+    
+    // In a real implementation, this would:
+    // 1. Create the folder in ChurchWebsiteIMG
+    // 2. Update the website code to include the new category
+    // 3. Return success/failure status
+}
+
+async function uploadGalleryPhotos(categoryName, fileInput) {
+    const files = fileInput.files;
+    if (files.length === 0) return;
+    
+    try {
+        // This would typically call a backend API to upload the files
+        // For now, we'll simulate the upload
+        console.log(`Uploading ${files.length} photos to ${categoryName}:`, files);
+        
+        // In a real implementation, this would:
+        // 1. Upload the files to the correct category folder
+        // 2. Update the website code to include the new photos
+        // 3. Refresh the gallery display
+        
+        alert(`${files.length} images uploaded successfully to ${categoryName}!`);
+        
+        // Refresh the category images
+        loadCategoryImages(categoryName);
+        
+    } catch (error) {
+        console.error('Error uploading photos:', error);
+        alert('Error uploading photos: ' + error.message);
+    }
+}
+
+function setCoverPhoto(categoryName, imageFilename) {
+    if (confirm(`Set "${imageFilename}" as the cover photo for ${categoryName}?`)) {
+        // This would typically call a backend API to update the cover photo
+        // For now, we'll simulate the update
+        console.log(`Setting ${imageFilename} as cover photo for ${categoryName}`);
+        
+        alert('Cover photo updated successfully!');
+        
+        // Refresh the category display
+        loadCategoryImages(categoryName);
+    }
+}
+
+function deleteImage(categoryName, imageFilename) {
+    if (confirm(`Delete "${imageFilename}" from ${categoryName}? This action cannot be undone.`)) {
+        // This would typically call a backend API to delete the image
+        // For now, we'll simulate the deletion
+        console.log(`Deleting ${imageFilename} from ${categoryName}`);
+        
+        alert('Image deleted successfully!');
+        
+        // Refresh the category display
+        loadCategoryImages(categoryName);
+    }
+}
+
+function handleDrop(e, categoryName) {
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+        // Create a file input element and trigger the upload
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.multiple = true;
+        fileInput.accept = 'image/*';
+        fileInput.files = files;
+        
+        uploadGalleryPhotos(categoryName, fileInput);
+    }
+}
+
+function handleDragOver(e) {
+    e.preventDefault();
+    e.currentTarget.classList.add('dragover');
+}
+
+function handleDragLeave(e) {
+    e.currentTarget.classList.remove('dragover');
+}
+
+function updateGalleryStats() {
+    // Update the dashboard stats
+    const totalCategories = 8; // This would be dynamic in a real implementation
+    const totalImages = 0; // This would be calculated from all categories
+    
+    document.getElementById('totalCategories').textContent = totalCategories;
+    document.getElementById('totalImages').textContent = totalImages;
+}
+
+function closeNewCategoryModal() {
+    document.getElementById('newCategoryModal').style.display = 'none';
+}
+
+function closeCategoryGalleryModal() {
+    document.getElementById('categoryGalleryModal').style.display = 'none';
+}

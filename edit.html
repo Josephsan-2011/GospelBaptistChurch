@@ -98,6 +98,7 @@
         .calendar-icon { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         .sermons-icon { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
         .news-icon { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .gallery-icon { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
         .settings-icon { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
 
         .card-title {
@@ -447,6 +448,299 @@
         .login-info strong {
             color: #007bff;
         }
+
+        /* Gallery Management Styles */
+        .gallery-modal-content,
+        .category-gallery-modal-content {
+            max-width: 95vw;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .category-list {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        .category-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .category-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .category-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .cover-photo-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .cover-photo-current {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .cover-photo-preview {
+            width: 120px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid #e0e0e0;
+        }
+
+        .cover-photo-info {
+            flex: 1;
+        }
+
+        .cover-photo-info h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--text-dark);
+        }
+
+        .cover-photo-info p {
+            margin: 0;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .gallery-images-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-image-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-image-item:hover {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .gallery-image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-image-actions {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .gallery-image-action {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-image-action:hover {
+            background: rgba(0, 0, 0, 1);
+            transform: scale(1.1);
+        }
+
+        .gallery-image-action.set-cover {
+            background: rgba(40, 167, 69, 0.8);
+        }
+
+        .gallery-image-action.set-cover:hover {
+            background: rgba(40, 167, 69, 1);
+        }
+
+        .gallery-image-action.delete {
+            background: rgba(220, 53, 69, 0.8);
+        }
+
+        .gallery-image-action.delete:hover {
+            background: rgba(220, 53, 69, 1);
+        }
+
+        .upload-section {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .upload-section:hover {
+            border-color: var(--primary-color);
+            background: #f0f0f0;
+        }
+
+        .upload-section.dragover {
+            border-color: var(--primary-color);
+            background: #e3f2fd;
+        }
+
+        .upload-input {
+            display: none;
+        }
+
+        .upload-label {
+            cursor: pointer;
+            color: var(--primary-color);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .upload-label:hover {
+            text-decoration: underline;
+        }
+
+        .new-category-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-gray);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .category-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #e9ecef;
+            border-radius: 8px;
+        }
+
+        .stat-item-small {
+            text-align: center;
+        }
+
+        .stat-number-small {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label-small {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+
+        .back-to-categories {
+            margin-bottom: 1rem;
+        }
+
+        .back-to-categories button {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-to-categories button:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -616,6 +910,41 @@
                 </div>
             </div>
 
+            <!-- Manage Slideshow & Gallery -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-icon gallery-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title" data-en="Manage Slideshow & Gallery" data-my="ဓာတ်ပုံြသခြင်းနှင့် ဓာတ်ပုံပြခန်းကို စီမံခန့်ခွဲရန်">Manage Slideshow & Gallery</h3>
+                    </div>
+                </div>
+                <p class="card-description" data-en="Manage photo categories, upload images, set cover photos, and organize your church photo gallery. Each category maintains its own collection of images." data-my="ဓာတ်ပုံ အမျိုးအစားများကို စီမံခန့်ခွဲရန်၊ ဓာတ်ပုံများကို တင်ရန်၊ ဓာတ်ပုံများကို သတ်မှတ်ရန်၊ သင့်ဘုရားကျောင်း ဓာတ်ပုံပြခန်းကို စီစဉ်ရန်။ အမျိုးအစားတစ်ခုစီသည် ၎င်း၏ ဓာတ်ပုံများ စုစည်းမှုကို ထိန်းသိမ်းထားသည်">Manage photo categories, upload images, set cover photos, and organize your church photo gallery. Each category maintains its own collection of images.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalCategories">8</div>
+                        <div class="stat-label" data-en="Categories" data-my="အမျိုးအစားများ">Categories</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalImages">0</div>
+                        <div class="stat-label" data-en="Total Images" data-my="ဓာတ်ပုံ စုစုပေါင်း">Total Images</div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="action-btn btn-primary" onclick="openGalleryManagementModal()">
+                        <i class="fas fa-cog"></i>
+                        <span data-en="Manage Gallery" data-my="ဓာတ်ပုံပြခန်းကို စီမံခန့်ခွဲရန်">Manage Gallery</span>
+                    </button>
+                    <button class="action-btn btn-success" onclick="openNewCategoryModal()">
+                        <i class="fas fa-plus"></i>
+                        <span data-en="Add New Category" data-my="အမျိုးအစားအသစ် ထည့်သွင်းရန်">Add New Category</span>
+                    </button>
+                </div>
+            </div>
+
             <!-- Website Settings -->
             <div class="dashboard-card">
                 <div class="card-header">
@@ -694,6 +1023,39 @@
             <span class="close">&times;</span>
             <h2>Website Settings</h2>
             <div id="settingsModalContent">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Management Modal -->
+    <div id="galleryModal" class="modal" style="display: none;">
+        <div class="modal-content gallery-modal-content">
+            <span class="close">&times;</span>
+            <h2>Gallery Management</h2>
+            <div id="galleryModalContent">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Gallery Editor Modal -->
+    <div id="categoryGalleryModal" class="modal" style="display: none;">
+        <div class="modal-content category-gallery-modal-content">
+            <span class="close">&times;</span>
+            <h2 id="categoryGalleryTitle">Category Gallery Editor</h2>
+            <div id="categoryGalleryContent">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- New Category Modal -->
+    <div id="newCategoryModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add New Category</h2>
+            <div id="newCategoryModalContent">
                 <!-- Content will be loaded dynamically -->
             </div>
         </div>

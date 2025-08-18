@@ -60,6 +60,21 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .slide-card {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .slide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .slide-card:active {
+            transform: translateY(-2px);
+        }
+    </style>
     
     <!-- Structured Data for Local Business -->
     <script type="application/ld+json">
@@ -195,91 +210,22 @@
                 
                 <!-- Hero Slideshow -->
                 <div class="hero-slideshow">
-                    <div class="slideshow-container">
-                        <div class="slide-card active" data-category="Church Baptism">
+                    <div class="slideshow-container" id="slideshowContainer">
+                        <!-- Slides will be loaded dynamically from category folders -->
+                        <div class="slide-card active" data-category="Church Baptism" onclick="goToGallery('Church Baptism')">
                             <div class="slide-image">
-                                <img src="ChurchWebsiteIMG/Church Baptism/churchbaptism4.jpg" alt="Church Baptism">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTIwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjZjhmOWZhIi8+CjxwYXRoIGQ9Ik02MCA0MGwyMC0yMGgyMEw2MCA2MEw0MCA0MEw2MCAyMFY0MFoiIGZpbGw9IiNjY2NjY2MiLz4KPC9zdmc+" alt="Church Baptism">
                             </div>
                             <div class="slide-overlay">
                                 <h3 data-en="Church Baptism" data-my="ဘုရားကျောင်း နှစ်ခြင်းမင်္ဂလာ">Church Baptism</h3>
                                 <p data-en="Click to view more baptism photos" data-my="နှစ်ခြင်းမင်္ဂလာ ဓာတ်ပုံများ ထပ်ကြည့်ရန် နှိပ်ပါ">Click to view more baptism photos</p>
                             </div>
                         </div>
-                        <div class="slide-card" data-category="Church Camp">
-                            <div class="slide-image">
-                                <img src="ChurchWebsiteIMG/Church Camp/churchcamp.jpg" alt="Church Camp">
-                            </div>
-                            <div class="slide-overlay">
-                                <h3 data-en="Church Camp" data-my="ဘုရားကျောင်း စခန်း">Church Camp</h3>
-                                <p data-en="Click to view more camp photos" data-my="စခန်း ဓာတ်ပုံများ ထပ်ကြည့်ရန် နှိပ်ပါ">Click to view more camp photos</p>
-                            </div>
-                        </div>
-                        <div class="slide-card" data-category="Church General Photos">
-                            <div class="slide-image">
-                                <img src="ChurchWebsiteIMG/Church General Photos/IMG_20250811_112731 (1).heic" alt="Church General Photos">
-                            </div>
-                            <div class="slide-overlay">
-                                <h3 data-en="Church General Photos" data-my="ဘုရားကျောင်း ယခုနှစ် ဓာတ်ပုံများ">Church General Photos</h3>
-                                <p data-en="Click to view more general photos" data-my="ယခုနှစ် ဓာတ်ပုံများ ထပ်ကြည့်ရန် နှိပ်ပါ">Click to view more general photos</p>
-                            </div>
-                        </div>
-                        <div class="slide-card" data-category="Church Holidays">
-                            <div class="slide-image">
-                                <img src="ChurchWebsiteIMG/Church Holidays/IMG_20250811_122655 (3).jpg" alt="Church Holidays">
-                            </div>
-                            <div class="slide-overlay">
-                                <h3 data-en="Church Holidays" data-my="ဘုရားကျောင်း ပွဲတော်များ">Church Holidays</h3>
-                                <p data-en="Click to view more holiday photos" data-my="ပွဲတော် ဓာတ်ပုံများ ထပ်ကြည့်ရန် နှိပ်ပါ">Click to view more holiday photos</p>
-                            </div>
-                        </div>
-                        <div class="slide-card" data-category="Church Mother & Father Day">
-                            <div class="slide-image">
-                                <img src="ChurchWebsiteIMG/Church Mother-Father Day/IMG_20250811_113351.jpg" alt="Church Mother & Father Day">
-                            </div>
-                            <div class="slide-overlay">
-                                <h3 data-en="Church Mother & Father Day" data-my="ဘုရားကျောင်း မိခင်နှင့် ဖခင်နေ့">Church Mother & Father Day</h3>
-                                <p data-en="Click to view more Mother & Father Day photos" data-my="မိခင်နှင့် ဖခင်နေ့ ဓာတ်ပုံများ ထပ်ကြည့်ရန် နှိပ်ပါ">Click to view more Mother & Father Day photos</p>
-                            </div>
-                        </div>
-                        <div class="slide-card" data-category="Church Picnic">
-                            <div class="slide-image">
-                                <img src="ChurchWebsiteIMG/Church Picnic/picniccover.jpeg" alt="Church Picnic">
-                            </div>
-                            <div class="slide-overlay">
-                                <h3 data-en="Church Picnic" data-my="ဘုရားကျောင်း စားသောက်ပွဲ">Church Picnic</h3>
-                                <p data-en="Click to view more picnic photos" data-my="စားသောက်ပွဲ ဓာတ်ပုံများ ထပ်ကြည့်ရန် နှိပ်ပါ">Click to view more picnic photos</p>
-                            </div>
-                        </div>
-                        <div class="slide-card" data-category="Church Sunday School">
-                            <div class="slide-image">
-                                <img src="ChurchWebsiteIMG/Church Sunday School/groupphoto3.jpg" alt="Church Sunday School">
-                            </div>
-                            <div class="slide-overlay">
-                                <h3 data-en="Church Sunday School" data-my="ဘုရားကျောင်း တနင်္ဂနွေကျောင်း">Church Sunday School</h3>
-                                <p data-en="Click to view more Sunday School photos" data-my="တနင်္ဂနွေကျောင်း ဓာတ်ပုံများ ထပ်ကြည့်ရန် နှိပ်ပါ">Click to view more Sunday School photos</p>
-                            </div>
-                        </div>
-                        <div class="slide-card" data-category="Pastor Paul Family">
-                            <div class="slide-image">
-                                <img src="ChurchWebsiteIMG/Pastor Paul Family/IMG_20250811_113656.jpg" alt="Pastor Paul Family">
-                            </div>
-                            <div class="slide-overlay">
-                                <h3 data-en="Pastor Paul Family" data-my="ဆရာကြီး ပေါလု မိသားစု">Pastor Paul Family</h3>
-                                <p data-en="Click to view more Pastor Paul Family photos" data-my="ဆရာကြီး ပေါလု မိသားစု ဓာတ်ပုံများ ထပ်ကြည့်ရန် နှိပ်ပါ">Click to view more Pastor Paul Family photos</p>
-                            </div>
-                        </div>
                     </div>
                     
                     <!-- Slideshow Navigation -->
-                    <div class="slideshow-nav">
+                    <div class="slideshow-nav" id="slideshowNav">
                         <button class="nav-dot active" data-slide="0"></button>
-                        <button class="nav-dot" data-slide="1"></button>
-                        <button class="nav-dot" data-slide="2"></button>
-                        <button class="nav-dot" data-slide="3"></button>
-                        <button class="nav-dot" data-slide="4"></button>
-                        <button class="nav-dot" data-slide="5"></button>
-                        <button class="nav-dot" data-slide="6"></button>
-                        <button class="nav-dot" data-slide="7"></button>
                     </div>
                     
                     <!-- Slideshow Controls -->
@@ -510,5 +456,108 @@ His ministry is marked by a heart for people, a vision for the church, and an un
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Function to navigate to gallery with category
+        function goToGallery(category) {
+            window.location.href = `gallery.html?category=${encodeURIComponent(category)}`;
+        }
+
+        // Load slideshow from category folders
+        async function loadSlideshowFromCategories() {
+            try {
+                const categories = [
+                    'Church Baptism',
+                    'Church Camp', 
+                    'Church General Photos',
+                    'Church Holidays',
+                    'Church Mother & Father Day',
+                    'Church Picnic',
+                    'Church Sunday School',
+                    'Pastor Paul Family'
+                ];
+                
+                const slideshowContainer = document.getElementById('slideshowContainer');
+                const slideshowNav = document.getElementById('slideshowNav');
+                
+                // Clear existing slides
+                slideshowContainer.innerHTML = '';
+                slideshowNav.innerHTML = '';
+                
+                // Create slides for each category
+                categories.forEach((category, index) => {
+                    const slideCard = document.createElement('div');
+                    slideCard.className = `slide-card ${index === 0 ? 'active' : ''}`;
+                    slideCard.setAttribute('data-category', category);
+                    slideCard.onclick = () => goToGallery(category);
+                    
+                    slideCard.innerHTML = `
+                        <div class="slide-image">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTIwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjZjhmOWZhIi8+CjxwYXRoIGQ9Ik02MCA0MGwyMC0yMGgyMEw2MCA2MEw0MCA0MEw2MCAyMFY0MFoiIGZpbGw9IiNjY2NjY2MiLz4KPC9zdmc+" alt="${category}">
+                        </div>
+                        <div class="slide-overlay">
+                            <h3 data-en="${category}" data-my="${category}">${category}</h3>
+                            <p data-en="Click to view photos" data-my="ဓာတ်ပုံများကို ကြည့်ရှုရန် နှိပ်ပါ">Click to view photos</p>
+                        </div>
+                    `;
+                    
+                    slideshowContainer.appendChild(slideCard);
+                    
+                    // Create navigation dot
+                    const navDot = document.createElement('button');
+                    navDot.className = `nav-dot ${index === 0 ? 'active' : ''}`;
+                    navDot.setAttribute('data-slide', index);
+                    navDot.onclick = () => showSlide(index);
+                    slideshowNav.appendChild(navDot);
+                });
+                
+                // Initialize slideshow functionality
+                initSlideshow();
+                
+            } catch (error) {
+                console.error('Error loading slideshow:', error);
+            }
+        }
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slide-card');
+            const dots = document.querySelectorAll('.nav-dot');
+            
+            // Remove active class from all slides and dots
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // Add active class to current slide and dot
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide-card');
+            const dots = document.querySelectorAll('.nav-dot');
+            
+            // Auto-advance slides
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }, 5000);
+            
+            // Previous/Next button functionality
+            document.querySelector('.slideshow-control.prev').onclick = () => {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            };
+            
+            document.querySelector('.slideshow-control.next').onclick = () => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            };
+        }
+
+        // Load slideshow when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSlideshowFromCategories();
+        });
+    </script>
 </body>
 </html>
