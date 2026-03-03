@@ -15,12 +15,14 @@
     --text-dark: #1a1a1a;
     --text-light: #ffffff;
     --text-gray: #666666;
-    --background-light: #ffffff;
-    --background-gray: #f8f8f8;
-    --background-accent: #f0f0f0;
-    --border-color: #e0e0e0;
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    --shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.15);
+    --background-light: #fdfcfa;
+    --background-gray: #f7f6f3;
+    --background-accent: #f0eeea;
+    --border-color: #e8e6e2;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.12);
+    --section-green: #ccded1;
+    --section-green-light: #e8f0eb;
     --border-radius: 4px;
     --transition: all 0.2s ease;
 }
@@ -293,32 +295,90 @@ p {
 .hero {
     background: var(--background-light);
     color: var(--text-dark);
-    padding: 8rem 0 6rem 0;
-    text-align: center;
+    padding: 6rem 0 0 0;
+    text-align: left;
     border-bottom: 1px solid var(--border-color);
     position: relative;
     min-height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    justify-content: flex-start;
     width: 100%;
+    overflow: hidden;
 }
 
+/* Left-align hero container so text sits on the left */
+.hero .container {
+    margin-left: 0;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
 
+/* Full-width bottom fade so text is readable edge to edge */
+.hero::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 45%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Hero background slideshow - all images from images/ folder */
+.hero-bg-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+.hero-bg-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero-bg-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.35) 35%, transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+}
 
 .hero-content {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 560px;
+    margin: 0;
     position: relative;
     z-index: 3;
     width: 100%;
-    padding: 2rem 0;
+    padding: 1.5rem 0 2.5rem 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 60vh;
-    text-align: center;
+    align-items: flex-start;
+    justify-content: flex-end;
+    text-align: left;
 }
 
 .hero-title {
@@ -339,10 +399,10 @@ p {
 
 .hero-verse {
     margin: 0 0 2rem 0;
-    max-width: 800px;
-    margin-left: auto;
+    max-width: 100%;
+    margin-left: 0;
     margin-right: auto;
-    padding: 0 2rem;
+    padding: 0;
     position: relative;
     z-index: 5;
 }
@@ -355,7 +415,7 @@ p {
     font-family: inherit;
     color: #ffffff;
     font-weight: 600;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 0 3px rgba(0, 0, 0, 1), 0 0 8px rgba(0, 0, 0, 1), 0 2px 4px rgba(0, 0, 0, 1), 0 2px 12px rgba(0, 0, 0, 0.9);
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
@@ -368,27 +428,28 @@ p {
     color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 0 3px rgba(0, 0, 0, 1), 0 0 8px rgba(0, 0, 0, 1), 0 2px 4px rgba(0, 0, 0, 1), 0 2px 12px rgba(0, 0, 0, 0.9);
 }
 
 .hero-subtitle {
     margin-top: 1.5rem;
-    text-align: center;
+    text-align: left;
 }
 
 .hero-subtitle p {
     font-size: 1.1rem;
-    color: #000000;
+    color: #ffffff;
     margin: 0.5rem 0;
     opacity: 1;
     font-weight: 500;
     line-height: 1.4;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 1), 0 0 8px rgba(0, 0, 0, 1), 0 2px 4px rgba(0, 0, 0, 1), 0 2px 12px rgba(0, 0, 0, 0.9);
 }
 
 .hero-subtitle p:first-child {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #000000;
+    color: #ffffff;
 }
 
 .hero-buttons {
@@ -404,11 +465,11 @@ p {
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    color: #000000;
+    color: #ffffff;
     font-size: 2rem;
     cursor: pointer;
     animation: bounce 2s infinite;
-    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.9), 0 2px 8px rgba(0, 0, 0, 0.8);
     z-index: 10;
 }
 
@@ -1291,7 +1352,7 @@ p {
 }
 
 .scroll-arrow:hover {
-    color: #cccccc;
+    color: #f0f0f0;
     transform: translateX(-50%) scale(1.1);
 }
 
@@ -1325,7 +1386,7 @@ p {
 /* Location Section */
 .location-section {
     padding: 5rem 0;
-    background: var(--background-light);
+    background: var(--section-green);
 }
 
 .location-content {
@@ -1391,6 +1452,12 @@ p {
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     object-fit: cover;
+}
+
+/* Broken/failed image - keep layout, optional styling */
+img.img-load-error {
+    min-height: 80px;
+    background: var(--background-gray);
 }
 
 .service-grid {
@@ -1651,6 +1718,7 @@ p {
 /* Welcome Section */
 .welcome {
     padding: 4rem 0;
+    background: var(--section-green-light);
 }
 
 .welcome-content {
@@ -1664,7 +1732,190 @@ p {
     line-height: 1.8;
 }
 
+/* Sunday School Kids Section */
+.sunday-school {
+    padding: 5rem 0;
+    background: var(--section-green);
+    border-top: 1px solid var(--border-color);
+}
 
+.sunday-school-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.sunday-school-text {
+    max-width: 540px;
+}
+
+.sunday-school-intro {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.sunday-school-text p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.sunday-school-text .btn {
+    margin-top: 0.5rem;
+}
+
+.sunday-school-images {
+    min-width: 0;
+}
+
+.sunday-school-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.sunday-school-gallery img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: default;
+}
+
+.sunday-school-gallery img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* 7th image spans or we use 2 rows: 3 + 3 + 1 - so 3 columns, 3 rows with last one spanning or just 3+2+2 */
+.sunday-school-gallery img:nth-child(7) {
+    grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+    .sunday-school-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .sunday-school-images {
+        order: -1;
+    }
+
+    .sunday-school-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    .sunday-school-gallery img {
+        height: 120px;
+    }
+
+    .sunday-school-gallery img:nth-child(7) {
+        grid-column: span 2;
+    }
+}
+
+/* Youth Group Section */
+.youth-group {
+    padding: 5rem 0;
+    background: var(--section-green-light);
+    border-top: 1px solid var(--border-color);
+}
+
+.youth-group-content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.youth-group-text {
+    max-width: 560px;
+}
+
+.youth-group-intro {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.youth-group-schedule {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--primary-color);
+    font-weight: 600;
+}
+
+.youth-group-text p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.youth-group-text .btn {
+    margin-top: 0.5rem;
+}
+
+.youth-group-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.youth-group-icon-wrap {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: var(--section-green);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.youth-group-icon-wrap i {
+    font-size: 3.5rem;
+}
+
+@media (max-width: 768px) {
+    .youth-group-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .youth-group-visual {
+        order: -1;
+    }
+
+    .youth-group-icon-wrap {
+        width: 110px;
+        height: 110px;
+    }
+
+    .youth-group-icon-wrap i {
+        font-size: 2.75rem;
+    }
+}
 
 /* Donation Section */
 .donation {
@@ -1688,7 +1939,7 @@ p {
 /* Calendar Section */
 .calendar-section {
     padding: 4rem 0;
-    background-color: var(--background-light);
+    background-color: var(--section-green);
 }
 
 .page-title {
@@ -1708,16 +1959,17 @@ p {
 }
 
 .calendar-container {
-    background: var(--background-light);
+    background: var(--section-green-light);
     padding: 2rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    border: 2px solid var(--accent-color);
+    border: 2px solid var(--section-green);
 }
 
 /* Sermons Section */
 .sermons-section {
     padding: 4rem 0;
+    background-color: var(--section-green);
 }
 
 .sermons-controls {
@@ -1836,7 +2088,12 @@ p {
 /* Blog Section */
 .blog-section {
     padding: 4rem 0;
-    background-color: var(--background-light);
+    background-color: var(--section-green);
+}
+
+/* Gallery page: content area uses theme */
+.gallery-container {
+    background-color: var(--section-green-light);
 }
 
 .blog-header {
@@ -1912,6 +2169,7 @@ p {
 /* Contact Section */
 .contact-section {
     padding: 4rem 0;
+    background-color: var(--section-green);
 }
 
 .contact-content {

@@ -526,6 +526,10 @@ function initImageModal() {
     const modalCaption = document.getElementById('modalCaption');
     const closeBtn = document.querySelector('.image-modal-close');
 
+    if (!modal || !modalImg || !modalCaption || !closeBtn) {
+        return;
+    }
+
     // Close modal when clicking the close button
     closeBtn.addEventListener('click', () => {
         modal.classList.remove('show');
@@ -556,31 +560,31 @@ function initImageModal() {
 
     // Add click handlers to all slideshow slides to open category modal
     const slideshowSlides = document.querySelectorAll('.slide-card');
-    
-    if (slideshowSlides.length === 0) {
-        return;
-    }
-    
-    slideshowSlides.forEach((slide, index) => {
-        slide.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const category = this.getAttribute('data-category');
-            
-            if (category) {
-                // Redirect to gallery page with category parameter
-                const galleryUrl = `gallery.html?category=${encodeURIComponent(category)}`;
-                window.location.href = galleryUrl;
-            }
+
+    if (slideshowSlides.length > 0) {
+        slideshowSlides.forEach((slide) => {
+            slide.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const category = this.getAttribute('data-category');
+
+                if (category) {
+                    // Redirect to gallery page with category parameter
+                    const galleryUrl = `gallery.html?category=${encodeURIComponent(category)}`;
+                    window.location.href = galleryUrl;
+                }
+            });
         });
-    });
+    }
     
     // Add click handlers to other images on the page (optional)
     const allImages = document.querySelectorAll('img');
     allImages.forEach(img => {
         // Skip small icons and buttons
         if (img.width > 100 && img.height > 100) {
+            // Do not open modal for Sunday School gallery images
+            if (img.closest('.sunday-school')) return;
             img.addEventListener('click', () => {
                 modalImg.src = img.src;
                 modalCaption.textContent = img.alt || 'Image';
@@ -895,7 +899,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initParallaxEffects();
     initPastorBioToggle();
     initImageLoadingEnhancements();
-    initAuthentication(); // Initialize authentication system
 
     initScrollAnimations();
     
@@ -967,249 +970,6 @@ window.churchWebsite = {
     currentLanguage: () => currentLanguage,
     slidePhotos
 };
-
-// Authentication system with server-side validation
-function initAuthentication() {
-    // Check if user is already authenticated
-    const token = localStorage.getItem('authToken');
-    const userRole = localStorage.getItem('userRole');
-    
-    if (token && userRole) {
-        // Verify token with server
-        checkAuthStatus();
-    }
-    // Don't automatically show login modal - wait for user to click login button
-    
-    // Add event listeners for login buttons
-    const loginBtn = document.getElementById('loginBtn');
-    const mainLoginBtn = document.getElementById('mainLoginBtn');
-    
-    if (loginBtn) {
-        console.log('Login button found, adding event listener');
-        loginBtn.addEventListener('click', () => {
-            console.log('Login button clicked!');
-            showLoginModal();
-        });
-    } else {
-        console.log('Login button not found');
-    }
-    
-    if (mainLoginBtn) {
-        console.log('Main login button found, adding event listener');
-        mainLoginBtn.addEventListener('click', () => {
-            console.log('Main login button clicked!');
-            showLoginModal();
-        });
-    } else {
-        console.log('Main login button not found');
-    }
-    
-    // Update UI based on authentication status
-    updateAuthUI();
-}
-
-// Check authentication status with server
-async function checkAuthStatus() {
-    const token = localStorage.getItem('authToken');
-    
-    if (!token) {
-        updateAuthUI();
-        return;
-    }
-    
-    try {
-        const response = await fetch('http://localhost:3000/api/auth/status', {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        
-        const data = await response.json();
-        
-        if (!data.authenticated) {
-            // Token is invalid, clear storage and show login
-            localStorage.removeItem('authToken');
-            localStorage.removeItem('userRole');
-            updateAuthUI();
-        } else {
-            // If authenticated, update UI
-            updateAuthUI();
-        }
-    } catch (error) {
-        console.error('Error checking auth status:', error);
-        // On error, assume not authenticated
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('userRole');
-        showLoginModal();
-    }
-}
-
-// Show login modal
-function showLoginModal() {
-    console.log('showLoginModal called');
-    
-    // Check if modal already exists
-    if (document.getElementById('loginModal')) {
-        console.log('Modal already exists, showing it');
-        document.getElementById('loginModal').style.display = 'block';
-        return;
-    }
-    
-    const modalHtml = `
-        <div class="modal" id="loginModal" style="display: block;">
-            <div class="modal-content">
-                <span class="close" onclick="closeLoginModal()">&times;</span>
-                <h2 data-en="Pastor Login" data-my="ဓမ္မဆရာ ဝင်ရောက်ခြင်း">Pastor Login</h2>
-                
-                <form id="loginForm" class="login-form">
-                    <div class="form-group">
-                        <label for="loginPassword" data-en="Enter 5-Digit Password" data-my="၅ လုံး စကားဝှက် ထည့်သွင်းပါ">Enter 5-Digit Password</label>
-                        <input type="password" id="loginPassword" maxlength="5" pattern="[0-9]{5}" placeholder="54321" required>
-                        <small data-en="Enter a 5-digit number" data-my="၅ လုံး ဂဏန်း ထည့်သွင်းပါ">Enter a 5-digit number</small>
-                    </div>
-                    
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary" data-en="Login" data-my="ဝင်ရောက်ရန်">Login</button>
-                        <button type="button" class="btn btn-secondary" onclick="closeLoginModal()" data-en="Cancel" data-my="ပယ်ဖျက်ရန်">Cancel</button>
-                    </div>
-                </form>
-                
-                <div class="login-info">
-                    <p><strong data-en="Pastor Password:" data-my="ဓမ္မဆရာ စကားဝှက်:">Pastor Password:</strong> 54321</p>
-                    <p data-en="Only pastors can access the management dashboard" data-my="ဓမ္မဆရာများသာ စီမံခန့်ခွဲမှု ဒက်ရှ်ဘုတ်ကို ဝင်ရောက်နိုင်ပါသည်">Only pastors can access the management dashboard</p>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    document.body.insertAdjacentHTML('beforeend', modalHtml);
-    
-    // Handle form submission
-    document.getElementById('loginForm').addEventListener('submit', handleLogin);
-    
-    // Handle password input (only allow numbers)
-    document.getElementById('loginPassword').addEventListener('input', function(e) {
-        e.target.value = e.target.value.replace(/[^0-9]/g, '');
-    });
-}
-
-
-
-// Handle login form submission
-async function handleLogin(e) {
-    e.preventDefault();
-    
-    const password = document.getElementById('loginPassword').value;
-    
-    try {
-        const response = await fetch('http://localhost:3000/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                password: password,
-                role: 'pastor'
-            })
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            // Store authentication token and role
-            localStorage.setItem('authToken', data.token);
-            localStorage.setItem('userRole', data.role);
-            
-            closeLoginModal();
-            showSuccessMessage(data.message);
-            
-            // Redirect to pastor dashboard
-            window.location.href = 'pastor.html';
-        } else {
-            showErrorMessage(data.error || 'Login failed');
-        }
-    } catch (error) {
-        console.error('Login error:', error);
-        showErrorMessage('Network error. Please try again.');
-    }
-}
-
-// Close login modal
-function closeLoginModal() {
-    const modal = document.getElementById('loginModal');
-    if (modal) {
-        modal.remove();
-    }
-}
-
-// Show success message
-function showSuccessMessage(message) {
-    const messageHtml = `
-        <div class="message-popup success" style="position: fixed; top: 20px; right: 20px; background: #28a745; color: white; padding: 1rem; border-radius: 5px; z-index: 1000;">
-            <i class="fas fa-check-circle"></i> ${message}
-        </div>
-    `;
-    document.body.insertAdjacentHTML('beforeend', messageHtml);
-    
-    setTimeout(() => {
-        const messageEl = document.querySelector('.message-popup');
-        if (messageEl) messageEl.remove();
-    }, 3000);
-}
-
-// Show error message
-function showErrorMessage(message) {
-    const messageHtml = `
-        <div class="message-popup error" style="position: fixed; top: 20px; right: 20px; background: #dc3545; color: white; padding: 1rem; border-radius: 5px; z-index: 1000;">
-            <i class="fas fa-exclamation-circle"></i> ${message}
-        </div>
-    `;
-    document.body.insertAdjacentHTML('beforeend', messageHtml);
-    
-    setTimeout(() => {
-        const messageEl = document.querySelector('.message-popup');
-        if (messageEl) messageEl.remove();
-    }, 3000);
-}
-
-
-
-// Check if user is authenticated as pastor
-function isPastorAuthenticated() {
-    const token = localStorage.getItem('authToken');
-    const role = localStorage.getItem('userRole');
-    return token && role === 'pastor';
-}
-
-// Get authentication token
-function getAuthToken() {
-    return localStorage.getItem('authToken');
-}
-
-// Logout function
-async function logout() {
-    const token = localStorage.getItem('authToken');
-    
-    if (token) {
-        try {
-            await fetch('http://localhost:3000/api/auth/logout', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-        } catch (error) {
-            console.error('Logout error:', error);
-        }
-    }
-    
-    // Clear local storage
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userRole');
-    
-    // Redirect to home page
-    window.location.href = 'index.html';
-}
 
 // Navigation functionality
 function initNavigation() {
@@ -1533,6 +1293,59 @@ function getMyanmarTitle(category) {
     return myanmarTitles[category] || category;
 }
 
+// Global image loading enhancements for desktop and mobile
+function initImageLoadingEnhancements() {
+    function enhanceImage(img) {
+        if (!img) return;
+
+        // Do not replace failed images with a placeholder - let them show as broken so paths can be fixed.
+        // Only add a class for styling if desired (e.g. .img-error).
+        if (!img.dataset.fallbackBound) {
+            img.addEventListener('error', function() {
+                img.classList.add('img-load-error');
+            });
+            img.dataset.fallbackBound = 'true';
+        }
+
+        // Critical/above-the-fold: logo and first content images load eagerly
+        var isEager = img.classList.contains('logo-image') || img.classList.contains('pastor-photo') || (img.closest('.top-header') && img.alt && img.alt.toLowerCase().indexOf('logo') !== -1);
+        if (isEager) {
+            img.loading = 'eager';
+            img.decoding = 'sync';
+            if (!img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority', 'high');
+        } else if (!img.loading) {
+            img.loading = 'lazy';
+            img.decoding = 'async';
+        }
+
+        // Hero slideshow uses background images, not img tags - no sizes needed for .hero-bg-slide
+        if (img.closest('.hero-slideshow')) {
+            img.sizes = '(max-width: 480px) 300px, (max-width: 768px) 350px, 400px';
+        }
+    }
+
+    // Enhance all current images
+    document.querySelectorAll('img').forEach(enhanceImage);
+
+    // Observe future images (e.g., gallery content injected on DOMContentLoaded)
+    const observer = new MutationObserver(function(mutations) {
+        for (var i = 0; i < mutations.length; i++) {
+            var mutation = mutations[i];
+            for (var j = 0; j < mutation.addedNodes.length; j++) {
+                var node = mutation.addedNodes[j];
+                if (node.nodeType !== 1) continue;
+                if (node.tagName === 'IMG') {
+                    enhanceImage(node);
+                } else if (node.querySelectorAll) {
+                    node.querySelectorAll('img').forEach(enhanceImage);
+                }
+            }
+        }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+}
+
 // Pastor Bio "See More" functionality
 function initPastorBioToggle() {
     const pastorBio = document.getElementById('pastorBio');
@@ -1592,144 +1405,4 @@ function initPastorBioToggle() {
             seeMoreBtn.textContent = isExpanded ? originalSeeLessText : originalSeeMoreText;
         }
     };
-}
-
-// Global image loading enhancements for desktop and mobile
-function initImageLoadingEnhancements() {
-    function enhanceImage(img) {
-        if (!img) return;
-
-        // Add error fallback for any image on the site
-        if (!img.dataset.fallbackBound) {
-            img.addEventListener('error', () => {
-                if (img.src && !img.src.endsWith('template.png')) {
-                    img.src = 'template.png';
-                }
-            });
-            img.dataset.fallbackBound = 'true';
-        }
-
-        // Critical image: first hero slide image loads eagerly, others lazy
-        const firstHeroImage = document.querySelector('.hero-slideshow .slide-card .slide-image img');
-        const isFirstHero = firstHeroImage && img === firstHeroImage;
-        if (isFirstHero) {
-            img.loading = 'eager';
-            img.decoding = 'sync';
-            img.setAttribute('fetchpriority', 'high');
-        } else if (!img.loading) {
-            img.loading = 'lazy';
-            img.decoding = 'async';
-        }
-
-        // Improve responsiveness for slideshow images
-        if (img.closest('.hero-slideshow')) {
-            img.sizes = '(max-width: 480px) 300px, (max-width: 768px) 350px, 400px';
-        }
-    }
-
-    // Enhance all current images
-    document.querySelectorAll('img').forEach(enhanceImage);
-
-    // Observe future images (e.g., gallery content injected on DOMContentLoaded)
-    const observer = new MutationObserver((mutations) => {
-        for (const mutation of mutations) {
-            mutation.addedNodes.forEach(node => {
-                if (node.nodeType !== 1) return; // ELEMENT_NODE
-                if (node.tagName === 'IMG') {
-                    enhanceImage(node);
-                } else {
-                    node.querySelectorAll && node.querySelectorAll('img').forEach(enhanceImage);
-                }
-            });
-        }
-    });
-
-    observer.observe(document.body, { childList: true, subtree: true });
-}
-
-// Update authentication UI based on login status
-function updateAuthUI() {
-    const token = localStorage.getItem('authToken');
-    const userRole = localStorage.getItem('userRole');
-    const loginBtn = document.getElementById('loginBtn');
-    const mainLoginBtn = document.getElementById('mainLoginBtn');
-    
-    if (token && userRole) {
-        // User is authenticated - show logout button
-        if (loginBtn) {
-            loginBtn.innerHTML = `<i class="fas fa-sign-out-alt"></i> ${userRole === 'pastor' ? 'Pastor Logout' : 'Member Logout'}`;
-            loginBtn.onclick = () => logout();
-            loginBtn.className = 'btn btn-secondary';
-        }
-        
-        if (mainLoginBtn) {
-            mainLoginBtn.innerHTML = `<i class="fas fa-sign-out-alt"></i> ${userRole === 'pastor' ? 'Pastor Logout' : 'Member Logout'}`;
-            mainLoginBtn.onclick = () => logout();
-            mainLoginBtn.className = 'btn btn-secondary';
-        }
-        
-        // Update login section content
-        const loginSection = document.querySelector('.login-section');
-        if (loginSection) {
-            const loginContent = loginSection.querySelector('.login-content');
-            if (loginContent) {
-                loginContent.innerHTML = `
-                    <h2 class="section-title fade-in" data-en="Welcome Back!" data-my="ပြန်လည်ကြိုဆိုပါသည်!">Welcome Back!</h2>
-                    <div class="login-info slide-up">
-                        <p data-en="You are logged in as a ${userRole === 'pastor' ? 'Pastor' : 'Member'}" data-my="သင်သည် ${userRole === 'pastor' ? 'ဓမ္မဆရာ' : 'အဖွဲ့ဝင်'} အဖြစ် ဝင်ရောက်ထားပါသည်">You are logged in as a ${userRole === 'pastor' ? 'Pastor' : 'Member'}</p>
-                        
-                        <div class="login-actions">
-                            ${userRole === 'pastor' ? `
-                                <a href="pastor.html" class="btn btn-primary btn-large" data-en="Go to Pastor Dashboard" data-my="ဓမ္မဆရာ ဒက်ရှ်ဘုတ်သို့ သွားရန်">Go to Pastor Dashboard</a>
-                            ` : ''}
-                            <button class="btn btn-secondary btn-large" onclick="logout()" data-en="Logout" data-my="ထွက်ရန်">Logout</button>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-    } else {
-        // User is not authenticated - show login buttons
-        if (loginBtn) {
-            loginBtn.innerHTML = `<i class="fas fa-sign-in-alt"></i> Login`;
-            loginBtn.onclick = () => showLoginModal();
-            loginBtn.className = 'btn btn-primary';
-        }
-        
-        if (mainLoginBtn) {
-            mainLoginBtn.innerHTML = `<i class="fas fa-sign-in-alt"></i> Login Now`;
-            mainLoginBtn.onclick = () => showLoginModal();
-            mainLoginBtn.className = 'btn btn-primary btn-large';
-        }
-    }
-}
-
-// Logout function
-function logout() {
-    const token = localStorage.getItem('authToken');
-    
-    if (token) {
-        try {
-            fetch('http://localhost:3000/api/auth/logout', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }).catch(error => {
-                console.error('Logout error:', error);
-            });
-        } catch (error) {
-            console.error('Logout error:', error);
-        }
-    }
-    
-    // Clear local storage
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userRole');
-    
-    // Update UI
-    updateAuthUI();
-    
-    // Show success message
-    showSuccessMessage('Logged out successfully!');
 }
