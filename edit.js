@@ -1048,6 +1048,16 @@ async function loadCategories() {
         // Get list of folders from ChurchWebsiteIMG
         const categories = await getCategoryFolders();
         displayCategories(categories);
+        
+        // Update cover photos for categories that have images
+        categories.forEach(category => {
+            const categoryImages = JSON.parse(localStorage.getItem(`gallery_${category.name}`) || '[]');
+            if (categoryImages.length > 0) {
+                const coverPhoto = categoryImages.find(img => img.isCover) || categoryImages[0];
+                updateCategoryCoverPhotoDisplay(category.name, coverPhoto, categoryImages.length);
+            }
+        });
+        
         updateGalleryStats();
     } catch (error) {
         console.error('Error loading categories:', error);
@@ -1106,8 +1116,8 @@ function displayCategories(categories) {
                 <h4>Cover Photo</h4>
                 <div class="cover-photo-current">
                     <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTIwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjZjhmOWZhIi8+CjxwYXRoIGQ9Ik02MCA0MGwyMC0yMGgyMEw2MCA2MEw0MCA0MEw2MCAyMFY0MFoiIGZpbGw9IiNjY2NjY2MiLz4KPC9zdmc+" 
-                         alt="No cover photo" class="cover-photo-preview">
-                    <div class="cover-photo-info">
+                         alt="No cover photo" class="cover-photo-preview" id="coverPreview_${category.name.replace(/\s+/g, '_')}">
+                    <div class="cover-photo-info" id="coverInfo_${category.name.replace(/\s+/g, '_')}">
                         <h4>No Cover Photo Set</h4>
                         <p>Upload images to this category and select one as the cover photo.</p>
                     </div>
@@ -1184,9 +1194,8 @@ function openCategoryGallery(categoryName) {
 
 async function loadCategoryImages(categoryName) {
     try {
-        // This would typically call a backend API to get images from the category folder
-        // For now, we'll simulate empty categories
-        const images = [];
+        // Load images from localStorage (simulating database storage)
+        const images = JSON.parse(localStorage.getItem(`gallery_${categoryName}`) || '[]');
         displayCategoryImages(categoryName, images);
         updateCategoryStats(categoryName, images);
     } catch (error) {
@@ -1211,11 +1220,11 @@ function displayCategoryImages(categoryName, images) {
     
     galleryGrid.innerHTML = images.map((image, index) => `
         <div class="gallery-image-item" data-image="${image.filename}">
-            <img src="${image.path}" alt="${image.filename}">
+            <img src="${image.path}" alt="${image.filename}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTIwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjZjhmOWZhIi8+CjxwYXRoIGQ9Ik02MCA0MGwyMC0yMGgyMEw2MCA2MEw0MCA0MEw2MCAyMFY0MFoiIGZpbGw9IiNjY2NjY2MiLz4KPC9zdmc+'">
             <div class="gallery-image-actions">
-                <button class="gallery-image-action set-cover" 
+                <button class="gallery-image-action set-cover ${image.isCover ? 'active' : ''}" 
                         onclick="setCoverPhoto('${categoryName}', '${image.filename}')" 
-                        title="Set as Cover Photo">
+                        title="${image.isCover ? 'Current Cover Photo' : 'Set as Cover Photo'}">
                     <i class="fas fa-star"></i>
                 </button>
                 <button class="gallery-image-action delete" 
@@ -1224,6 +1233,7 @@ function displayCategoryImages(categoryName, images) {
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
+            ${image.isCover ? '<div class="cover-badge">Cover</div>' : ''}
         </div>
     `).join('');
 }
@@ -1271,19 +1281,106 @@ async function uploadGalleryPhotos(categoryName, fileInput) {
     if (files.length === 0) return;
     
     try {
-        // This would typically call a backend API to upload the files
-        // For now, we'll simulate the upload
-        console.log(`Uploading ${files.length} photos to ${categoryName}:`, files);
+        // Process each uploaded file
+        const uploadedImages = [];
+        let processedCount = 0;
+        const totalFiles = files.length;
         
-        // In a real implementation, this would:
-        // 1. Upload the files to the correct category folder
-        // 2. Update the website code to include the new photos
-        // 3. Refresh the gallery display
+        // Show loading message
+        const loadingMessage = document.createElement('div');
+        loadingMessage.className = 'loading-message';
+        loadingMessage.innerHTML = `
+            <div class="loading-content">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Processing ${totalFiles} image${totalFiles !== 1 ? 's' : ''}...</p>
+            </div>
+        `;
+        document.body.appendChild(loadingMessage);
         
-        alert(`${files.length} images uploaded successfully to ${categoryName}!`);
-        
-        // Refresh the category images
-        loadCategoryImages(categoryName);
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            
+            // Create a unique filename
+            const timestamp = Date.now() + i; // Ensure unique timestamps
+            const filename = `${timestamp}_${file.name}`;
+            
+            // Convert file to data URL for preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    // Create image object for storage
+                    const imageData = {
+                        filename: filename,
+                        originalName: file.name,
+                        category: categoryName,
+                        uploadDate: new Date().toISOString(),
+                        isCover: false, // Will be set to true if this is the first image
+                        path: e.target.result, // Store the actual image data as data URL
+                        dataUrl: e.target.result // Keep reference to data URL
+                    };
+                    
+                    // Store image data in localStorage (simulating database storage)
+                    const existingImages = JSON.parse(localStorage.getItem(`gallery_${categoryName}`) || '[]');
+                    
+                    // If this is the first image, make it the cover photo
+                    if (existingImages.length === 0) {
+                        imageData.isCover = true;
+                    }
+                    
+                    existingImages.push(imageData);
+                    localStorage.setItem(`gallery_${categoryName}`, JSON.stringify(existingImages));
+                    
+                    uploadedImages.push(imageData);
+                    processedCount++;
+                    
+                    // Update loading message
+                    loadingMessage.querySelector('p').textContent = `Processing ${processedCount}/${totalFiles} images...`;
+                    
+                    // If all images are processed, complete the upload
+                    if (processedCount === totalFiles) {
+                        // Remove loading message
+                        document.body.removeChild(loadingMessage);
+                        
+                        // Update the gallery display
+                        displayCategoryImages(categoryName, existingImages);
+                        updateCategoryStats(categoryName, existingImages);
+                        
+                        // Update the main slideshow if this category has a cover photo
+                        updateSlideshowFromCategory(categoryName);
+                        
+                        // Show success message
+                        showSuccessMessage(`${totalFiles} image${totalFiles !== 1 ? 's' : ''} uploaded successfully to ${categoryName}!`);
+                        
+                        // Verify images are actually loaded
+                        verifyImagesLoaded(categoryName, existingImages);
+                        
+                        // Refresh the category images
+                        loadCategoryImages(categoryName);
+                    }
+                } catch (error) {
+                    console.error('Error processing image:', error);
+                    processedCount++;
+                    
+                    if (processedCount === totalFiles) {
+                        document.body.removeChild(loadingMessage);
+                        showErrorMessage(`Error processing some images. ${processedCount - uploadedImages.length} failed to upload.`);
+                    }
+                }
+            };
+            
+            reader.onerror = function() {
+                console.error('Error reading file:', file.name);
+                processedCount++;
+                
+                if (processedCount === totalFiles) {
+                    document.body.removeChild(loadingMessage);
+                    showErrorMessage(`Error reading some files. ${processedCount - uploadedImages.length} failed to upload.`);
+                }
+            };
+            
+            // Read the file as data URL
+            reader.readAsDataURL(file);
+        }
         
     } catch (error) {
         console.error('Error uploading photos:', error);
@@ -1291,29 +1388,97 @@ async function uploadGalleryPhotos(categoryName, fileInput) {
     }
 }
 
+// Function to update the main slideshow when a category gets images
+function updateSlideshowFromCategory(categoryName) {
+    // Get the images for this category
+    const categoryImages = JSON.parse(localStorage.getItem(`gallery_${categoryName}`) || '[]');
+    
+    if (categoryImages.length > 0) {
+        // Find the cover photo (first image with isCover = true, or first image)
+        const coverPhoto = categoryImages.find(img => img.isCover) || categoryImages[0];
+        
+        // Update the slideshow on the main page
+        updateSlideshowCoverPhoto(categoryName, coverPhoto);
+        
+        // Also update the category display in the admin panel
+        updateCategoryCoverPhotoDisplay(categoryName, coverPhoto, categoryImages.length);
+    }
+}
+
+// Function to update slideshow cover photo
+function updateSlideshowCoverPhoto(categoryName, coverPhoto) {
+    // This will be called from the main page to update the slideshow
+    // We'll implement this in index.html
+    console.log(`Updating slideshow for ${categoryName} with cover photo:`, coverPhoto);
+    
+    // Dispatch a custom event that the main page can listen to
+    const event = new CustomEvent('slideshowUpdate', {
+        detail: {
+            category: categoryName,
+            coverPhoto: coverPhoto
+        }
+    });
+    window.dispatchEvent(event);
+}
+
 function setCoverPhoto(categoryName, imageFilename) {
     if (confirm(`Set "${imageFilename}" as the cover photo for ${categoryName}?`)) {
-        // This would typically call a backend API to update the cover photo
-        // For now, we'll simulate the update
-        console.log(`Setting ${imageFilename} as cover photo for ${categoryName}`);
-        
-        alert('Cover photo updated successfully!');
-        
-        // Refresh the category display
-        loadCategoryImages(categoryName);
+        try {
+            // Get current images for this category
+            const images = JSON.parse(localStorage.getItem(`gallery_${categoryName}`) || '[]');
+            
+            // Update cover photo status
+            images.forEach(img => {
+                img.isCover = (img.filename === imageFilename);
+            });
+            
+            // Save updated images
+            localStorage.setItem(`gallery_${categoryName}`, JSON.stringify(images));
+            
+            // Update the main slideshow
+            updateSlideshowFromCategory(categoryName);
+            
+            alert('Cover photo updated successfully!');
+            
+            // Refresh the category display
+            loadCategoryImages(categoryName);
+            
+        } catch (error) {
+            console.error('Error updating cover photo:', error);
+            alert('Error updating cover photo: ' + error.message);
+        }
     }
 }
 
 function deleteImage(categoryName, imageFilename) {
     if (confirm(`Delete "${imageFilename}" from ${categoryName}? This action cannot be undone.`)) {
-        // This would typically call a backend API to delete the image
-        // For now, we'll simulate the deletion
-        console.log(`Deleting ${imageFilename} from ${categoryName}`);
-        
-        alert('Image deleted successfully!');
-        
-        // Refresh the category display
-        loadCategoryImages(categoryName);
+        try {
+            // Get current images for this category
+            let images = JSON.parse(localStorage.getItem(`gallery_${categoryName}`) || '[]');
+            
+            // Remove the image
+            images = images.filter(img => img.filename !== imageFilename);
+            
+            // If we deleted the cover photo and there are other images, set a new cover
+            if (images.length > 0 && !images.some(img => img.isCover)) {
+                images[0].isCover = true;
+            }
+            
+            // Save updated images
+            localStorage.setItem(`gallery_${categoryName}`, JSON.stringify(images));
+            
+            // Update the main slideshow
+            updateSlideshowFromCategory(categoryName);
+            
+            alert('Image deleted successfully!');
+            
+            // Refresh the category display
+            loadCategoryImages(categoryName);
+            
+        } catch (error) {
+            console.error('Error deleting image:', error);
+            alert('Error deleting image: ' + error.message);
+        }
     }
 }
 
@@ -1356,4 +1521,116 @@ function closeNewCategoryModal() {
 
 function closeCategoryGalleryModal() {
     document.getElementById('categoryGalleryModal').style.display = 'none';
+}
+
+// Function to show success messages
+function showSuccessMessage(message) {
+    const successMessage = document.createElement('div');
+    successMessage.className = 'success-message';
+    successMessage.innerHTML = `
+        <div class="success-content">
+            <i class="fas fa-check-circle"></i>
+            <p>${message}</p>
+        </div>
+    `;
+    document.body.appendChild(successMessage);
+    
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+        if (document.body.contains(successMessage)) {
+            document.body.removeChild(successMessage);
+        }
+    }, 5000);
+}
+
+// Function to show error messages
+function showErrorMessage(message) {
+    const errorMessage = document.createElement('div');
+    errorMessage.className = 'error-message';
+    errorMessage.innerHTML = `
+        <div class="error-content">
+            <i class="fas fa-exclamation-circle"></i>
+            <p>${message}</p>
+        </div>
+    `;
+    document.body.appendChild(errorMessage);
+    
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+        if (document.body.contains(errorMessage)) {
+            document.body.removeChild(errorMessage);
+        }
+            }, 5000);
+}
+
+// Function to verify images are actually loaded and displayable
+function verifyImagesLoaded(categoryName, images) {
+    console.log(`Verifying ${images.length} images for category: ${categoryName}`);
+    
+    let loadedCount = 0;
+    let failedCount = 0;
+    
+    images.forEach((image, index) => {
+        const img = new Image();
+        img.onload = function() {
+            loadedCount++;
+            console.log(`✅ Image ${index + 1} loaded successfully: ${image.originalName}`);
+            
+            // If this is the last image, show verification result
+            if (loadedCount + failedCount === images.length) {
+                if (failedCount === 0) {
+                    showSuccessMessage(`All ${loadedCount} images verified and loaded successfully!`);
+                } else {
+                    showErrorMessage(`${loadedCount} images loaded, ${failedCount} failed to load`);
+                }
+            }
+        };
+        
+        img.onerror = function() {
+            failedCount++;
+            console.error(`❌ Image ${index + 1} failed to load: ${image.originalName}`);
+            
+            // If this is the last image, show verification result
+            if (loadedCount + failedCount === images.length) {
+                if (failedCount === 0) {
+                    showSuccessMessage(`All ${loadedCount} images verified and loaded successfully!`);
+                } else {
+                    showErrorMessage(`${loadedCount} images loaded, ${failedCount} failed to load`);
+                }
+            }
+        };
+        
+        // Test the image by setting src
+        img.src = image.path;
+    });
+}
+
+// Function to update cover photo display in the admin panel
+function updateCategoryCoverPhotoDisplay(categoryName, coverPhoto, imageCount) {
+    const categoryId = categoryName.replace(/\s+/g, '_');
+    const coverPreview = document.getElementById(`coverPreview_${categoryId}`);
+    const coverInfo = document.getElementById(`coverInfo_${categoryId}`);
+    
+    if (coverPreview && coverInfo) {
+        if (coverPhoto) {
+            // Update the cover photo preview
+            coverPreview.src = coverPhoto.path;
+            coverPreview.alt = coverPhoto.originalName;
+            
+            // Update the cover photo info
+            coverInfo.innerHTML = `
+                <h4>Cover Photo: ${coverPhoto.originalName}</h4>
+                <p>${imageCount} image${imageCount !== 1 ? 's' : ''} in this category</p>
+            `;
+        } else {
+            // Reset to default state
+            coverPreview.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTIwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjZjhmOWZhIi8+CjxwYXRoIGQ9Ik02MCA0MGwyMC0yMGgyMEw2MCA2MEw0MCA0MEw2MCAyMFY0MFoiIGZpbGw9IiNjY2NjY2MiLz4KPC9zdmc+';
+            coverPreview.alt = 'No cover photo';
+            
+            coverInfo.innerHTML = `
+                <h4>No Cover Photo Set</h4>
+                <p>Upload images to this category and select one as the cover photo.</p>
+            `;
+        }
+    }
 }

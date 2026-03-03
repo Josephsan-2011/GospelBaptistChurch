@@ -60,21 +60,6 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .slide-card {
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .slide-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-        
-        .slide-card:active {
-            transform: translateY(-2px);
-        }
-    </style>
     
     <!-- Structured Data for Local Business -->
     <script type="application/ld+json">
@@ -160,7 +145,7 @@
     <header class="top-header">
         <div class="container">
             <div class="logo">
-                <img src="gbclogos.png" alt="Gospel Baptist Church Logo" class="logo-image">
+                <img src="gbclogos.png" alt="Gospel Baptist Church Logo" class="logo-image" loading="eager" decoding="sync">
                 <h1 class="logo-text" data-en="GBC – Gospel Baptist Church" data-my="GBC – သတင်းကောင်းနှစ်ခြင်းအသင်းတော်">GBC – Gospel Baptist Church</h1>
             </div>
         </div>
@@ -175,16 +160,11 @@
                 <li><a href="sermons.html" class="nav-link" data-en="Sermons" data-my="ဓမ္မဟောကြားချက်များ">Sermons</a></li>
                 <li><a href="blog.html" class="nav-link" data-en="News" data-my="ကြေညာချက်">News</a></li>
                 <li><a href="contact.html" class="nav-link" data-en="Contact" data-my="ဆက်သွယ်ရန်">Contact</a></li>
-                <li><a href="edit.html" class="nav-link edit-link" data-en="Edit" data-my="တည်းဖြတ်ရန်">Edit</a></li>
             </ul>
             
             <div class="language-toggle">
                 <button class="lang-btn active" data-lang="en">EN</button>
                 <button class="lang-btn" data-lang="my">MY</button>
-            </div>
-            
-            <div class="auth-buttons">
-                <button class="btn btn-primary" id="loginBtn" data-en="Pastor" data-my="ဝင်ရောက်ရန်">Pastor</button>
             </div>
             
             <div class="mobile-menu-toggle">
@@ -195,80 +175,126 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Photo Gallery -->
+    <!-- Hero Section with background images from images/ folder -->
     <section class="hero">
+        <div class="hero-bg-slideshow" id="heroBgSlideshow" aria-hidden="true">
+            <!-- Slides filled by JS from hero-images.json -->
+        </div>
+        <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-verse">
                     <p class="bible-verse" data-en="Who will have all men to be saved, and to come unto the knowledge of the truth." data-my="လူအပေါင်းတို့သည် ကယ်တင်ခြင်းသို့ရောက်၍ သမ္မာတရားကို သိစေခြင်းငှါ၊ ဘုရားသခင်အလိုတော် ရှိ၏။">Who will have all men to be saved, and to come unto the knowledge of the truth.</p>
                     <p class="verse-reference" data-en="1 Timothy 2:4 KJV" data-my="၁ တိမောသေသြဝါဒစာ ၂ : ၄">1 Timothy 2:4 KJV</p>
-                    <div class="hero-subtitle">
-                        <p data-en="Welcome to GBC – Your Burmese (Myanmar) Church in Des Moines, Iowa" data-my="GBC သို့ ကြိုဆိုပါသည် - ဒက်စ်မွိုင်းန်း၊ အိုင်အိုဝါရှိ သင့်အတွက် ဗမာဘုရားကျောင်း">Welcome to GBC – Your Burmese (Myanmar) Church in Des Moines, Iowa</p>
-                        <p data-en="Join our Burmese (Myanmar) church services every Sunday and Saturday in Des Moines" data-my="ဒက်စ်မွိုင်းန်း၌ တနင်္ဂနွေနှင့် စနေနေ့တိုင်း ကျင်းပသော ဗမာဘုရားကျောင်း ဝတ်ပြုချိန်များသို့ လာပါ">Join our Burmese (Myanmar) church services every Sunday and Saturday in Des Moines</p>
-                    </div>
-                </div>
-                
-                <!-- Hero Slideshow -->
-                <div class="hero-slideshow">
-                    <div class="slideshow-container" id="slideshowContainer">
-                        <!-- Slides will be loaded dynamically from category folders -->
-                        <div class="slide-card active" data-category="Church Baptism" onclick="goToGallery('Church Baptism')">
-                            <div class="slide-image">
-                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTIwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjZjhmOWZhIi8+CjxwYXRoIGQ9Ik02MCA0MGwyMC0yMGgyMEw2MCA2MEw0MCA0MEw2MCAyMFY0MFoiIGZpbGw9IiNjY2NjY2MiLz4KPC9zdmc+" alt="Church Baptism">
-                            </div>
-                            <div class="slide-overlay">
-                                <h3 data-en="Church Baptism" data-my="ဘုရားကျောင်း နှစ်ခြင်းမင်္ဂလာ">Church Baptism</h3>
-                                <p data-en="Click to view more baptism photos" data-my="နှစ်ခြင်းမင်္ဂလာ ဓာတ်ပုံများ ထပ်ကြည့်ရန် နှိပ်ပါ">Click to view more baptism photos</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Slideshow Navigation -->
-                    <div class="slideshow-nav" id="slideshowNav">
-                        <button class="nav-dot active" data-slide="0"></button>
-                    </div>
-                    
-                    <!-- Slideshow Controls -->
-                    <button class="slideshow-control prev">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="slideshow-control next">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
                 </div>
             </div>
         </div>
-                        <div class="scroll-arrow">
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                
-
+        <div class="scroll-arrow">
+            <i class="fas fa-chevron-down"></i>
+        </div>
     </section>
 
-    <!-- Service Times Section -->
-    <section id="services" class="services">
+    <!-- Welcome Message Section -->
+    <section class="welcome">
         <div class="container">
-            <h2 class="section-title fade-in" data-en="Burmese Church Service Times in Des Moines" data-my="ဒက်စ်မွိုင်းန်း၌ ဗမာဘုရားကျောင်း ဝတ်ပြုချိန်များ">Burmese Church Service Times in Des Moines</h2>
-            <div class="service-grid">
-                <div class="service-card fade-in-left">
-                    <div class="service-icon">
-                        <i class="fas fa-sun"></i>
-                    </div>
-                    <h3 data-en="Sunday Burmese Service" data-my="တနင်္ဂနွေ ဗမာဘာသာ ဝတ်ပြုချိန်">Sunday Burmese Service</h3>
-                    <p class="service-time" data-en="1:00 PM - 3:00 PM" data-my="နေ့လည် ၁ နာရီ - ၃ နာရီ">1:00 PM - 3:00 PM</p>
-                    <p class="service-desc" data-en="Main Burmese language worship service with preaching and fellowship in Des Moines" data-my="ဒက်စ်မွိုင်းန်း၌ ဓမ္မဟောကြားချက်နှင့် ညီညွတ်ခြင်းဖြင့် အဓိက ဗမာဘာသာ ဝတ်ပြုချိန်">Main Burmese language worship service with preaching and fellowship in Des Moines</p>
-                </div>
-                <div class="service-card fade-in-right">
-                    <div class="service-icon">
-                        <i class="fas fa-moon"></i>
-                    </div>
-                    <h3 data-en="Saturday Evening Burmese Service" data-my="စနေညနေ ဗမာဘာသာ ဝတ်ပြုချိန်">Saturday Evening Burmese Service</h3>
-                    <p class="service-time" data-en="5:00 PM - 6:00 PM" data-my="နေ ၅ နာရီ - ၆ နာရီ">5:00 PM - 6:00 PM</p>
-                    <p class="service-desc" data-en="Evening prayer and Bible study in Burmese language" data-my="ညနေခင်း ဆုတောင်းခြင်းနှင့် ဗမာဘာသာဖြင့် သမ္မာကျမ်းလေ့လာခြင်း">Evening prayer and Bible study in Burmese language</p>
+            <div class="welcome-content">
+                <h2 class="section-title fade-in" data-en="Welcome Message" data-my="လှိုက်လှဲစွာကြိုဆိုပါ၏">Welcome Message</h2>
+                <div class="welcome-text slide-up">
+                    <p data-en="We are delighted to welcome you to Gospel Baptist Church. Our church is a place where people from all walks of life come together to worship, learn, and grow in their faith. Whether you're a long-time believer or just beginning your spiritual journey, you'll find a warm and welcoming community here." data-my="သတင်းကောင်းနှစ်ခြင်းအသင်းတော်မှ သင့်အား ဝမ်းမြောက်စွာ ကြိုဆိုပါသည်။ကျွန်ုပ်တို့ဘုရားကျောင်းမှာ လူတန်းစားမရွှေး ဘာသာလူမျိုးမရွှေး စုဝေးကာ ကိုးကွယ်ခြင်း၊ သင်ယူခြင်း၊ယုံကြည်ခြင်း အစရှိသည်များကို ကြီးထွားရင့်ကျက်လာစေရန် စုဝေးသော နေရာပင် ဖြစ်ပါသည်။ သင်သည် ဝိညာဉ်ရေးရာ ကြီးထွားရင့်ကျက်သောသူ (သို့)ဝိညာဥ်ရေးရာ ခရီးကို စတင်နေသူဖြစ်စေ ဤနေရာမှ သင့်အား နွေးထွေးစွာ ကြိုဆိုတတ်သောအသိုင်းအဝိုင်းကို တွေ့ရှိမည်ဖြစ်ပါသည်။ ဘုရားသခင်ကို ချီးမွမ်းခြင်း၊ သူ၏ နှုတ်ကပတ်တော်ကို လေ့လာခြင်းနှင့် ခရစ်တော်နှင့်အတူ လျှောက်လှမ်းရာတွင် တစ်ဦးကို တစ်ဦး အားပေးခြင်းဖြင့် စုဝေးကြရန် တနင်္ဂနွေနှင့် စနေနေ့တိုင်း ကျွန်ုပ်တို့နှင့် တွဲလက်မြဲစေလိုပါသည်။ သင့်နှင့်ဆုံ တွေ့ရပြီး ကျွန်ုပ်တို့၏ ဘုရားသခင်အား အတူတကွ ဝတ်ပြုရခြင်းဖြင့် ဝမ်းမြောက်ခြင်းကို ခံစားရရှိရန် မျှော်လင့်ပါသည်။">We are delighted to welcome you to Gospel Baptist Church. Our church is a place where people from all walks of life come together to worship, learn, and grow in their faith. Whether you're a long-time believer or just beginning your spiritual journey, you'll find a warm and welcoming community here.</p>
+                    <p data-en="Join us every Sunday and Saturday as we gather to praise God, study His Word, and encourage one another in our walk with Christ. We look forward to meeting you and sharing in the joy of serving our Lord together." data-my="ဘုရားသခင်ကို ချီးမွမ်းခြင်း၊ သူ၏ နှုတ်ကပတ်တော်ကို လေ့လာခြင်းနှင့် ခရစ်တော်နှင့်အတူ လျှောက်လှမ်းရာတွင် တစ်ဦးကို တစ်ဦး အားပေးခြင်းဖြင့် စုဝေးကြရန် တနင်္ဂနွေနှင့် စနေနေ့တိုင်း ကျွန်ုပ်တို့နှင့် ပူးပေါင်းပါ။ သင့်ကို တွေ့ဆုံရပြီး ကျွန်ုပ်တို့ သခင်ဘုရားကို ကတူတကွ ဝတ်ပြုရခြင်း၏ ဝမ်းမြောက်ခြင်းကို မျှဝေရန် မျှော်လင့်ပါသည်။">Join us every Sunday and Saturday as we gather to praise God, study His Word, and encourage one another in our walk with Christ. We look forward to meeting you and sharing in the joy of serving our Lord together.</p>
                 </div>
             </div>
-            <div class="service-info fade-in">
-                <p data-en="Join our Des Moines GBC community for authentic Burmese church services every week. Our church welcomes everyone to experience the love of Christ in a warm, welcoming environment." data-my="တစ်ပတ်တိုင်း ကျွန်ုပ်တို့ ဒက်စ်မွိုင်းန်း GBC အသိုင်းအဝိုင်းနှင့် ပူးပေါင်းကာ စစ်မှန်သော ဗမာဘုရားကျောင်း ဝတ်ပြုချိန်များကို တွေ့ကြုံကြပါ။ ကျွန်ုပ်တို့ ဘုရားကျောင်းသည် နွေးထွေးပြီး ကြိုဆိုတတ်သော ပတ်ဝန်းကျင်တွင် ခရစ်တော်၏ မေတ္တာကို တွေ့ကြုံရန် လူတိုင်းကို ကြိုဆိုပါသည်။">Join our Des Moines GBC community for authentic Burmese church services every week. Our church welcomes everyone to experience the love of Christ in a warm, welcoming environment.</p>
+        </div>
+    </section>
+
+    <!-- About Pastor Section -->
+    <section class="about-pastor">
+        <div class="container">
+            <h2 class="section-title fade-in" data-en="Our Pastor" data-my="ကျွန်ုပ်တို့၏ ဓမ္မဆရာ">Our Pastor</h2>
+            <div class="pastor-content">
+                <div class="pastor-image fade-in-left">
+                    <img src="pastorpaulface.jpeg" alt="Pastor Paul" class="pastor-photo" loading="eager" decoding="sync">
+                </div>
+                <div class="pastor-info fade-in-right">
+                    <h3 class="pastor-name" data-en="Rev. Dr. Pastor Paul" data-my="ဓမ္မဆရာ ဒေါက်တာ ပေါလ်">Rev. Dr. Pastor Paul</h3>
+                    <div class="pastor-bio-container">
+                        <p class="pastor-description" id="pastorBio" data-en="Rev. Dr. Paul serves as Senior Pastor of Gospel Baptist Church. He is committed to faithfully preaching God's Word, encouraging spiritual growth, and caring for the needs of the congregation and community.
+
+With over 22 years in ministry, he continues to serve with gratitude for God's calling and a heart to see people grow in their relationship with Christ. His desire is to point others to Jesus and to help the church live out the Gospel in everyday life.
+
+Rev. Dr. Paul considers it a privilege to shepherd the church and seeks to honor the Lord in all he does." data-my="ဓမ္မဆရာ ဒေါက်တာ ပေါလ်သည် သတင်းကောင်းနှစ်ခြင်း ဘုရားကျောင်း၏ အကြီးအကဲ ဓမ္မဆရာအဖြစ် ဝတ်ပြုပါသည်။ ဘုရားသခင်၏ နှုတ်ကပတ်တော်ကို သစ္စာရှိစွာ ဟောကြားခြင်း၊ ဝိညာဉ်ရေးရာ ကြီးထွားမှုကို အားပေးခြင်းနှင့် အသင်းတော်နှင့် လူမှုအသိုင်းအဝိုင်း၏ လိုအပ်ချက်များကို စောင့်ရှောက်ခြင်းတို့အတွက် ကတိပြုထားပါသည်။
+
+ဝတ်ပြုခြင်း နှစ် ၂၂ နှစ်ကျော်ဖြင့် ဘုရားသခင်၏ ခေါ်ခြင်းအတွက် ကျေးဇူးတင်လျက် လူများ ခရစ်တော်နှင့် ဆက်ဆံရေး ကြီးထွားသည်ကို မြင်လိုသော နှလုံးသားဖြင့် ဆက်လက်ဝတ်ပြုပါသည်။ သူ၏ ဆန္ဒမှာ အခြားသူများကို ယေရှုထံ ညွှန်ပြရန်နှင့် ဘုရားကျောင်းကို နေ့စဉ်ဘဝတွင် သတင်းကောင်းကို အသက်ရှင်စေရန် ကူညီရန်ဖြစ်ပါသည်။
+
+ဓမ္မဆရာ ဒေါက်တာ ပေါလ်သည် ဘုရားကျောင်းကို ထိန်းကျောင်းရခြင်းကို ဂုဏ်ယူပြီး သူလုပ်ဆောင်သမျှတွင် သခင်ဘုရားကို ဂုဏ်ပြုရန် ရှာမှီးပါသည်။">Rev. Dr. Paul serves as Senior Pastor of Gospel Baptist Church. He is committed to faithfully preaching God's Word, encouraging spiritual growth, and caring for the needs of the congregation and community.
+
+With over 22 years in ministry, he continues to serve with gratitude for God's calling and a heart to see people grow in their relationship with Christ. His desire is to point others to Jesus and to help the church live out the Gospel in everyday life.
+
+Rev. Dr. Paul considers it a privilege to shepherd the church and seeks to honor the Lord in all he does.</p>
+                        <button class="see-more-btn" id="seeMoreBtn" data-en="See More..." data-my="ထပ်ကြည့်ရန်...">See More...</button>
+                    </div>
+                    <div class="pastor-details">
+                        <div class="pastor-detail">
+                            <i class="fas fa-heart"></i>
+                            <span data-en="Married with 4 children" data-my="ကလေး ၄ ယောက်နှင့် အိမ်ထောင်ရှင်">Married with 4 children</span>
+                        </div>
+                        <div class="pastor-detail">
+                            <i class="fas fa-clock"></i>
+                            <span data-en="22+ years of ministry experience" data-my="ဝတ်ပြုခြင်း အတွေ့အကြုံ ၂၂+ နှစ်">22+ years of ministry experience</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sunday School Kids Section -->
+    <section class="sunday-school" id="sunday-school">
+        <div class="container">
+            <h2 class="section-title fade-in" data-en="Our Sunday School Kids" data-my="ကျွန်ုပ်တို့၏ တနင်္ဂနွေကျောင်း ကလေးများ">Our Sunday School Kids</h2>
+            <div class="sunday-school-content">
+                <div class="sunday-school-text fade-in-left">
+                    <p class="sunday-school-intro" data-en="At GBC we love our children and are committed to teaching them the Word of God in a fun, safe environment. Our Sunday School ministry helps kids grow in faith through Bible stories, songs, and activities." data-my="GBC တွင် ကျွန်ုပ်တို့သည် ကလေးများကို ချစ်မြတ်နိုးပြီး ပျော်ရွှင်ပြီး လုံခြုံသော ပတ်ဝန်းကျင်တွင် ဘုရားသခင်၏ နှုတ်ကပတ်တော်ကို သင်ကြားပေးရန် ကတိပြုထားပါသည်။ ကျွန်ုပ်တို့၏ တနင်္ဂနွေကျောင်းဝတ်ပြုခြင်းသည် သမ္မာကျမ်းပုံပြင်များ၊ သီချင်းများနှင့် လုပ်ဆောင်ချက်များမှတစ်ဆင့် ကလေးများ ယုံကြည်ခြင်း၌ ကြီးထွားစေပါသည်။">At GBC we love our children and are committed to teaching them the Word of God in a fun, safe environment. Our Sunday School ministry helps kids grow in faith through Bible stories, songs, and activities.</p>
+                    <p data-en="Children join during our Sunday service. We welcome all ages to learn and worship together." data-my="ကလေးများသည် ကျွန်ုပ်တို့၏ တနင်္ဂနွေ ဝတ်ပြုချိန်အတွင်း ပါဝင်ကြပါသည်။ အသက်အရွယ်အားလုံး အတူတကွ သင်ယူပြီး ကိုးကွယ်ရန် ကြိုဆိုပါသည်။">Children join during our Sunday service. We welcome all ages to learn and worship together.</p>
+                    <a href="contact.html" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i>
+                        <span data-en="Ask About Sunday School" data-my="တနင်္ဂနွေကျောင်းအကြောင်း မေးမြန်းရန်">Ask About Sunday School</span>
+                    </a>
+                </div>
+                <div class="sunday-school-images fade-in-right">
+                    <div class="sunday-school-gallery">
+                        <img src="youngins/children1.jpeg" alt="Sunday School kids at GBC" loading="lazy" decoding="async">
+                        <img src="youngins/children2.jpeg" alt="Sunday School kids at GBC" loading="lazy" decoding="async">
+                        <img src="youngins/children3.jpeg" alt="Sunday School kids at GBC" loading="lazy" decoding="async">
+                        <img src="youngins/children4.jpeg" alt="Sunday School kids at GBC" loading="lazy" decoding="async">
+                        <img src="youngins/children5.jpeg" alt="Sunday School kids at GBC" loading="lazy" decoding="async">
+                        <img src="youngins/children6.jpg" alt="Sunday School kids at GBC" loading="lazy" decoding="async">
+                        <img src="youngins/children7.jpg" alt="Sunday School kids at GBC" loading="lazy" decoding="async">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Youth Group Section -->
+    <section class="youth-group" id="youth-group">
+        <div class="container">
+            <h2 class="section-title fade-in" data-en="Youth Group" data-my="လူငယ်အသင်း">Youth Group</h2>
+            <div class="youth-group-content">
+                <div class="youth-group-text fade-in-left">
+                    <p class="youth-group-intro" data-en="Our youth group brings together teens and young adults to grow in faith, build friendships, and serve together. We meet for Bible study, worship, and fellowship in a space designed for the next generation." data-my="ကျွန်ုပ်တို့ လူငယ်အသင်းသည် ဆယ်ကျော်သက်များနှင့် လူငယ်များကို ယုံကြည်ခြင်း၌ ကြီးထွားရန်၊ မိတ်ဆွေဖွဲ့ရန်နှင့် အတူတကွ ဝတ်ပြုရန် စုစည်းပေးပါသည်။ မျိုးဆက်သစ်အတွက် ဒီဇိုင်းထုတ်ထားသော နေရာတွင် သမ္မာကျမ်းလေ့လာခြင်း၊ ကိုးကွယ်ခြင်းနှင့် ညီညွတ်ခြင်းအတွက် ကျွန်ုပ်တို့ စုဝေးကြပါသည်။">Our youth group brings together teens and young adults to grow in faith, build friendships, and serve together. We meet for Bible study, worship, and fellowship in a space designed for the next generation.</p>
+                    <p class="youth-group-schedule" data-en="Every last week of the month: Youth Program, 3:30 PM – 4:30 PM. Come join us!" data-my="လတိုင်း နောက်ဆုံးအပတ်: လူငယ်အစီအစဉ်၊ နေ့လည် ၃:၃၀ – ၄:၃၀။ ကျွန်ုပ်တို့နှင့် ပူးပေါင်းပါ။">Every last week of the month: Youth Program, 3:30 PM – 4:30 PM. Come join us!</p>
+                    <p data-en="Whether you're in middle school, high school, or college, you're welcome here. Join us to connect with other young believers and grow closer to Christ." data-my="အလယ်တန်း၊ အထက်တန်းသို့မဟုတ် ကောလိပ်တက်နေသည်ဖြစ်စေ ဤနေရာတွင် ကြိုဆိုပါသည်။ အခြား လူငယ်ယုံကြည်သူများနှင့် ခရစ်တော်နှင့် ပိုနီးစပ်စွာ ကြီးထွားရန် ပူးပေါင်းပါ။">Whether you're in middle school, high school, or college, you're welcome here. Join us to connect with other young believers and grow closer to Christ.</p>
+                    <a href="contact.html" class="btn btn-primary">
+                        <i class="fas fa-users"></i>
+                        <span data-en="Join Us — Ask About Youth Group" data-my="ပူးပေါင်းပါ — လူငယ်အသင်းအကြောင်း မေးမြန်းရန်">Join Us — Ask About Youth Group</span>
+                    </a>
+                </div>
+                <div class="youth-group-visual fade-in-right">
+                    <div class="youth-group-icon-wrap">
+                        <i class="fas fa-hands-praying"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -322,87 +348,30 @@
         </div>
     </section>
 
-    <!-- About Pastor Section -->
-    <section class="about-pastor">
+    <!-- Service Times Section -->
+    <section id="services" class="services">
         <div class="container">
-            <h2 class="section-title fade-in" data-en="Our Pastor" data-my="ကျွန်ုပ်တို့၏ ဓမ္မဆရာ">Our Pastor</h2>
-            <div class="pastor-content">
-                <div class="pastor-image fade-in-left">
-                    <img src="pastorpaulface.jpeg" alt="Pastor Paul" class="pastor-photo">
+            <h2 class="section-title fade-in" data-en="Burmese Church Service Times in Des Moines" data-my="ဒက်စ်မွိုင်းန်း၌ ဗမာဘုရားကျောင်း ဝတ်ပြုချိန်များ">Burmese Church Service Times in Des Moines</h2>
+            <div class="service-grid">
+                <div class="service-card fade-in-left">
+                    <div class="service-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3 data-en="Sunday Burmese Service" data-my="တနင်္ဂနွေ ဗမာဘာသာ ဝတ်ပြုချိန်">Sunday Burmese Service</h3>
+                    <p class="service-time" data-en="1:00 PM - 3:00 PM" data-my="နေ့လည် ၁ နာရီ - ၃ နာရီ">1:00 PM - 3:00 PM</p>
+                    <p class="service-desc" data-en="Main Burmese language worship service with preaching and fellowship in Des Moines" data-my="ဒက်စ်မွိုင်းန်း၌ ဓမ္မဟောကြားချက်နှင့် ညီညွတ်ခြင်းဖြင့် အဓိက ဗမာဘာသာ ဝတ်ပြုချိန်">Main Burmese language worship service with preaching and fellowship in Des Moines</p>
                 </div>
-                <div class="pastor-info fade-in-right">
-                    <h3 class="pastor-name" data-en="Rev. Dr. Pastor Paul" data-my="ဓမ္မဆရာ ဒေါက်တာ ပေါလ်">Rev. Dr. Pastor Paul</h3>
-                    <div class="pastor-bio-container">
-                        <p class="pastor-description" id="pastorBio" data-en="Rev. Dr. Pastor Paul serves as the Senior Pastor of Gospel Baptist Church, faithfully leading the congregation with a deep commitment to biblical preaching, discipleship, and community outreach. He is passionate about proclaiming the Word of God with clarity and conviction, equipping believers to grow in their faith and live out the Gospel in everyday life.
-
-He earned his degrees in Theology, Ministry, Biblical Studies, and Evangelism from Shalom Bible College in West Des Moines, IA. With more than 22 years of diverse experience in Christian ministry, Rev. Dr. Pastor Paul brings both wisdom and dedication to his calling.
-
-His ministry is marked by a heart for people, a vision for the church, and an unwavering commitment to glorifying God in all that he does." data-my="ဓမ္မဆရာ ဒေါက်တာ ပေါလ်သည် သတင်းကောင်း ဗတ္တစ်တ် ဘုရားကျောင်း၏ အကြီးအကဲ ဓမ္မဆရာအဖြစ် ဝတ်ပြုပြီး သမ္မာကျမ်းစာ ဟောကြားခြင်း၊ တပည့်တော်ပြုခြင်းနှင့် လူမှုအသိုင်းအဝိုင်း ပြင်ပရောက်ရှိရေးတို့အပေါ် နက်ရှိုင်းသော ကတိကဝတ်ဖြင့် လူအစုအဝေးကို သစ္စာရှိစွာ ဦးဆောင်ပါသည်။ သူသည် ဘုရားသခင်၏ နှုတ်ကပတ်တော်ကို ရှင်းလင်းပြီး ယုံကြည်ခြင်းဖြင့် ဟောကြားရန် စိတ်အားထက်သန်ပြီး ယုံကြည်သူများကို သူတို့၏ ယုံကြည်ခြင်းတွင် ကြီးထွားစေကာ နေ့စဉ်ဘဝတွင် သတင်းကောင်းကို အသက်ရှင်ရန် ပြင်ဆင်ပေးပါသည်။
-
-သူသည် အနောက်ဒက်စ်မွိုင်းန်း၊ အိုင်အေရှိ Shalom Bible College မှ ဘာသာရေး၊ ဝတ်ပြုခြင်း၊ သမ္မာကျမ်းစာ လေ့လာခြင်းနှင့် သတင်းကောင်းဟောကြားခြင်း ဘွဲ့များကို ရရှိခဲ့ပါသည်။ ခရစ်ယာန် ဝတ်ပြုခြင်းတွင် နှစ် ၂၂ နှစ်ကျော် မျိုးစုံသော အတွေ့အကြုံများဖြင့် ဓမ္မဆရာ ဒေါက်တာ ပေါလ်သည် သူ၏ ခေါ်ခြင်းတွင် ဉာဏ်ပညာနှင့် သစ္စာရှိမှုကို ယူဆောင်လာပါသည်။
-
-သူ၏ ဝတ်ပြုခြင်းသည် လူများအပေါ် နှလုံးသား၊ ဘုရားကျောင်းအတွက် မြင်ကွင်းနှင့် သူလုပ်ဆောင်သမျှတွင် ဘုရားသခင်ကို ဘုန်းထင်ရှားစေရန် မတုန်မလှုပ် ကတိကဝတ်ဖြင့် မှတ်သားထားပါသည်။">Rev. Dr. Pastor Paul serves as the Senior Pastor of Gospel Baptist Church, faithfully leading the congregation with a deep commitment to biblical preaching, discipleship, and community outreach. He is passionate about proclaiming the Word of God with clarity and conviction, equipping believers to grow in their faith and live out the Gospel in everyday life.
-
-He earned his degrees in Theology, Ministry, Biblical Studies, and Evangelism from Shalom Bible College in West Des Moines, IA. With more than 22 years of diverse experience in Christian ministry, Rev. Dr. Pastor Paul brings both wisdom and dedication to his calling.
-
-His ministry is marked by a heart for people, a vision for the church, and an unwavering commitment to glorifying God in all that he does.</p>
-                        <button class="see-more-btn" id="seeMoreBtn" data-en="See More..." data-my="ထပ်ကြည့်ရန်...">See More...</button>
+                <div class="service-card fade-in-right">
+                    <div class="service-icon">
+                        <i class="fas fa-moon"></i>
                     </div>
-                    <div class="pastor-details">
-                        <div class="pastor-detail">
-                            <i class="fas fa-graduation-cap"></i>
-                            <span data-en="Theology, Ministry, Biblical Studies, Evangelism" data-my="ဘာသာရေး၊ ဝတ်ပြုခြင်း၊ သမ္မာကျမ်းစာ လေ့လာခြင်း၊ သတင်းကောင်းဟောကြားခြင်း">Theology, Ministry, Biblical Studies, Evangelism</span>
-                        </div>
-                        <div class="pastor-detail">
-                            <i class="fas fa-heart"></i>
-                            <span data-en="Married with 4 children" data-my="ကလေး ၄ ယောက်နှင့် အိမ်ထောင်ရှင်">Married with 4 children</span>
-                        </div>
-                        <div class="pastor-detail">
-                            <i class="fas fa-clock"></i>
-                            <span data-en="22+ years of ministry experience" data-my="ဝတ်ပြုခြင်း အတွေ့အကြုံ ၂၂+ နှစ်">22+ years of ministry experience</span>
-                        </div>
-                    </div>
+                    <h3 data-en="Saturday Evening Burmese Service" data-my="စနေညနေ ဗမာဘာသာ ဝတ်ပြုချိန်">Saturday Evening Burmese Service</h3>
+                    <p class="service-time" data-en="5:00 PM - 6:00 PM" data-my="နေ ၅ နာရီ - ၆ နာရီ">5:00 PM - 6:00 PM</p>
+                    <p class="service-desc" data-en="Evening prayer and Bible study in Burmese language" data-my="ညနေခင်း ဆုတောင်းခြင်းနှင့် ဗမာဘာသာဖြင့် သမ္မာကျမ်းလေ့လာခြင်း">Evening prayer and Bible study in Burmese language</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Welcome Message Section -->
-    <section class="welcome">
-        <div class="container">
-            <div class="welcome-content">
-                <h2 class="section-title fade-in" data-en="Welcome Message" data-my="လှိုက်လှဲစွာကြိုဆိုပါ၏">Welcome Message</h2>
-                <div class="welcome-text slide-up">
-                    <p data-en="We are delighted to welcome you to Gospel Baptist Church. Our church is a place where people from all walks of life come together to worship, learn, and grow in their faith. Whether you're a long-time believer or just beginning your spiritual journey, you'll find a warm and welcoming community here." data-my="သတင်းကောင်းနှစ်ခြင်းအသင်းတော်မှ သင့်အား ဝမ်းမြောက်စွာ ကြိုဆိုပါသည်။ကျွန်ုပ်တို့ဘုရားကျောင်းမှာ လူတန်းစားမရွှေး ဘာသာလူမျိုးမရွှေး စုဝေးကာ ကိုးကွယ်ခြင်း၊ သင်ယူခြင်း၊ယုံကြည်ခြင်း အစရှိသည်များကို ကြီးထွားရင့်ကျက်လာစေရန် စုဝေးသော နေရာပင် ဖြစ်ပါသည်။ သင်သည် ဝိညာဉ်ရေးရာ ကြီးထွားရင့်ကျက်သောသူ (သို့)ဝိညာဥ်ရေးရာ ခရီးကို စတင်နေသူဖြစ်စေ ဤနေရာမှ သင့်အား နွေးထွေးစွာ ကြိုဆိုတတ်သောအသိုင်းအဝိုင်းကို တွေ့ရှိမည်ဖြစ်ပါသည်။ ဘုရားသခင်ကို ချီးမွမ်းခြင်း၊ သူ၏ နှုတ်ကပတ်တော်ကို လေ့လာခြင်းနှင့် ခရစ်တော်နှင့်အတူ လျှောက်လှမ်းရာတွင် တစ်ဦးကို တစ်ဦး အားပေးခြင်းဖြင့် စုဝေးကြရန် တနင်္ဂနွေနှင့် စနေနေ့တိုင်း ကျွန်ုပ်တို့နှင့် တွဲလက်မြဲစေလိုပါသည်။ သင့်နှင့်ဆုံ တွေ့ရပြီး ကျွန်ုပ်တို့၏ ဘုရားသခင်အား အတူတကွ ဝတ်ပြုရခြင်းဖြင့် ဝမ်းမြောက်ခြင်းကို ခံစားရရှိရန် မျှော်လင့်ပါသည်။">We are delighted to welcome you to Gospel Baptist Church. Our church is a place where people from all walks of life come together to worship, learn, and grow in their faith. Whether you're a long-time believer or just beginning your spiritual journey, you'll find a warm and welcoming community here.</p>
-                    <p data-en="Join us every Sunday and Saturday as we gather to praise God, study His Word, and encourage one another in our walk with Christ. We look forward to meeting you and sharing in the joy of serving our Lord together." data-my="ဘုရားသခင်ကို ချီးမွမ်းခြင်း၊ သူ၏ နှုတ်ကပတ်တော်ကို လေ့လာခြင်းနှင့် ခရစ်တော်နှင့်အတူ လျှောက်လှမ်းရာတွင် တစ်ဦးကို တစ်ဦး အားပေးခြင်းဖြင့် စုဝေးကြရန် တနင်္ဂနွေနှင့် စနေနေ့တိုင်း ကျွန်ုပ်တို့နှင့် ပူးပေါင်းပါ။ သင့်ကို တွေ့ဆုံရပြီး ကျွန်ုပ်တို့ သခင်ဘုရားကို ကတူတကွ ဝတ်ပြုရခြင်း၏ ဝမ်းမြောက်ခြင်းကို မျှဝေရန် မျှော်လင့်ပါသည်။">Join us every Sunday and Saturday as we gather to praise God, study His Word, and encourage one another in our walk with Christ. We look forward to meeting you and sharing in the joy of serving our Lord together.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Login Section -->
-    <section class="login-section">
-        <div class="container">
-            <div class="login-content">
-                <h2 class="section-title fade-in" data-en="Pastor Access" data-my="ဓမ္မဆရာ ဝင်ရောက်ခြင်း">Pastor Access</h2>
-                <div class="login-info slide-up">
-                    <p data-en="Pastors can access the management dashboard to manage sermons, news, calendar events, and website content." data-my="ဓမ္မဆရာများသည် ဓမ္မဟောကြားချက်များ၊ သတင်းများ၊ က္ခဒိန်အစီအစဉ်များနှင့် ဝဘ်ဆိုက် အကြောင်းအရာများကို စီမံခန့်ခွဲရန် စီမံခန့်ခွဲမှု ဒက်ရှ်ဘုတ်ကို ဝင်ရောက်နိုင်ပါသည်။">Pastors can access the management dashboard to manage sermons, news, calendar events, and website content.</p>
-                    
-                    <div class="login-features">
-                        <div class="feature-item">
-                            <i class="fas fa-cross"></i>
-                            <div>
-                                <h4 data-en="Pastor Dashboard" data-my="ဓမ္မဆရာ ဒက်ရှ်ဘုတ်">Pastor Dashboard</h4>
-                                <p data-en="Manage sermons, news, calendar events, and website content" data-my="ဓမ္မဟောကြားချက်များ၊ သတင်းများ၊ က္ခဒိန်အစီအစဉ်များနှင့် ဝဘ်ဆိုက် အကြောင်းအရာများကို စီမံခန့်ခွဲရန်">Manage sermons, news, calendar events, and website content</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="login-actions">
-                        <button class="btn btn-primary btn-large" id="mainLoginBtn" data-en="Pastor" data-my="ယခု ဝင်ရောက်ရန်">Pastor</button>
-                        <p class="login-note" data-en="Use the pastor password provided by church administration" data-my="ဘုရားကျောင်း အုပ်ချုပ်ရေးမှ ပေးထားသော ဓမ္မဆရာ စကားဝှက်ကို အသုံးပြုပါ">Use the pastor password provided by church administration</p>
-                    </div>
-                </div>
+            <div class="service-info fade-in">
+                <p data-en="Join our Des Moines GBC community for authentic Burmese church services every week. Our church welcomes everyone to experience the love of Christ in a warm, welcoming environment." data-my="တစ်ပတ်တိုင်း ကျွန်ုပ်တို့ ဒက်စ်မွိုင်းန်း GBC အသိုင်းအဝိုင်းနှင့် ပူးပေါင်းကာ စစ်မှန်သော ဗမာဘုရားကျောင်း ဝတ်ပြုချိန်များကို တွေ့ကြုံကြပါ။ ကျွန်ုပ်တို့ ဘုရားကျောင်းသည် နွေးထွေးပြီး ကြိုဆိုတတ်သော ပတ်ဝန်းကျင်တွင် ခရစ်တော်၏ မေတ္တာကို တွေ့ကြုံရန် လူတိုင်းကို ကြိုဆိုပါသည်။">Join our Des Moines GBC community for authentic Burmese church services every week. Our church welcomes everyone to experience the love of Christ in a warm, welcoming environment.</p>
             </div>
         </div>
     </section>
@@ -457,107 +426,53 @@ His ministry is marked by a heart for people, a vision for the church, and an un
 
     <script src="script.js"></script>
     <script>
-        // Function to navigate to gallery with category
-        function goToGallery(category) {
-            window.location.href = `gallery.html?category=${encodeURIComponent(category)}`;
+      (function() {
+        // Resolve base URL so images work when opened as file:// or from a subpath (e.g. GitHub Pages)
+        var base = (function() {
+          var href = window.location.href;
+          var lastSlash = href.lastIndexOf('/');
+          return lastSlash >= 0 ? href.substring(0, lastSlash + 1) : href + '/';
+        })();
+
+        function resolveUrl(path) {
+          if (!path || path.indexOf('http') === 0 || path.indexOf('data:') === 0 || path.indexOf('//') === 0) return path;
+          return base + path;
         }
 
-        // Load slideshow from category folders
-        async function loadSlideshowFromCategories() {
-            try {
-                const categories = [
-                    'Church Baptism',
-                    'Church Camp', 
-                    'Church General Photos',
-                    'Church Holidays',
-                    'Church Mother & Father Day',
-                    'Church Picnic',
-                    'Church Sunday School',
-                    'Pastor Paul Family'
-                ];
-                
-                const slideshowContainer = document.getElementById('slideshowContainer');
-                const slideshowNav = document.getElementById('slideshowNav');
-                
-                // Clear existing slides
-                slideshowContainer.innerHTML = '';
-                slideshowNav.innerHTML = '';
-                
-                // Create slides for each category
-                categories.forEach((category, index) => {
-                    const slideCard = document.createElement('div');
-                    slideCard.className = `slide-card ${index === 0 ? 'active' : ''}`;
-                    slideCard.setAttribute('data-category', category);
-                    slideCard.onclick = () => goToGallery(category);
-                    
-                    slideCard.innerHTML = `
-                        <div class="slide-image">
-                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTIwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjZjhmOWZhIi8+CjxwYXRoIGQ9Ik02MCA0MGwyMC0yMGgyMEw2MCA2MEw0MCA0MEw2MCAyMFY0MFoiIGZpbGw9IiNjY2NjY2MiLz4KPC9zdmc+" alt="${category}">
-                        </div>
-                        <div class="slide-overlay">
-                            <h3 data-en="${category}" data-my="${category}">${category}</h3>
-                            <p data-en="Click to view photos" data-my="ဓာတ်ပုံများကို ကြည့်ရှုရန် နှိပ်ပါ">Click to view photos</p>
-                        </div>
-                    `;
-                    
-                    slideshowContainer.appendChild(slideCard);
-                    
-                    // Create navigation dot
-                    const navDot = document.createElement('button');
-                    navDot.className = `nav-dot ${index === 0 ? 'active' : ''}`;
-                    navDot.setAttribute('data-slide', index);
-                    navDot.onclick = () => showSlide(index);
-                    slideshowNav.appendChild(navDot);
-                });
-                
-                // Initialize slideshow functionality
-                initSlideshow();
-                
-            } catch (error) {
-                console.error('Error loading slideshow:', error);
-            }
-        }
-
-        function showSlide(index) {
-            const slides = document.querySelectorAll('.slide-card');
-            const dots = document.querySelectorAll('.nav-dot');
-            
-            // Remove active class from all slides and dots
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            // Add active class to current slide and dot
-            slides[index].classList.add('active');
-            dots[index].classList.add('active');
-        }
-
-        function initSlideshow() {
-            let currentSlide = 0;
-            const slides = document.querySelectorAll('.slide-card');
-            const dots = document.querySelectorAll('.nav-dot');
-            
-            // Auto-advance slides
-            setInterval(() => {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-            }, 5000);
-            
-            // Previous/Next button functionality
-            document.querySelector('.slideshow-control.prev').onclick = () => {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                showSlide(currentSlide);
-            };
-            
-            document.querySelector('.slideshow-control.next').onclick = () => {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-            };
-        }
-
-        // Load slideshow when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            loadSlideshowFromCategories();
+        // Fix all img src so they load regardless of how the page was opened
+        document.querySelectorAll('img[src]').forEach(function(img) {
+          var s = img.getAttribute('src');
+          if (s) img.src = resolveUrl(s);
         });
+
+        var container = document.getElementById('heroBgSlideshow');
+        if (!container) return;
+        var fallbackPaths = [
+          "compressed/churchbaptism1.jpg", "compressed/churchbaptism2.jpg", "compressed/churchbaptism3.jpg",
+          "compressed/IMG_20250811_112730.jpg", "compressed/IMG_20250811_113351.jpg", "compressed/IMG_20250811_113656 (1).jpg"
+        ];
+        function buildSlides(paths) {
+          if (!paths.length) return;
+          paths.forEach(function(path, i) {
+            var slide = document.createElement('div');
+            slide.className = 'hero-bg-slide' + (i === 0 ? ' active' : '');
+            slide.style.backgroundImage = 'url("' + resolveUrl(path).replace(/"/g, '%22') + '")';
+            container.appendChild(slide);
+          });
+          var slides = container.querySelectorAll('.hero-bg-slide');
+          var idx = 0;
+          setInterval(function() {
+            slides[idx].classList.remove('active');
+            idx = (idx + 1) % slides.length;
+            slides[idx].classList.add('active');
+          }, 5000);
+        }
+        fetch(resolveUrl('hero-images.json')).then(function(r) { return r.ok ? r.json() : []; }).catch(function() { return []; }).then(function(paths) {
+          var list = paths && paths.length ? paths : fallbackPaths;
+          list = list.map(function(p) { return p; });
+          buildSlides(list);
+        });
+      })();
     </script>
 </body>
 </html>

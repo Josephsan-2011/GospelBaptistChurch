@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .gallery-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
+            background: var(--section-green);
+            color: var(--text-dark);
             padding: 3rem 0;
             text-align: center;
         }
@@ -22,16 +22,17 @@
         
         .gallery-subtitle {
             font-size: 1.2rem;
-            opacity: 0.9;
+            opacity: 0.85;
             margin-bottom: 2rem;
+            color: var(--text-gray);
         }
         
         .back-button {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+            background: rgba(0, 0, 0, 0.08);
+            color: var(--text-dark);
             padding: 0.75rem 1.5rem;
             border-radius: 50px;
             text-decoration: none;
@@ -40,7 +41,7 @@
         }
         
         .back-button:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.12);
             transform: translateY(-2px);
         }
         
@@ -173,7 +174,6 @@
                 <li><a href="sermons.html" class="nav-link">Sermons</a></li>
                 <li><a href="blog.html" class="nav-link">Blog</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
-                <li><a href="edit.html" class="nav-link edit-link">Edit</a></li>
             </ul>
         </div>
     </nav>
@@ -287,21 +287,14 @@
         }
         
         function getCategoryPhotos(category) {
-            // This function will dynamically load images from category folders
-            // In a real implementation, this would scan the ChurchWebsiteIMG folder structure
-            // For now, we'll return an empty array for all categories
-            const categoryPhotos = {
-                'Church Baptism': [],
-                'Church Camp': [],
-                'Church General Photos': [],
-                'Church Holidays': [],
-                'Church Mother & Father Day': [],
-                'Church Picnic': [],
-                'Church Sunday School': [],
-                'Pastor Paul Family': []
-            };
-            
-            return categoryPhotos[category] || [];
+            // Load images from localStorage (simulating database storage)
+            try {
+                const images = JSON.parse(localStorage.getItem(`gallery_${category}`) || '[]');
+                return images.map(img => img.path);
+            } catch (error) {
+                console.error('Error loading category photos:', error);
+                return [];
+            }
         }
 
         // Function to dynamically load images from category folders

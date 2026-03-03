@@ -605,6 +605,94 @@
             background: rgba(220, 53, 69, 1);
         }
 
+        .cover-badge {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: rgba(40, 167, 69, 0.9);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .gallery-image-action.set-cover.active {
+            background: rgba(40, 167, 69, 1);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Loading, Success, and Error Messages */
+        .loading-message,
+        .success-message,
+        .error-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            animation: slideInRight 0.3s ease-out;
+        }
+        
+        .loading-message {
+            background: #007bff;
+            color: white;
+        }
+        
+        .success-message {
+            background: #28a745;
+            color: white;
+        }
+        
+        .error-message {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .loading-content,
+        .success-content,
+        .error-content {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            gap: 12px;
+        }
+        
+        .loading-content i,
+        .success-content i,
+        .error-content i {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .loading-content p,
+        .success-content p,
+        .error-content p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
         .upload-section {
             border: 2px dashed #ccc;
             border-radius: 8px;
