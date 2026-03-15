@@ -206,7 +206,7 @@ const translations = {
         'Contact Us': 'ကျွန်ုပ်တို့ကို ဆက်သွယ်ပါ',
         'Get in Touch': 'ဆက်သွယ်ရန်',
         'We\'d love to hear from you. Please feel free to reach out to us with any questions, prayer requests, or to learn more about our church.': 'ကျွန်ုပ်တို့သည် သင့်ထံမှ ကြားရရန် လိုလားပါသည်။ မေးခွန်းများ၊ ဆုတောင်းခြင်း တောင်းဆိုမှုများ သို့မဟုတ် ကျွန်ုပ်တို့ ဘုရားကျောင်းအကြောင်း ပိုမိုလေ့လာရန် ကျွန်ုပ်တို့ကို ဆက်သွယ်ရန် ဝမ်းမြောက်ပါသည်။',
-        'Send us a Message': 'ကျွန်ုပ်တို့ထံ မက်ဆေ့ချ် ပို့ပါ',
+        'Send us a Message': 'ကျွန်ပ်တို့ထံစာပေးပို့ရန်',
         'Email': 'အီးမေးလ်',
         'Phone': 'ဖုန်း',
         'Office Hours': 'ရုံးချိန်',
@@ -583,8 +583,6 @@ function initImageModal() {
     allImages.forEach(img => {
         // Skip small icons and buttons
         if (img.width > 100 && img.height > 100) {
-            // Do not open modal for Sunday School gallery images
-            if (img.closest('.sunday-school')) return;
             img.addEventListener('click', () => {
                 modalImg.src = img.src;
                 modalCaption.textContent = img.alt || 'Image';
