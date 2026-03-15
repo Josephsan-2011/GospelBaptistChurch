@@ -67,13 +67,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const calendarEl = document.getElementById('calendar');
     if (!calendarEl) return;
 
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
+        headerToolbar: isMobile
+            ? { left: 'prev,today', center: 'title', right: 'next' }
+            : {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
         locale: 'en',
         events: sampleEvents,
         eventClick: function(info) {
