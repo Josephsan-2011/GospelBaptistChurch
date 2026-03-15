@@ -110,6 +110,11 @@ p {
     font-size: 1.1rem;
 }
 
+/* Wrapper for header + nav (single row on mobile) */
+.header-nav-row {
+    position: relative;
+}
+
 /* Top Header with Logo */
 .top-header {
     background: var(--background-light);
@@ -345,7 +350,7 @@ p {
     right: 0;
     bottom: 0;
     background-size: cover;
-    background-position: right center;
+    background-position: center center;
     background-repeat: no-repeat;
     opacity: 0;
     transition: opacity 1s ease-in-out;
@@ -1966,6 +1971,181 @@ img.img-load-error {
     border: 2px solid var(--section-green);
 }
 
+/* Calendar: prev/next month arrows – clear and on-theme */
+.calendar-container .fc .fc-prev-button,
+.calendar-container .fc .fc-next-button {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    padding: 0.5rem !important;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color) !important;
+    background: var(--section-green-light) !important;
+    color: var(--primary-color) !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+    box-shadow: none !important;
+}
+.calendar-container .fc .fc-prev-button:focus,
+.calendar-container .fc .fc-next-button:focus {
+    box-shadow: 0 0 0 2px var(--background-light), 0 0 0 4px var(--primary-color);
+}
+.calendar-container .fc .fc-prev-button:hover,
+.calendar-container .fc .fc-next-button:hover {
+    background: var(--primary-color) !important;
+    color: var(--background-light) !important;
+    border-color: var(--primary-color) !important;
+}
+.calendar-container .fc .fc-prev-button .fc-icon,
+.calendar-container .fc .fc-next-button .fc-icon {
+    font-size: 1.125rem;
+    margin: 0;
+}
+.calendar-container .fc .fc-prev-button svg,
+.calendar-container .fc .fc-next-button svg {
+    width: 1.125rem;
+    height: 1.125rem;
+}
+.calendar-container .fc .fc-prev-button .fc-icon::before,
+.calendar-container .fc .fc-next-button .fc-icon::before {
+    font-weight: bold;
+}
+.calendar-container .fc .fc-today-button {
+    border-radius: 999px;
+    border: 2px solid var(--primary-color) !important;
+    background: var(--section-green-light) !important;
+    color: var(--primary-color) !important;
+    padding: 0.5rem 1rem !important;
+    font-weight: 600;
+}
+.calendar-container .fc .fc-today-button:hover {
+    background: var(--primary-color) !important;
+    color: var(--background-light) !important;
+}
+
+/* Calendar page: mobile view */
+@media (max-width: 768px) {
+    .calendar-section {
+        padding: 1.5rem 0 2rem;
+    }
+    
+    .calendar-section .page-title {
+        font-size: 1.75rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .calendar-controls {
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .calendar-controls .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem 1rem;
+    }
+    
+    .calendar-container {
+        padding: 1rem;
+        margin: 0 -0.5rem;
+        border-radius: 12px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .calendar-container .fc {
+        min-width: 280px;
+    }
+    
+    /* FullCalendar toolbar: month title on top, then Prev + Today + Next on one row */
+    .calendar-container .fc .fc-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding: 0.5rem 0;
+    }
+    
+    .calendar-container .fc .fc-toolbar-chunk {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    /* Month/year title: full width on first row */
+    .calendar-container .fc .fc-toolbar-chunk:nth-child(2) {
+        width: 100%;
+        justify-content: center;
+        order: 0;
+    }
+    
+    /* Prev + Today: left side of second row */
+    .calendar-container .fc .fc-toolbar-chunk:first-child {
+        justify-content: flex-start;
+        order: 1;
+    }
+    
+    /* Next (and view switcher on desktop): right side of second row */
+    .calendar-container .fc .fc-toolbar-chunk:last-child {
+        justify-content: flex-end;
+        order: 2;
+    }
+    
+    .calendar-container .fc .fc-toolbar-title {
+        font-size: 1.1rem;
+        margin: 0;
+    }
+    
+    .calendar-container .fc .fc-button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+    }
+    
+    .calendar-container .fc .fc-button .fc-icon {
+        font-size: 0.875rem;
+    }
+    
+    .calendar-container .fc .fc-daygrid-day-number {
+        font-size: 0.8rem;
+        padding: 2px 4px;
+    }
+    
+    .calendar-container .fc .fc-daygrid-event {
+        font-size: 0.7rem;
+        padding: 1px 4px;
+    }
+    
+    .calendar-container .fc .fc-col-header-cell-cushion {
+        font-size: 0.75rem;
+        padding: 4px 2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-section {
+        padding: 1rem 0 1.5rem;
+    }
+    
+    .calendar-section .page-title {
+        font-size: 1.5rem;
+    }
+    
+    .calendar-container {
+        padding: 0.75rem;
+    }
+    
+    .calendar-container .fc .fc-toolbar-title {
+        font-size: 1rem;
+    }
+    
+    .calendar-container .fc .fc-button {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+}
+
 /* Sermons Section */
 .sermons-section {
     padding: 4rem 0;
@@ -2380,13 +2560,132 @@ img.img-load-error {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .header .container {
-        flex-wrap: wrap;
-        gap: 1rem;
+    /* Mobile: logo, language switch, and menu in one row */
+    .header-nav-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        padding: 0.75rem 1rem;
+        background: var(--background-light);
+        border-bottom: 1px solid var(--border-color);
+        gap: 0.75rem;
+    }
+    
+    .top-header {
+        flex: 0 0 auto;
+        padding: 0;
+        background: transparent;
+        border-bottom: none;
+        z-index: 1002;
+    }
+    
+    .top-header .container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        max-width: none;
+        width: auto;
+        box-sizing: border-box;
+    }
+    
+    .logo {
+        gap: 0.65rem;
+        align-items: center;
+        flex-shrink: 0;
+        max-width: 100%;
+    }
+    
+    .logo-image {
+        height: 52px;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+    }
+    
+    /* Mobile: show only logo, hide h1 title */
+    .logo-text {
+        display: none;
+    }
+    
+    .navbar {
+        flex: 1;
+        min-width: 0;
+        position: relative;
+        top: auto;
+        padding: 0;
+        background: transparent;
+        border-bottom: none;
+        box-shadow: none;
+        display: flex;
+        justify-content: flex-end;
     }
     
     .navbar .container {
         position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0;
+        margin: 0;
+        max-width: none;
+        width: 100%;
+        box-sizing: border-box;
+        gap: 0.5rem;
+    }
+    
+    /* Language toggle + menu button: same container, same row on mobile */
+    .nav-controls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+    }
+    
+    /* Language and hamburger: standard dark text on light bar */
+    .navbar .language-toggle .lang-btn {
+        border-color: var(--text-dark);
+        color: var(--text-dark);
+    }
+    
+    .navbar .language-toggle .lang-btn.active,
+    .navbar .language-toggle .lang-btn:hover {
+        background-color: var(--text-dark);
+        color: var(--text-light);
+        border-color: var(--text-dark);
+    }
+    
+    .navbar .mobile-menu-toggle span {
+        background-color: var(--text-dark);
+    }
+    
+    /* Hero: below header and navbar, no overlap */
+    .hero {
+        margin-top: 0;
+        /* Resize hero to image-like aspect ratio (height follows width) */
+        min-height: 0;
+        height: auto;
+        aspect-ratio: 4 / 3;
+    }
+    
+    .hero-bg-slideshow,
+    .hero-bg-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    
+    /* Mobile: full image visible (contain) and stuck to top */
+    .hero-bg-slide {
+        background-size: contain;
+        background-position: center top;
+        background-repeat: no-repeat;
     }
     
     .nav-list {
@@ -2395,20 +2694,19 @@ img.img-load-error {
         top: 100%;
         left: 0;
         right: 0;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin: 0.5rem 0 0;
+        background: var(--background-light);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
         flex-direction: column;
         gap: 0;
-        padding: 0;
-        margin: 0;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.1);
-        border-radius: 0 0 16px 16px;
+        padding: 0.5rem 0;
+        list-style: none;
         overflow: hidden;
-        transform: translateY(-10px);
+        transform: translateY(-8px);
         opacity: 0;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.25s ease, opacity 0.25s ease;
         z-index: 1000;
     }
     
@@ -2420,190 +2718,182 @@ img.img-load-error {
     
     .nav-list li {
         width: 100%;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        margin: 0;
+        padding: 0;
         opacity: 0;
-        transform: translateX(-20px);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-    }
-    
-    .nav-list li::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-        transform: translateX(-100%);
-        transition: transform 0.6s ease;
-    }
-    
-    .nav-list li:hover::before {
-        transform: translateX(100%);
+        transform: translateY(4px);
+        transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease;
     }
     
     .nav-list.active li {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0);
     }
     
-    /* Staggered animation for menu items */
-    .nav-list.active li:nth-child(1) { transition-delay: 0.1s; }
-    .nav-list.active li:nth-child(2) { transition-delay: 0.15s; }
-    .nav-list.active li:nth-child(3) { transition-delay: 0.2s; }
-    .nav-list.active li:nth-child(4) { transition-delay: 0.25s; }
-    .nav-list.active li:nth-child(5) { transition-delay: 0.3s; }
-    .nav-list.active li:nth-child(6) { transition-delay: 0.35s; }
+    .nav-list.active li:nth-child(1) { transition-delay: 0.03s; }
+    .nav-list.active li:nth-child(2) { transition-delay: 0.06s; }
+    .nav-list.active li:nth-child(3) { transition-delay: 0.09s; }
+    .nav-list.active li:nth-child(4) { transition-delay: 0.12s; }
+    .nav-list.active li:nth-child(5) { transition-delay: 0.15s; }
+    .nav-list.active li:nth-child(6) { transition-delay: 0.18s; }
     
-    /* Enhanced slideDown animation */
-    @keyframes slideDown {
-        from {
-            transform: translateY(-30px);
-            opacity: 0;
-            filter: blur(10px);
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-            filter: blur(0);
-        }
+    .nav-list li + li {
+        border-top: 1px solid var(--border-color);
     }
     
-    .nav-list li:last-child {
-        border-bottom: none;
-    }
-    
+    /* Full-width clickable link – minimum 48px touch target */
     .nav-list .nav-link {
-        padding: 1.5rem 2rem;
+        display: flex;
+        align-items: center;
         width: 100%;
+        min-height: 48px;
+        padding: 0 1.25rem;
+        box-sizing: border-box;
         text-align: left;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-dark);
         border-radius: 0;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: #000000;
-        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        transition: background 0.15s ease, color 0.15s ease;
         position: relative;
-        z-index: 1;
     }
     
-    .nav-list .nav-link:hover {
-        background-color: rgba(255, 255, 255, 0.25);
-        transform: translateX(8px);
-        color: #000000;
-        text-shadow: 0 2px 4px rgba(255, 255, 255, 1);
-        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.2);
-    }
-    
+    .nav-list .nav-link:hover,
     .nav-list .nav-link:active {
-        background-color: rgba(255, 255, 255, 0.35);
-        transform: translateX(12px);
-        color: #000000;
-        text-shadow: 0 2px 4px rgba(255, 255, 255, 1);
+        background: var(--section-green-light);
+        color: var(--text-dark);
     }
     
-    /* Add icons to mobile menu items */
+    .nav-list .nav-link.active {
+        background: var(--section-green-light);
+        color: var(--primary-color);
+    }
+    
+    /* Icons – do not block clicks; pointer-events so tap hits the link */
     .nav-list .nav-link::before {
         content: '';
         display: inline-block;
-        width: 24px;
-        height: 24px;
-        margin-right: 18px;
+        width: 22px;
+        height: 22px;
+        margin-right: 14px;
+        flex-shrink: 0;
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        opacity: 1;
-        filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.8));
+        opacity: 0.85;
+        pointer-events: none;
     }
     
     .nav-list .nav-link[href="index.html"]::before {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 24 24'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23333' viewBox='0 0 24 24'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E");
     }
     
     .nav-list .nav-link[href="calendar.html"]::before {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 24 24'%3E%3Cpath d='M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23333' viewBox='0 0 24 24'%3E%3Cpath d='M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z'/%3E%3C/svg%3E");
     }
     
     .nav-list .nav-link[href="sermons.html"]::before {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23333' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E");
     }
     
     .nav-list .nav-link[href="blog.html"]::before {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 24 24'%3E%3Cpath d='M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23333' viewBox='0 0 24 24'%3E%3Cpath d='M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z'/%3E%3C/svg%3E");
     }
     
     .nav-list .nav-link[href="contact.html"]::before {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 24 24'%3E%3Cpath d='M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23333' viewBox='0 0 24 24'%3E%3Cpath d='M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'/%3E%3C/svg%3E");
     }
     
     .nav-list .edit-link::before {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 24 24'%3E%3Cpath d='M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z'/%3E%3C/svg%3E");
     }
     
-    /* Special styling for Edit link to indicate admin function */
     .nav-list .edit-link {
-        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        background: linear-gradient(135deg, #e85555, #d94a1f) !important;
         color: white !important;
-        border-radius: 20px;
-        padding: 0.5rem 1rem;
-        margin: 0 0.25rem;
-        transition: all 0.3s ease;
+        margin: 0.25rem 0.75rem;
+        border-radius: 8px;
+        min-height: 44px;
     }
     
-    .nav-list .edit-link:hover {
-        background: linear-gradient(135deg, #ee5a24, #ff6b6b);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(238, 90, 36, 0.3);
+    .nav-list .edit-link:hover,
+    .nav-list .edit-link:active {
+        background: linear-gradient(135deg, #d94a1f, #e85555) !important;
+        color: white !important;
     }
     
     .nav-list .edit-link.active {
-        background: linear-gradient(135deg, #ee5a24, #ff6b6b);
-        box-shadow: 0 2px 8px rgba(238, 90, 36, 0.4);
+        background: linear-gradient(135deg, #d94a1f, #e85555) !important;
     }
     
-
-    
-    /* Mobile menu animations */
-    @keyframes slideDown {
-        from {
-            transform: translateY(-20px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-    
-    .nav-list.active {
+    /* nav-controls: language toggle + menu in same row */
+    .nav-controls {
         display: flex;
-        transform: translateY(0);
-        opacity: 1;
-        animation: slideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+        z-index: 1001;
     }
     
-    .mobile-menu-toggle {
+    .nav-controls .mobile-menu-toggle {
         display: flex !important;
-        margin-left: auto;
-        z-index: 1001;
         background-color: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 8px;
         padding: 10px;
     }
     
-    .language-toggle {
-        margin-left: 0;
-        margin-right: 1rem;
+    .nav-controls .language-toggle {
+        margin: 0;
         transition: all 0.3s ease;
     }
     
-    .language-toggle .lang-btn {
-        padding: 0.5rem 0.75rem;
+    .nav-controls .language-toggle .lang-btn {
+        padding: 0.55rem 0.9rem;
         font-size: 0.9rem;
+        min-width: 2.5rem;
+    }
+    
+    /* Hero section: height from aspect-ratio, content at bottom */
+    .hero {
+        padding: 5rem 0 2rem 0;
+        align-items: flex-end;
+    }
+    
+    .hero .container {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+    
+    .hero-content {
+        padding: 1rem 0 2rem 0;
+        width: 100%;
+    }
+    
+    .hero-verse {
+        margin: 0 0 1.5rem 0;
+        padding: 0;
+    }
+    
+    .bible-verse {
+        font-size: 1.5rem;
+        line-height: 1.5;
+        margin-bottom: 0.75rem;
+    }
+    
+    .verse-reference {
+        font-size: 0.95rem;
+    }
+    
+    .hero::after {
+        height: 55%;
+    }
+    
+    .scroll-arrow {
+        bottom: 1.25rem;
+        font-size: 1.75rem;
     }
     
     /* Image Modal */
@@ -2860,25 +3150,45 @@ img[width][height]:hover {
         padding: 0 15px;
     }
     
+    /* Single row: logo | language | menu — tighter padding on very small screens */
+    .header-nav-row {
+        padding: 0.6rem 1rem;
+    }
+    
+    .logo-image {
+        height: 44px;
+    }
+    
     .hero {
-        padding: 2rem 0;
+        margin-top: 0;
+        padding: 4rem 0 2rem 0;
+    }
+    
+    .hero .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .hero-verse {
+        margin: 0 0 1.25rem 0;
+    }
+    
+    .bible-verse {
+        font-size: 1.3rem;
+        line-height: 1.45;
+    }
+    
+    .verse-reference {
+        font-size: 0.9rem;
+    }
+    
+    .scroll-arrow {
+        bottom: 1rem;
+        font-size: 1.5rem;
     }
     
     .hero-title {
         font-size: 1.75rem;
-    }
-    
-    .hero-verse {
-        margin: 0 1rem 1.5rem 1rem;
-    }
-    
-    .bible-verse {
-        font-size: 1.4rem;
-        line-height: 1.5;
-    }
-    
-    .verse-reference {
-        font-size: 1rem;
     }
     
     .section-title {
