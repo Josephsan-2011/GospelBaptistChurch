@@ -472,53 +472,6 @@ function initSmoothScrolling() {
     });
 }
 
-// Initialize scroll arrow functionality
-function initScrollArrow() {
-    const scrollArrow = document.querySelector('.scroll-arrow');
-    if (scrollArrow) {
-        scrollArrow.addEventListener('click', function() {
-            const servicesSection = document.getElementById('services');
-            if (servicesSection) {
-                // Custom smooth scroll with gentler easing and duration
-                const targetY = servicesSection.getBoundingClientRect().top + window.pageYOffset;
-                smoothScrollTo(targetY, 1200);
-            }
-        });
-    }
-}
-
-// Smoothly scroll the window to a specific Y position with easing
-function smoothScrollTo(targetY, duration = 1000) {
-    // Respect user reduced motion preference
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
-        window.scrollTo(0, targetY);
-        return;
-    }
-
-    const startY = window.pageYOffset;
-    const distance = targetY - startY;
-    let startTime = null;
-
-    // Ease in-out cubic
-    function ease(t) {
-        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
-
-    function step(timestamp) {
-        if (startTime === null) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = ease(progress);
-        window.scrollTo(0, startY + distance * eased);
-        if (elapsed < duration) {
-            requestAnimationFrame(step);
-        }
-    }
-
-    requestAnimationFrame(step);
-}
-
 // Initialize hero slideshow functionality
 function initImageModal() {
     const modal = document.getElementById('imageModal');
@@ -870,6 +823,32 @@ function initParallaxEffects() {
     });
 }
 
+// Back to top: at top of footer (mobile only), scroll to top on click
+function initBackToTop() {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) {
+        btn = document.createElement('a');
+        btn.id = 'back-to-top';
+        btn.href = '#';
+        btn.className = 'back-to-top';
+        btn.setAttribute('aria-label', 'Back to top');
+        btn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+        var wrap = document.createElement('div');
+        wrap.className = 'back-to-top-row';
+        wrap.appendChild(btn);
+        var container = document.querySelector('.footer .container');
+        if (container) {
+            container.insertBefore(wrap, container.firstChild);
+        } else {
+            document.body.appendChild(btn);
+        }
+    }
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize language toggle
@@ -891,7 +870,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initModals();
     initFormValidation();
     initSmoothScrolling();
-    initScrollArrow();
     initImageModal();
     initHeroSlideshow();
     initParallaxEffects();
@@ -899,7 +877,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initImageLoadingEnhancements();
 
     initScrollAnimations();
-    
+    initBackToTop();
+
     // Start photo slider if on home page
     if (document.querySelector('.photo-slider')) {
         startAutoSlide();

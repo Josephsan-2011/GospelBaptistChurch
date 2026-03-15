@@ -15,8 +15,7 @@
     --text-dark: #1a1a1a;
     --text-light: #ffffff;
     --text-gray: #666666;
-    --background-light: #fdfcfa;
-    --background-gray: #f7f6f3;
+    --background-light: #fdfcfa; 
     --background-accent: #f0eeea;
     --border-color: #e8e6e2;
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -161,6 +160,15 @@ p {
     height: 80px;
     width: auto;
     filter: brightness(1.1) contrast(1.1);
+}
+
+.logo-text-mobile {
+    display: none;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-dark);
+    letter-spacing: -0.025em;
 }
 
 .logo-text {
@@ -377,12 +385,12 @@ p {
 }
 
 .hero-content {
-    max-width: 560px;
+    max-width: 90%;
     margin: 0 auto;
     position: relative;
     z-index: 3;
     width: 100%;
-    padding: 1.5rem 0 2.5rem 0;
+    padding: 14rem 0 2.5rem 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -407,36 +415,94 @@ p {
 }
 
 .hero-verse {
-    margin: 0 auto 2rem 0;
-    max-width: 100%;
-    padding: 0;
+    margin: 0 auto 2rem auto;
+    max-width: 56em;
+    padding: 0 1rem;
     position: relative;
     z-index: 5;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
-/* Responsive verse size so background images stay visible */
 .bible-verse {
-    font-size: clamp(1rem, 4vw, 1.75rem);
-    font-style: normal;
-    margin-bottom: 0.75rem;
+    font-size: clamp(1rem, 2.8vw, 1.5rem);
+    font-style: italic;
+    margin: 0;
     line-height: 1.5;
     font-family: inherit;
-    color: #ffffff;
-    font-weight: 600;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 1), 0 0 8px rgba(0, 0, 0, 1), 0 2px 4px rgba(0, 0, 0, 1), 0 2px 12px rgba(0, 0, 0, 0.9);
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
+    color: #fff;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.6);
+    white-space: normal;
+    flex-shrink: 1;
+    min-width: 0;
 }
 
 .verse-reference {
-    font-size: clamp(0.75rem, 2.2vw, 1.05rem);
+    font-size: clamp(0.8rem, 2vw, 1rem);
     font-weight: 600;
     font-family: inherit;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 1), 0 0 8px rgba(0, 0, 0, 1), 0 2px 4px rgba(0, 0, 0, 1), 0 2px 12px rgba(0, 0, 0, 0.9);
+    color: rgba(255, 255, 255, 0.95);
+    text-transform: none;
+    letter-spacing: 0.02em;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    flex-shrink: 0;
+}
+
+.verse-reference::before {
+    content: ' — ';
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Back to top: row at top of footer, mobile only */
+.back-to-top-row {
+    display: none;
+    width: 100%;
+    padding: 1rem 0 1.25rem 0;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.back-to-top {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    background: var(--section-green);
+    color: var(--text-dark);
+    border-radius: 50%;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    animation: backToTopBounce 2.5s ease-in-out infinite;
+}
+
+.back-to-top:hover {
+    background: var(--section-green-light);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    animation: none;
+    transform: translateY(-4px) scale(1.05);
+}
+
+.back-to-top:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+@keyframes backToTopBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+.back-to-top i {
+    font-size: 1.2rem;
 }
 
 .hero-subtitle {
@@ -2396,6 +2462,50 @@ img.img-load-error {
     color: var(--primary-color);
 }
 
+.address-map-link,
+.phone-link,
+.email-link {
+    color: var(--text-dark);
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary-color);
+    transition: color 0.2s, border-color 0.2s;
+}
+.address-map-link:hover,
+.phone-link:hover,
+.email-link:hover {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.btn-map,
+.btn-call,
+.btn-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #1a1a1a;
+    border: none;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+.btn-map:hover,
+.btn-call:hover,
+.btn-email:hover {
+    background: rgba(255, 255, 255, 0.55);
+    color: #1a1a1a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
 .contact-form-container h2 {
     color: var(--primary-color);
     margin-bottom: 1.5rem;
@@ -2610,9 +2720,12 @@ img.img-load-error {
         object-fit: contain;
     }
     
-    /* Mobile: show only logo, hide h1 title */
+    /* Mobile: show GBC only, hide full title */
     .logo-text {
         display: none;
+    }
+    .logo-text-mobile {
+        display: inline;
     }
     
     .navbar {
@@ -2860,9 +2973,9 @@ img.img-load-error {
         min-width: 2.5rem;
     }
     
-    /* Hero section: centered text, size scales so images visible */
+    /* Hero section: text lower so more image is visible */
     .hero {
-        padding: 5rem 0 2rem 0;
+        padding: 32% 0 1.25rem 0;
         align-items: flex-end;
         justify-content: center;
     }
@@ -2871,29 +2984,48 @@ img.img-load-error {
         padding-left: 1.25rem;
         padding-right: 1.25rem;
         justify-content: center;
+        align-items: center;
     }
     
     .hero-content {
-        padding: 1rem 0 2rem 0;
+        padding: 0 0 0.75rem 0;
         width: 100%;
+        max-width: 100%;
         align-items: center;
+        justify-content: flex-end;
         text-align: center;
     }
     
     .hero-verse {
-        margin: 0 auto 1.5rem 0;
-        padding: 0;
+        margin: 0 auto 0 auto;
+        padding: 0 0.5rem;
+        width: 100%;
+        max-width: 100%;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
         text-align: center;
     }
     
+    .hero-verse .bible-verse,
+    .hero-verse .verse-reference {
+        text-align: center;
+        width: 100%;
+        max-width: 100%;
+    }
+    
     .bible-verse {
-        font-size: clamp(0.95rem, 3.5vw, 1.5rem);
-        line-height: 1.5;
-        margin-bottom: 0.75rem;
+        font-size: clamp(0.95rem, 4vw, 1.35rem);
+        margin-bottom: 0.5rem;
+        line-height: 1.45;
     }
     
     .verse-reference {
-        font-size: clamp(0.7rem, 2vw, 0.95rem);
+        font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+    }
+    
+    .verse-reference::before {
+        content: none;
     }
     
     .hero::after {
@@ -2903,6 +3035,20 @@ img.img-load-error {
     .scroll-arrow {
         bottom: 1.25rem;
         font-size: 1.75rem;
+    }
+    
+    /* Back to top: at top of footer, mobile only */
+    .back-to-top-row {
+        display: block;
+    }
+    
+    .back-to-top {
+        width: 3rem;
+        height: 3rem;
+    }
+    
+    .back-to-top i {
+        font-size: 1.25rem;
     }
     
     /* Image Modal */
@@ -3171,7 +3317,7 @@ img[width][height]:hover {
     
     .hero {
         margin-top: 0;
-        padding: 4rem 0 2rem 0;
+        padding: 30% 0 1rem 0;
     }
     
     .hero .container {
@@ -3180,16 +3326,17 @@ img[width][height]:hover {
     }
     
     .hero-verse {
-        margin: 0 auto 1.25rem 0;
+        margin: 0 auto;
+        padding: 0 0.25rem;
     }
     
     .bible-verse {
-        font-size: clamp(0.9rem, 3vw, 1.25rem);
+        font-size: clamp(0.9rem, 3.5vw, 1.2rem);
         line-height: 1.45;
     }
     
     .verse-reference {
-        font-size: clamp(0.65rem, 1.8vw, 0.85rem);
+        font-size: clamp(0.75rem, 2vw, 0.9rem);
     }
     
     .scroll-arrow {
