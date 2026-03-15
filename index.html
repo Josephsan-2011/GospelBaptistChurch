@@ -177,7 +177,7 @@
         </nav>
     </div>
 
-    <!-- Hero Section with background images from images/ folder -->
+    <!-- Hero Section with background images (root) -->
     <section class="hero">
         <div class="hero-bg-slideshow" id="heroBgSlideshow" aria-hidden="true">
             <!-- Slides filled by JS from hero-images.json -->
@@ -450,8 +450,8 @@ Rev. Dr. Paul considers it a privilege to shepherd the church and seeks to honor
         var container = document.getElementById('heroBgSlideshow');
         if (!container) return;
         var fallbackPaths = [
-          "images/groupphoto1.jpg", "images/groupphoto2.jpg", "images/groupphoto4.jpg",
-          "images/IMG_20250811_112730.jpg", "images/IMG_20250811_113351.jpg", "images/IMG_20250811_113656 (1).jpg"
+          "groupphoto1.jpg", "groupphoto2.jpg", "groupphoto4.jpg",
+          "IMG_20250811_112730.jpg", "IMG_20250811_113351.jpg", "IMG_20250811_113656 (1).jpg"
         ];
         function buildSlides(paths) {
           if (!paths.length) return;
