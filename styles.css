@@ -547,11 +547,11 @@ p {
     z-index: 10;
 }
 
-/* Parallax and Fade Effects */
+/* Parallax and scroll-driven slide-in effects (JS drives transform/opacity from scroll progress) */
 .fade-in {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(48px);
+    transition: transform 0.18s ease-out, opacity 0.18s ease-out;
 }
 
 .fade-in.visible {
@@ -561,8 +561,8 @@ p {
 
 .fade-in-left {
     opacity: 0;
-    transform: translateX(-50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateX(-56px);
+    transition: transform 0.18s ease-out, opacity 0.18s ease-out;
 }
 
 .fade-in-left.visible {
@@ -572,8 +572,8 @@ p {
 
 .fade-in-right {
     opacity: 0;
-    transform: translateX(50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateX(56px);
+    transition: transform 0.18s ease-out, opacity 0.18s ease-out;
 }
 
 .fade-in-right.visible {
@@ -601,8 +601,8 @@ p {
 
 .scale-in {
     opacity: 0;
-    transform: scale(0.8);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: scale(0.82);
+    transition: transform 0.18s ease-out, opacity 0.18s ease-out;
 }
 
 .scale-in.visible {
@@ -612,8 +612,8 @@ p {
 
 .slide-up {
     opacity: 0;
-    transform: translateY(60px);
-    transition: opacity 1s ease, transform 1s ease;
+    transform: translateY(64px);
+    transition: transform 0.18s ease-out, opacity 0.18s ease-out;
 }
 
 .slide-up.visible {
