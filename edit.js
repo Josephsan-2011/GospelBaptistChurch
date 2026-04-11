@@ -707,7 +707,7 @@ function openContactSettingsModal() {
                 </div>
                 <div class="form-group">
                     <label for="saturdayService">Saturday Service Time</label>
-                    <input type="text" id="saturdayService" name="saturdayService" value="5:00 PM - 6:00 PM">
+                    <input type="text" id="saturdayService" name="saturdayService" value="10:00 AM - 11:00 AM">
                 </div>
                 <div class="form-group">
                     <label for="pastorName">Pastor Name</label>

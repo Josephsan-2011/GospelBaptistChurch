@@ -108,9 +108,9 @@ const translations = {
         'Sunday Service': 'Sunday Service',
         '1:00 PM - 3:00 PM': '1:00 PM - 3:00 PM',
         'Main worship service with preaching and fellowship': 'Main worship service with preaching and fellowship',
-        'Saturday Evening Service': 'Saturday Evening Service',
-        '5:00 PM - 6:00 PM': '5:00 PM - 6:00 PM',
-        'Evening prayer and Bible study': 'Evening prayer and Bible study',
+        'Saturday Morning Service': 'Saturday Morning Service',
+        '10:00 AM - 11:00 AM': '10:00 AM - 11:00 AM',
+        'Morning prayer and Bible study in Burmese language': 'Morning prayer and Bible study in Burmese language',
         'Welcome Message': 'Welcome Message',
         'We are delighted to welcome you to Gospel Baptist Church. Our church is a place where people from all walks of life come together to worship, learn, and grow in their faith. Whether you\'re a long-time believer or just beginning your spiritual journey, you\'ll find a warm and welcoming community here.': 'We are delighted to welcome you to Gospel Baptist Church. Our church is a place where people from all walks of life come together to worship, learn, and grow in their faith. Whether you\'re a long-time believer or just beginning your spiritual journey, you\'ll find a warm and welcoming community here.',
         'Join us every Sunday and Saturday as we gather to praise God, study His Word, and encourage one another in our walk with Christ. We look forward to meeting you and sharing in the joy of serving our Lord together.': 'Join us every Sunday and Saturday as we gather to praise God, study His Word, and encourage one another in our walk with Christ. We look forward to meeting you and sharing in the joy of serving our Lord together.',
@@ -222,9 +222,9 @@ const translations = {
         'Sunday Service': 'တနင်္ဂနွေ ဘုရားဝတ်ပြုချိန်',
         '1:00 PM - 3:00 PM': 'နေ့လည် ၁ နာရီ - ၃ နာရီ',
         'Main worship service with preaching and fellowship': 'ဓမ္မဟောကြားချက်နှင့် ညီညွတ်ခြင်းဖြင့် အဓိက ဘုရားဝတ်ပြုချိန်',
-        'Saturday Evening Service': 'စနေညနေ ဘုရားဝတ်ပြုချိန်',
-        '5:00 PM - 6:00 PM': 'ညနေ ၅ နာရီ - ၆ နာရီ',
-        'Evening prayer and Bible study': 'ညနေခင်း ဆုတောင်းခြင်းနှင့် သမ္မာကျမ်းလေ့လာခြင်း',
+        'Saturday Morning Service': 'စနေနံနက် ဘုရားဝတ်ပြုချိန်',
+        '10:00 AM - 11:00 AM': 'နံနက် ၁၀ နာရီ - ၁၁ နာရီ',
+        'Morning prayer and Bible study in Burmese language': 'နံနက်ပိုင်း ဆုတောင်းခြင်းနှင့် ဗမာဘာသာဖြင့် သမ္မာကျမ်းလေ့လာခြင်း',
         'Welcome Message': 'လှိုက်လှဲစွာကြိုဆိုပါ၏',
         'We are delighted to welcome you to Gospel Baptist Church. Our church is a place where people from all walks of life come together to worship, learn, and grow in their faith. Whether you\'re a long-time believer or just beginning your spiritual journey, you\'ll find a warm and welcoming community here.': 'သတင်းကောင်းနှစ်ခြင်းအသင်းတော်မှ သင့်အား ဝမ်းမြောက်စွာ ကြိုဆိုပါသည်။ကျွန်ုပ်တို့ဘုရားကျောင်းမှာ လူတန်းစားမရွှေး ဘာသာလူမျိုးမရွှေး စုဝေးကာ ကိုးကွယ်ခြင်း၊ သင်ယူခြင်း၊ယုံကြည်ခြင်း အစရှိသည်များကို ကြီးထွားရင့်ကျက်လာစေရန် စုဝေးသော နေရာပင် ဖြစ်ပါသည်။ သင်သည် ဝိညာဉ်ရေးရာ ကြီးထွားရင့်ကျက်သောသူ (သို့)ဝိညာဥ်ရေးရာ ခရီးကို စတင်နေသူဖြစ်စေ ဤနေရာမှ သင့်အား နွေးထွေးစွာ ကြိုဆိုတတ်သောအသိုင်းအဝိုင်းကို တွေ့ရှိမည်ဖြစ်ပါသည်။ ဘုရားသခင်ကို ချီးမွမ်းခြင်း၊ သူ၏ နှုတ်ကပတ်တော်ကို လေ့လာခြင်းနှင့် ခရစ်တော်နှင့်အတူ လျှောက်လှမ်းရာတွင် တစ်ဦးကို တစ်ဦး အားပေးခြင်းဖြင့် စုဝေးကြရန် တနင်္ဂနွေနှင့် စနေနေ့တိုင်း ကျွန်ုပ်တို့နှင့် တွဲလက်မြဲစေလိုပါသည်။ သင့်နှင့်ဆုံ တွေ့ရပြီး ကျွန်ုပ်တို့၏ ဘုရားသခင်အား အတူတကွ ဝတ်ပြုရခြင်းဖြင့် ဝမ်းမြောက်ခြင်းကို ခံစားရရှိရန် မျှော်လင့်ပါသည်။',
         'Join us every Sunday and Saturday as we gather to praise God, study His Word, and encourage one another in our walk with Christ. We look forward to meeting you and sharing in the joy of serving our Lord together.': 'ဘုရားသခင်ကို ချီးမွမ်းခြင်း၊ သူ၏ နှုတ်ကပတ်တော်ကို လေ့လာခြင်းနှင့် ခရစ်တော်နှင့်အတူ လျှောက်လှမ်းရာတွင် တစ်ဦးကို တစ်ဦး အားပေးခြင်းဖြင့် စုဝေးကြရန် တနင်္ဂနွေနှင့် စနေနေ့တိုင်း ကျွန်ုပ်တို့နှင့် ပူးပေါင်းပါ။ သင့်ကို တွေ့ဆုံရပြီး ကျွန်ုပ်တို့ သခင်ဘုရားကို အတူတကွ ဝတ်ပြုရခြင်း၏ ဝမ်းမြောက်ခြင်းကို မျှဝေရန် မျှော်လင့်ပါသည်။',
@@ -788,39 +788,87 @@ function initHeroSlideshow() {
     initImageModal();
 }
 
-// Initialize parallax and fade effects
-function initParallaxEffects() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+// Scroll progress: 0 = element just entering viewport bottom, 1 = section in place (element in upper portion of view)
+function getScrollProgress(el, viewportHeight) {
+    const rect = el.getBoundingClientRect();
+    const start = viewportHeight * 0.85;  // animation starts when element top is 85% down viewport
+    const end = viewportHeight * 0.25;    // animation ends when element top is 25% from top
+    const progress = (start - rect.top) / (start - end);
+    return Math.min(1, Math.max(0, progress));
+}
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            } else {
-                // Remove visible class when element is out of view for fade out effect
-                entry.target.classList.remove('visible');
+function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+}
+
+// Initialize parallax and scroll-driven slide-in effects
+function initParallaxEffects() {
+    const fadeLeft = document.querySelectorAll('.fade-in-left');
+    const fadeRight = document.querySelectorAll('.fade-in-right');
+    const fadeIn = document.querySelectorAll('.fade-in');
+    const slideUp = document.querySelectorAll('.slide-up');
+    const scaleIn = document.querySelectorAll('.scale-in');
+    const allAnimated = [
+        ...fadeLeft, ...fadeRight, ...fadeIn, ...slideUp, ...scaleIn
+    ];
+
+    const OFFSET_LEFT_RIGHT = 56;
+    const OFFSET_UP = 48;
+    const OFFSET_SLIDE_UP = 64;
+
+    function updateScrollAnimations() {
+        const vh = window.innerHeight;
+        allAnimated.forEach(el => {
+            const progress = getScrollProgress(el, vh);
+            const eased = easeOutCubic(progress);
+            const opacity = eased;
+
+            if (el.classList.contains('fade-in-left')) {
+                const x = -OFFSET_LEFT_RIGHT * (1 - eased);
+                el.style.transform = `translateX(${x}px)`;
+                el.style.opacity = opacity;
+            } else if (el.classList.contains('fade-in-right')) {
+                const x = OFFSET_LEFT_RIGHT * (1 - eased);
+                el.style.transform = `translateX(${x}px)`;
+                el.style.opacity = opacity;
+            } else if (el.classList.contains('slide-up')) {
+                const y = OFFSET_SLIDE_UP * (1 - eased);
+                el.style.transform = `translateY(${y}px)`;
+                el.style.opacity = opacity;
+            } else if (el.classList.contains('fade-in')) {
+                const y = OFFSET_UP * (1 - eased);
+                el.style.transform = `translateY(${y}px)`;
+                el.style.opacity = opacity;
+            } else if (el.classList.contains('scale-in')) {
+                const scale = 0.82 + 0.18 * eased;
+                el.style.transform = `scale(${scale})`;
+                el.style.opacity = opacity;
             }
         });
-    }, observerOptions);
 
-    // Observe all elements with fade classes
-    const fadeElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in, .slide-up');
-    fadeElements.forEach(el => observer.observe(el));
-
-    // Parallax scroll effect for background elements
-    window.addEventListener('scroll', () => {
+        // Parallax background elements
         const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('.parallax-bg');
-        
-        parallaxElements.forEach(element => {
+        document.querySelectorAll('.parallax-bg').forEach(element => {
             const speed = element.dataset.speed || 0.5;
             const yPos = -(scrolled * speed);
             element.style.transform = `translateY(${yPos}px)`;
         });
-    });
+    }
+
+    let ticking = false;
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                updateScrollAnimations();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    updateScrollAnimations();
 }
 
 // Back to top: at top of footer (mobile only), scroll to top on click
@@ -1122,24 +1170,9 @@ function initSlideshow() {
 
 
 
-// Scroll animations
+// Scroll animations: handled by initParallaxEffects (scroll-progress-driven)
 function initScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, observerOptions);
-    
-    // Observe all animated elements
-    const animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .slide-up, .scale-in');
-    animatedElements.forEach(el => observer.observe(el));
+    // No-op; scroll-driven slide-in is in initParallaxEffects
 }
 
 // Smooth scrolling for anchor links

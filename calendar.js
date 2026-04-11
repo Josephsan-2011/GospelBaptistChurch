@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
             {
                 id: '2',
                 title: 'Saturday Service',
-                start: '2025-08-09T17:00:00',
-                end: '2025-08-09T18:00:00',
-                description: 'Evening prayer and Bible study',
+                start: '2025-08-09T10:00:00',
+                end: '2025-08-09T11:00:00',
+                description: 'Saturday morning Burmese service',
                 color: '#0066CC',
                 allDay: false
             },
